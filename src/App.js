@@ -3,6 +3,7 @@ import Navbar from './Components/Navbar';
 import HeroBanner from './Components/HeroBanner';
 import CategorySection  from './CategorySection';
 import FlashSale from './Components/FlashSale';
+import FeaturedGalleries from './Components/FeaturedGalleries';
 import TrendingArtworks from './Components/TrendingArtworks';
 import LimitedEditionBanner from './Components/LimitedEditionBanner';
 import Newsletter from './Components/Newsletter';
@@ -19,6 +20,7 @@ function App() {
       <HeroBanner />
       <CategorySection />
       <FlashSale />
+      <FeaturedGalleries />
       <TrendingArtworks />
       <LimitedEditionBanner />
       <Newsletter />

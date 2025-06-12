@@ -1,5 +1,214 @@
-// src/components/FlashSale.jsx
-import React from 'react';
+// import {
+//   Box,
+//   Typography,
+//   Grid,
+//   Card,
+//   CardMedia,
+//   CardContent,
+//   Rating,
+//   Button,
+//   IconButton,
+//   Divider,
+// } from "@mui/material";
+// import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+// import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+// import Design1 from "../Assets/design 1.png"; 
+// import Design2 from "../Assets/sculpture 1.png"; 
+// import Design3 from "../Assets/brothers 1.png"; 
+
+// const flashDeals = [
+//   {
+//     title: "Abstract Canvas",
+//     artist: "Maria Santos",
+//     rating: 4.8,
+//     price: "$299",
+//     oldPrice: "$399",
+//     image: Design1,
+//   },
+//   {
+//     title: "Modern Sculpture",
+//     artist: "David Chen",
+//     rating: 4.9,
+//     price: "$299",
+//     oldPrice: "$399",
+//     image: Design2,
+//   },
+//   {
+//     title: "Vintage Print",
+//     artist: "Elena Rodriguez",
+//     rating: 4.7,
+//     price: "$299",
+//     oldPrice: "$399",
+//     image: Design3,
+//   },
+// ];
+
+// const CountdownBox = ({ value }) => (
+//   <Box
+//     sx={{
+//       backgroundColor: "#000",
+//       color: "#fff",
+//       px: 2,
+//       py: 1,
+//       fontSize: "16px",
+//       fontWeight: "bold",
+//       borderRadius: "4px",
+//       minWidth: "40px",
+//       textAlign: "center",
+//     }}
+//   >
+//     {value}
+//   </Box>
+// );
+
+// const FlashSaleSection = () => {
+//   return (
+//     <Box sx={{ px: { xs: 2, md: 8 }, py: 6, background: "#fcf8f7" }}>
+//       <Box sx={{ display: "flex", justifyContent: "space-between", mb: 4 }}>
+//         <Typography variant="h5" sx={{ fontWeight: 500 }}>
+//           Flash Sale
+//         </Typography>
+//         <Button
+//           sx={{ color: "#111", fontSize: "14px", textTransform: "none" }}
+//           endIcon={<span style={{ fontSize: "18px" }}>→</span>}
+//         >
+//           View All Deals
+//         </Button>
+//       </Box>
+
+//       <Grid container spacing={4}>
+//         {/* Flash sale cards */}
+//         <Grid item xs={12} md={9}>
+//           <Grid container spacing={3}>
+//             {flashDeals.map((item, i) => (
+//               <Grid item xs={12} sm={4} key={i}>
+//                 <Card elevation={0}>
+//                   <Box sx={{ position: "relative" }}>
+//                     <CardMedia
+//                       component="img"
+//                       height="200"
+//                       image={item.image}
+//                       alt={item.title}
+//                     />
+//                     <Box
+//                       sx={{
+//                         position: "absolute",
+//                         top: 8,
+//                         left: 8,
+//                         background: "#000",
+//                         color: "#fff",
+//                         px: 1,
+//                         fontSize: "12px",
+//                       }}
+//                     >
+//                       SALE
+//                     </Box>
+//                     <Box
+//                       sx={{
+//                         position: "absolute",
+//                         top: 8,
+//                         right: 8,
+//                         display: "flex",
+//                         flexDirection: "column",
+//                         gap: 1,
+//                       }}
+//                     >
+//                       <IconButton size="small" sx={{ bgcolor: "#fff" }}>
+//                         <FavoriteBorderIcon fontSize="small" />
+//                       </IconButton>
+//                       <IconButton size="small" sx={{ bgcolor: "#fff" }}>
+//                         <VisibilityOutlinedIcon fontSize="small" />
+//                       </IconButton>
+//                     </Box>
+//                   </Box>
+//                   <CardContent>
+//                     <Typography fontSize="14px" fontWeight="500">
+//                       {item.title}
+//                     </Typography>
+//                     <Typography fontSize="13px" color="text.secondary">
+//                       {item.artist}
+//                     </Typography>
+//                     <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
+//                       <Rating
+//                         name="read-only"
+//                         value={item.rating}
+//                         precision={0.1}
+//                         size="small"
+//                         readOnly
+//                       />
+//                       <Typography fontSize="13px" sx={{ ml: 1 }}>
+//                         {item.rating}
+//                       </Typography>
+//                     </Box>
+//                     <Box sx={{ mt: 1, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+//                       <Box>
+//                         <Typography sx={{ fontWeight: 600, fontSize: "15px" }}>
+//                           {item.price}
+//                         </Typography>
+//                         <Typography
+//                           sx={{
+//                             fontSize: "13px",
+//                             color: "gray",
+//                             textDecoration: "line-through",
+//                           }}
+//                         >
+//                           {item.oldPrice}
+//                         </Typography>
+//                       </Box>
+//                       <Button variant="outlined" size="small" sx={{ textTransform: "none" }}>
+//                         Add to Cart
+//                       </Button>
+//                     </Box>
+//                   </CardContent>
+//                 </Card>
+//               </Grid>
+//             ))}
+//           </Grid>
+//         </Grid>
+
+//         {/* Right-side deal info */}
+//         <Grid item xs={12} md={3}>
+//           <Box sx={{ p: 2 }}>
+//             <Typography variant="h6" sx={{ fontWeight: 500 }}>
+//               Deals Of The Month
+//             </Typography>
+//             <Typography
+//               sx={{ fontSize: "13px", color: "gray", mt: 1, mb: 2 }}
+//             >
+//               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque
+//               dui ultricies sollicitudin aliquam sem.
+//             </Typography>
+//             <Button
+//               variant="outlined"
+//               sx={{
+//                 textTransform: "none",
+//                 px: 3,
+//                 border: "1px solid #111",
+//                 color: "#111",
+//                 fontWeight: 500,
+//               }}
+//             >
+//               Buy Now
+//             </Button>
+
+//             <Typography sx={{ mt: 4, mb: 1, fontSize: "13px" }}>
+//               Hurry, Before It’s Too Late!
+//             </Typography>
+//             <Box sx={{ display: "flex", gap: 1 }}>
+//               <CountdownBox value="23" />
+//               <CountdownBox value="45" />
+//               <CountdownBox value="20" />
+//             </Box>
+//           </Box>
+//         </Grid>
+//       </Grid>
+//     </Box>
+//   );
+// };
+
+// export default FlashSaleSection;
+
+
 import {
   Box,
   Typography,
@@ -7,87 +216,264 @@ import {
   Card,
   CardMedia,
   CardContent,
+  Rating,
   IconButton,
-  Button,
-} from '@mui/material';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+} from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
+import Design1 from "../Assets/design 1.png"; 
+import Design2 from "../Assets/sculpture 1.png"; 
+import Design3 from "../Assets/brothers 1.png"; 
 
-const products = [
+const flashDeals = [
   {
-    title: 'Abstract Blend',
-    price: '₹6,000',
-    image: '/images/flash1.jpg',
+    title: "Abstract Canvas",
+    artist: "Maria Santos",
+    rating: 4.8,
+    price: "$299",
+    oldPrice: "$399",
+    image: Design1,
   },
   {
-    title: 'Nature Ink Art',
-    price: '₹4,500',
-    image: '/images/flash2.jpg',
+    title: "Modern Sculpture",
+    artist: "David Chen",
+    rating: 4.9,
+    price: "$299",
+    oldPrice: "$399",
+    image: Design2,
   },
   {
-    title: 'Color Rush',
-    price: '₹5,200',
-    image: '/images/flash3.jpg',
+    title: "Vintage Print",
+    artist: "Elena Rodriguez",
+    rating: 4.7,
+    price: "$299",
+    oldPrice: "$399",
+    image: Design3,
   },
 ];
 
-const FlashSale = () => {
+const CountdownBox = ({ value }) => (
+  <Box
+    sx={{
+      backgroundColor: "#000",
+      color: "#fff",
+      px: 2,
+      py: 1,
+      fontSize: "16px",
+      fontWeight: "bold",
+      borderRadius: "4px",
+      minWidth: "40px",
+      textAlign: "center",
+    }}
+  >
+    {value}
+  </Box>
+);
+
+const FlashSaleSection = () => {
   return (
-    <Box sx={{ px: 4, py: 6 }}>
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-        <Typography variant="h6" fontWeight="bold">
+    <Box sx={{ px: { xs: 2, md: 8 }, py: 6, background: "#fcf8f7" }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", mb: 4 }}>
+        <Typography
+          variant="h5"
+          sx={{
+            fontWeight: 600, // Slightly bolder
+            fontSize: "1.5rem", // Match the larger font size
+            color: "#111",
+          }}
+        >
           Flash Sale
         </Typography>
-        <Typography variant="body2" sx={{ cursor: 'pointer' }}>
-          View All &rarr;
-        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            cursor: "pointer",
+            "&:hover": { textDecoration: "underline" },
+          }}
+        >
+          <Typography
+            sx={{
+              color: "#111",
+              fontSize: "0.85rem", // Smaller font to match the image
+              textTransform: "none",
+              mr: 0.5,
+            }}
+          >
+            View All Deals
+          </Typography>
+          <span style={{ fontSize: "1rem", color: "#111" }}>→</span>
+        </Box>
       </Box>
 
-      <Grid container spacing={3}>
-        {products.map((product, idx) => (
-          <Grid item xs={12} sm={6} md={4} key={idx}>
-            <Card sx={{ borderRadius: 2 }}>
-              <Box sx={{ position: 'relative' }}>
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={product.image}
-                  alt={product.title}
-                />
-                <IconButton
-                  sx={{
-                    position: 'absolute',
-                    top: 10,
-                    right: 10,
-                    background: 'white',
-                    '&:hover': { background: '#eee' },
-                  }}
-                >
-                  <FavoriteBorderIcon />
-                </IconButton>
-              </Box>
-              <CardContent>
-                <Typography variant="subtitle1" fontWeight="medium">
-                  {product.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" mb={1}>
-                  {product.price}
-                </Typography>
-                <Button
-                  variant="outlined"
-                  startIcon={<ShoppingCartIcon />}
-                  size="small"
-                  sx={{ borderRadius: 5 }}
-                >
-                  Add to Cart
-                </Button>
-              </CardContent>
-            </Card>
+      <Grid container spacing={4}>
+        {/* Flash sale cards */}
+        <Grid item xs={12} md={9}>
+          <Grid container spacing={3}>
+            {flashDeals.map((item, i) => (
+              <Grid item xs={12} sm={4} key={i}>
+                <Card elevation={0}>
+                  <Box sx={{ position: "relative" }}>
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={item.image}
+                      alt={item.title}
+                    />
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        top: 8,
+                        left: 8,
+                        background: "#000",
+                        color: "#fff",
+                        px: 1,
+                        fontSize: "12px",
+                      }}
+                    >
+                      SALE
+                    </Box>
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        top: 8,
+                        right: 8,
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 1,
+                      }}
+                    >
+                      <IconButton size="small" sx={{ bgcolor: "#fff" }}>
+                        <FavoriteBorderIcon fontSize="small" />
+                      </IconButton>
+                      <IconButton size="small" sx={{ bgcolor: "#fff" }}>
+                        <VisibilityOutlinedIcon fontSize="small" />
+                      </IconButton>
+                    </Box>
+                  </Box>
+                  <CardContent sx={{ pb: 1 }}>
+                    <Typography
+                      fontSize="14px"
+                      fontWeight="500"
+                      sx={{ mb: 0.5 }}
+                    >
+                      {item.title}
+                    </Typography>
+                    <Typography
+                      fontSize="12px"
+                      color="text.secondary"
+                      sx={{ mb: 1 }}
+                    >
+                      {item.artist}
+                    </Typography>
+                    <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                      <Rating
+                        name="read-only"
+                        value={item.rating}
+                        precision={0.1}
+                        size="small"
+                        readOnly
+                      />
+                      <Typography fontSize="12px" sx={{ ml: 1 }}>
+                        {item.rating}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                      <Box sx={{ display: "flex", alignItems: "baseline", gap: 1 }}>
+                        <Typography sx={{ fontWeight: 600, fontSize: "15px" }}>
+                          {item.price}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: "13px",
+                            color: "gray",
+                            textDecoration: "line-through",
+                          }}
+                        >
+                          {item.oldPrice}
+                        </Typography>
+                      </Box>
+                      <Box
+                        sx={{
+                          border: "1px solid #111",
+                          px: 2,
+                          py: 0.5,
+                          fontSize: "12px",
+                          cursor: "pointer",
+                          "&:hover": { backgroundColor: "#f5f5f5" },
+                        }}
+                      >
+                        Add to Cart
+                      </Box>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
           </Grid>
-        ))}
+        </Grid>
+
+        {/* Right-side deal info */}
+        <Grid item xs={12} md={3}>
+          <Box sx={{ p: 2 }}>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 500,
+                fontSize: "1.25rem", // Match the size in the image
+                mb: 1,
+              }}
+            >
+              Deals Of The Month
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: "12px", // Smaller font to match the image
+                color: "gray",
+                mt: 1,
+                mb: 3, // More space before the button
+              }}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque
+              dui ultricies sollicitudin aliquam sem.
+            </Typography>
+            <Box
+              sx={{
+                border: "1px solid #111",
+                px: 3,
+                py: 1,
+                fontSize: "14px",
+                textAlign: "center",
+                cursor: "pointer",
+                "&:hover": { backgroundColor: "#f5f5f5" },
+                mb: 4, // Space before the countdown
+              }}
+            >
+              Buy Now
+            </Box>
+
+            <Typography
+              sx={{
+                mt: 2,
+                mb: 1,
+                fontSize: "12px", // Smaller font to match the image
+                textTransform: "uppercase", // Match the uppercase style
+              }}
+            >
+              Hurry, Before It’s Too Late!
+            </Typography>
+            <Box sx={{ display: "flex", gap: 1 }}>
+              <CountdownBox value="23" />
+              <Typography sx={{ fontSize: "16px" }}>:</Typography>
+              <CountdownBox value="45" />
+              <Typography sx={{ fontSize: "16px" }}>:</Typography>
+              <CountdownBox value="20" />
+            </Box>
+          </Box>
+        </Grid>
       </Grid>
     </Box>
   );
 };
 
-export default FlashSale;
+export default FlashSaleSection;
