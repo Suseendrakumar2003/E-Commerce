@@ -1,3 +1,4 @@
+
 import Navbar from './Components/Navbar';
 import HeroBanner from './Components/HeroBanner';
 import CategorySection  from './CategorySection';
@@ -6,6 +7,10 @@ import TrendingArtworks from './Components/TrendingArtworks';
 import LimitedEditionBanner from './Components/LimitedEditionBanner';
 import Newsletter from './Components/Newsletter';
 import Footer from './Components/Footer';
+
+import './App.css';
+import Navbar from './Components/Navbar';
+
 
 function App() {
   return (
@@ -18,6 +23,7 @@ function App() {
       <LimitedEditionBanner />
       <Newsletter />
       <Footer />
+
     </>
   );
 }
