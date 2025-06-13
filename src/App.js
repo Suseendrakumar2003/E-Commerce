@@ -1,6 +1,6 @@
 import Navbar from './Components/Navbar';
 import HeroBanner from './Components/HeroBanner';
-import CategorySection  from './CategorySection';
+import CategorySection  from './Components/CategorySection';
 import FlashSale from './Components/FlashSale';
 import FeaturedGalleries from './Components/FeaturedGalleries';
 import TrendingArtworks from './Components/TrendingArtworks';

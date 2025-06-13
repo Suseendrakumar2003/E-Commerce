@@ -13,6 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import { motion, AnimatePresence } from 'framer-motion';
+import logo from "../Assets/logo.png";
 
 const navItems = ['PAINTINGS', 'DRAWINGS', 'SCULPTURE', 'ARTISTS'];
 
@@ -60,7 +61,6 @@ const Navbar = () => {
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           {/* Logo */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <motion.div whileHover={{ scale: 1.05 }}>
               <Typography
                 variant="h6"
                 sx={{
@@ -70,9 +70,8 @@ const Navbar = () => {
                   letterSpacing: '0.05em',
                 }}
               >
-                <span style={{ fontWeight: 700 }}>ck.</span> cultured kid.
+                <img src={logo} alt="logo" width={"33px"} height={"20px"} /> cultured kid.
               </Typography>
-            </motion.div>
           </Box>
 
           {/* Right Section */}
