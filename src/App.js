@@ -10,7 +10,7 @@ import Newsletter from './Components/Newsletter';
 import Footer from './Components/Footer';
 
 import './App.css';
-import Navbar from './Components/Navbar';
+
 
 
 function App() {
