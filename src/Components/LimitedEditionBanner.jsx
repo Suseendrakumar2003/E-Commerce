@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button, IconButton } from '@mui/material';
 import { ArrowBackIosNew, ArrowForwardIos } from '@mui/icons-material';
@@ -16,6 +17,7 @@ const carouselItems = [
   { image: artwork3, title: 'Forest Path' },
   { image: artwork4, title: 'Desert Sunset' },
 ];
+
 
 const LimitedEditionBanner = () => {
   const [activeIndex, setActiveIndex] = useState(0);
