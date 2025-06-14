@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar';
-import HeroBanner from './Components/HeroBanner';// Fixed the import path
+import HeroBanner from './Components/HeroBanner';
 import FlashSale from './Components/FlashSale';
 import FeaturedGalleries from './Components/FeaturedGalleries';
 import TrendingArtworks from './Components/TrendingArtworks';
@@ -10,6 +10,7 @@ import Footer from './Components/Footer';
 import PaintingPage from './Pages/PaintingPage.jsx';
 import View from './Components/View';
 import CategorySection from './Components/CategorySection';
+import RegistrationAddress from './Pages/RegistrationAddress'; // ✅ Add this route
 import './App.css';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         />
         <Route path="/paintings" element={<PaintingPage />} />
         <Route path="/view" element={<View />} />
+        <Route path="/register-address" element={<RegistrationAddress />} /> {/* ✅ NEW ROUTE */}
       </Routes>
     </>
   );

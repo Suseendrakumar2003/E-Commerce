@@ -1,16 +1,8 @@
 import { useState } from 'react';
-import {
-  Box,
-  Typography,
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-} from '@mui/material';
+import { Box, Typography, Grid, Card, CardMedia, CardContent } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-
 import image1 from '../Assets/Painting.png';
 import image2 from '../Assets/Sculptures.png';
 import image3 from '../Assets/Photography.png';
@@ -22,12 +14,12 @@ const categories = [
   { title: 'Sculptures', image: image2, path: '/category/sculptures' },
   { title: 'Photography', image: image3, path: '/category/photography' },
   { title: 'Digital Art', image: image4, path: '/category/digital-art' },
-  { title: 'Drawings', image: image1, path: '/category/drawings' },
-  { title: 'Mixed Media', image: image2, path: '/category/mixed-media' },
-  { title: 'Prints', image: image3, path: '/category/prints' },
-  { title: 'Ceramics', image: image4, path: '/category/ceramics' },
-  { title: 'Textiles', image: image1, path: '/category/textiles' },
-  { title: 'Installations', image: image2, path: '/category/installations' },
+  { title: 'Drawings', image: image1, path: '/category/drawings' }, // Placeholder
+  { title: 'Mixed Media', image: image2, path: '/category/mixed-media' }, // Placeholder
+  { title: 'Prints', image: image3, path: '/category/prints' }, // Placeholder
+  { title: 'Ceramics', image: image4, path: '/category/ceramics' }, // Placeholder
+  { title: 'Textiles', image: image1, path: '/category/textiles' }, // Placeholder
+  { title: 'Installations', image: image2, path: '/category/installations' }, // Placeholder
 ];
 
 const ShopByCategory = () => {
@@ -37,6 +29,10 @@ const ShopByCategory = () => {
   // Toggle between showing 4 or 10 categories
   const handleToggleView = () => {
     setIsExpanded((prev) => !prev);
+    // Optionally navigate to a categories page
+    if (!isExpanded) {
+      navigate('/categories');
+    }
   };
 
   // Handle card click to navigate to category page
@@ -115,9 +111,7 @@ const ShopByCategory = () => {
                   elevation={0}
                   sx={{
                     cursor: 'pointer',
-                    '&:hover': {
-                      boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                    },
+                    '&:hover': { boxShadow: '0 4px 8px rgba(0,0,0,0.1)' },
                   }}
                   onClick={() => handleCardClick(category.path)}
                 >
@@ -131,12 +125,12 @@ const ShopByCategory = () => {
                     <Typography
                       variant="body1"
                       sx={{
-                        fontFamily: '',
+                        fontFamily : '',
                         fontSize: '18px',
                         fontWeight: 400,
                         color: '#555',
                         lineHeight: '28px',
-                        letterSpacing: '0%',
+                        letterSpacing: '0%'
                       }}
                     >
                       {category.title}
