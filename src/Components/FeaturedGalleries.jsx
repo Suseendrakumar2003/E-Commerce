@@ -13,10 +13,13 @@ const FeaturedGalleries = () => {
         variant="h5"
         align="center"
         sx={{
-          fontWeight: 600, // Slightly bolder to match the image
-          fontSize: "1.5rem", // Larger font size
-          color: "#111", // Darker color
+           fontFamily: '"Optima", serif',
+          fontWeight: 400,
+          fontSize: "30px",
+          color: "#111",
           mb: 1,
+          lineHeight: "36px",
+          letterSpacing: "0%",
         }}
       >
         Featured Galleries
@@ -24,16 +27,19 @@ const FeaturedGalleries = () => {
       <Typography
         align="center"
         sx={{
-          color: "#666", // Slightly darker gray to match the image
-          fontSize: "0.9rem", // Smaller font size
-          fontWeight: 400, // Lighter weight
+          color: "#666",
+          fontSize: "16px",
+          fontWeight: 400,
           mb: 4,
+          lineHeight: "24px",
+          letterSpacing: "0%",
         }}
       >
-        Discover exceptional artworks from our partner galleries and renowned art institutions worldwide
+        Discover exceptional artworks from our partner galleries and renowned
+        art institutions worldwide
       </Typography>
 
-      <Grid container spacing={3} justifyContent="center">
+      <Grid container spacing={26} justifyContent="center">
         {galleryImages.map((src, i) => (
           <Grid item xs={6} sm={3} key={i} sx={{ textAlign: "center" }}>
             <Box
@@ -41,11 +47,11 @@ const FeaturedGalleries = () => {
               src={src}
               alt={`Gallery ${i + 1}`}
               sx={{
-                width: "100%",
-                height: "auto",
-                maxHeight: "120px", // Slightly smaller to match the image proportions
+                width: "120px",
+                height: "60px",
+                maxHeight: "120px", 
                 objectFit: "cover",
-                borderRadius: 0, // No border radius to match the image
+                borderRadius: 0, 
               }}
             />
             <Typography

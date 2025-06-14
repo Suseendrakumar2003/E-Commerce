@@ -1,4 +1,9 @@
-import { Routes, Route } from 'react-router-dom';
+
+import React from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+
+// Components
+import LoginPage from './Components/LoginPage';
 import Navbar from './Components/Navbar';
 import HeroBanner from './Components/HeroBanner';
 import FlashSale from './Components/FlashSale';
@@ -9,35 +14,39 @@ import Newsletter from './Components/Newsletter';
 import Footer from './Components/Footer';
 import PaintingPage from './Pages/PaintingPage';
 import View from './Components/View';
-import CategorySection from './Pages/CategorySection';
-import './App.css';
+import CategorySection from './Components/CategorySection';
+import RegistrationAddress from './Pages/RegistrationAddress';
 
-function HomePage() {
+import './styles/globals.css';
+
+export default function App() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/';
+
   return (
     <>
-      <HeroBanner />
-      <CategorySection />
-      <FlashSale />
-      <FeaturedGalleries />
-      <TrendingArtworks />
-      <LimitedEditionBanner />
-      <Newsletter />
-      <Footer />
-    </>
-  );
-}
-
-function App() {
-  return (
-    <>
-      <Navbar />
+      {!isLoginPage && <Navbar />}
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route
+          path="/home"
+          element={
+            <>
+              <HeroBanner />
+              <CategorySection />
+              <FlashSale />
+              <FeaturedGalleries />
+              <TrendingArtworks />
+              <LimitedEditionBanner />
+              <Newsletter />
+              <Footer />
+            </>
+          }
+        />
         <Route path="/paintings" element={<PaintingPage />} />
         <Route path="/view" element={<View />} />
+        <Route path="/register-address" element={<RegistrationAddress />} />
       </Routes>
     </>
   );
 }
-
-export default App;
