@@ -9,7 +9,7 @@ import Newsletter from './Components/Newsletter';
 import Footer from './Components/Footer';
 import PaintingPage from './Pages/PaintingPage.jsx';
 import View from './Components/View';
-import CategorySection from './Pages/CategorySection.jsx';
+import CategorySection from './Components/CategorySection';
 import './App.css';
 
 function App() {
