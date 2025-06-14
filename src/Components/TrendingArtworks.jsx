@@ -14,7 +14,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { useNavigate } from "react-router-dom";
 
 // Import the images from the Assets folder
 import artwork1 from "../Assets/artwork 1.png";
@@ -126,6 +126,7 @@ const TrendingArtworks = () => {
                 color: "#1976d2",
                 cursor: "pointer",
               }}
+              onClick={() => navigate("/paintings")} // Navigate to /paintings
             >
               View All
             </Typography>

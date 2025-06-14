@@ -3,7 +3,7 @@ import { Box, Typography, Button, IconButton } from "@mui/material";
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 import { motion } from "framer-motion";
 
-// Import the new images from the Assets folder
+// Import the images from the Assets folder
 import image1 from "../Assets/Painting.png";
 import image2 from "../Assets/Sculptures.png";
 import image3 from "../Assets/Photography.png";
@@ -94,193 +94,203 @@ const LimitedEditionBanner = () => {
 
   return (
     <Box
-      component={motion.div}
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
       sx={{
         width: "100%",
-        bgcolor: "#fff",
-        py: { xs: 6, md: 10 },
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
-        minHeight: { xs: "auto", md: "500px" }, // Use minHeight for flexibility
       }}
     >
+      {/* Carousel Section */}
       <Box
+        component={motion.div}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
         sx={{
-          maxWidth: "1100px",
           width: "100%",
+          bgcolor: "#fff",
+          py: { xs: 6, md: 10 },
           display: "flex",
-          flexDirection: { xs: "column", md: "row" },
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          gap: { xs: 2, md: 4 },
-          position: "relative",
-          px: { xs: 2, md: 0 },
+          minHeight: { xs: "auto", md: "500px" },
         }}
       >
-        {/* Image */}
-        <Box
-          component={motion.img}
-          src={carouselItems[activeIndex].image}
-          alt={carouselItems[activeIndex].title}
-          sx={{
-            width: { xs: "100%", md: "479px" },
-            height: { xs: "auto", md: "359px" },
-            maxWidth: "479px",
-            borderRadius: 0,
-            objectFit: "cover",
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-          whileHover={{ scale: 1.02 }}
-          key={activeIndex} // Key ensures animation triggers on image change
-        />
-
-        {/* Navigation Arrows */}
         <Box
           sx={{
+            maxWidth: "1100px",
+            width: "100%",
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            width: { xs: "100%", md: "auto" },
-            position: { xs: "static", md: "absolute" },
-            top: { md: "50%" },
-            transform: { md: "translateY(-50%)" },
-            left: { md: "calc(-50px + 8px)" }, // Tighter gap for balance
-            right: { md: "8px" }, // Symmetric gap
-            px: { xs: 2, md: 0 },
-            mt: { xs: 2, md: 0 },
-            gap: 5,
-          }}
-        >
-          <IconButton
-            component={motion.button}
-            variants={arrowVariants}
-            initial="initial"
-            whileHover="hover"
-            whileTap="tap"
-            onClick={handlePrev}
-            sx={{
-              bgcolor: "rgba(255, 255, 255, 0.8)",
-              "&:hover": { bgcolor: "rgba(255, 255, 255, 1)" },
-            }}
-          >
-            <ArrowBackIosNew />
-          </IconButton>
-          <IconButton
-            component={motion.button}
-            variants={arrowVariants}
-            initial="initial"
-            whileHover="hover"
-            whileTap="tap"
-            onClick={handleNext}
-            sx={{
-              bgcolor: "rgba(255, 255, 255, 0.8)",
-              "&:hover": { bgcolor: "rgba(255, 255, 255, 1)" },
-            }}
-          >
-            <ArrowForwardIos />
-          </IconButton>
-        </Box>
-
-        {/* Text Section */}
-        <Box
-          component={motion.div}
-          variants={textVariants}
-          initial="hidden"
-          animate="visible"
-          key={`text-${activeIndex}`} // Key ensures animation on index change
-          sx={{
-            textAlign: { xs: "center", md: "left" },
-            mt: { xs: 4, md: 0 },
-            ml: { md: 2 },
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
+            flexDirection: { xs: "column", md: "row" },
             justifyContent: "center",
-            maxWidth: { xs: "100%", md: "400px" },
+            alignItems: "center",
+            gap: { xs: 2, md: 4 },
+            position: "relative",
+            px: { xs: 2, md: 0 },
           }}
         >
-          <Typography
-            variant="overline"
-            sx={{
-              fontWeight: "bold",
-              backgroundColor: "#f2f2f2",
-              px: 2,
-              py: 0.5,
-              borderRadius: 1,
-              display: "inline-block",
-            }}
-          >
-            LIMITED EDITION
-          </Typography>
-
-          <Typography variant="h5" fontWeight="bold" mt={2}>
-            {carouselItems[activeIndex].title}
-          </Typography>
-
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            mt={1}
-            mb={2}
-            maxWidth="400px"
-          >
-            {carouselItems[activeIndex].description}
-          </Typography>
-
-          <Typography variant="h6" fontWeight="bold">
-            $599{" "}
-            <Typography
-              component="span"
-              variant="body2"
-              sx={{ color: "gray", ml: 1 }}
-            >
-              USD
-            </Typography>
-          </Typography>
-
-          <Button
-            variant="contained"
-            sx={{
-              mt: 2,
-              bgcolor: "#000",
-              px: 4,
-              py: 1.5,
-              fontWeight: "bold",
-              "&:hover": { bgcolor: "#333" },
-              alignSelf: { xs: "center", md: "flex-start" },
-            }}
-          >
-            CLAIM YOURS
-          </Button>
-        </Box>
-      </Box>
-
-      {/* Pagination Dots */}
-      <Box display="flex" justifyContent="center" mt={10} gap={3}>
-        {carouselItems.map((_, index) => (
+          {/* Image */}
           <Box
-            key={index}
-            component={motion.div}
-            variants={dotVariants}
-            animate={index === activeIndex ? "active" : "inactive"}
+            component={motion.img}
+            src={carouselItems[activeIndex].image}
+            alt={carouselItems[activeIndex].title}
             sx={{
-              width: index === activeIndex ? 50 : 30,
-              height: 4,
-              bgcolor: index === activeIndex ? "#000" : "#e0e0e0",
-              borderRadius: 10,
-              cursor: "pointer",
+              width: { xs: "100%", md: "479px" },
+              height: { xs: "auto", md: "359px" },
+              maxWidth: "479px",
+              borderRadius: 0,
+              objectFit: "cover",
             }}
-            onClick={() => setActiveIndex(index)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ scale: 1.02 }}
+            key={activeIndex}
           />
-        ))}
+
+          {/* Navigation Arrows */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: { xs: "100%", md: "auto" },
+              position: { xs: "static", md: "absolute" },
+              top: { md: "50%" },
+              transform: { md: "translateY(-50%)" },
+              left: { md: "calc(-50px + 8px)" },
+              right: { md: "8px" },
+              px: { xs: 2, md: 0 },
+              mt: { xs: 2, md: 0 },
+              gap: 5,
+            }}
+          >
+            <IconButton
+              component={motion.button}
+              variants={arrowVariants}
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
+              onClick={handlePrev}
+              sx={{
+                bgcolor: "rgba(255, 255, 255, 0.8)",
+                "&:hover": { bgcolor: "rgba(255, 255, 255, 1)" },
+              }}
+            >
+              <ArrowBackIosNew />
+            </IconButton>
+            <IconButton
+              component={motion.button}
+              variants={arrowVariants}
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
+              onClick={handleNext}
+              sx={{
+                bgcolor: "rgba(255, 255, 255, 0.8)",
+                "&:hover": { bgcolor: "rgba(255, 255, 255, 1)" },
+              }}
+            >
+              <ArrowForwardIos />
+            </IconButton>
+          </Box>
+
+          {/* Text Section */}
+          <Box
+            component={motion.div}
+            variants={textVariants}
+            initial="hidden"
+            animate="visible"
+            key={`text-${activeIndex}`}
+            sx={{
+              textAlign: { xs: "center", md: "left" },
+              mt: { xs: 4, md: 0 },
+              ml: { md: 2 },
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              maxWidth: { xs: "100%", md: "400px" },
+            }}
+          >
+            <Typography
+              variant="overline"
+              sx={{
+                fontWeight: "bold",
+                backgroundColor: "#f2f2f2",
+                px: 2,
+                py: 0.5,
+                borderRadius: 1,
+                display: "inline-block",
+              }}
+            >
+              LIMITED EDITION
+            </Typography>
+
+            <Typography variant="h5" fontWeight="bold" mt={2}>
+              {carouselItems[activeIndex].title}
+            </Typography>
+
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              mt={1}
+              mb={2}
+              maxWidth="400px"
+            >
+              {carouselItems[activeIndex].description}
+            </Typography>
+
+            <Typography variant="h6" fontWeight="bold">
+              $599{" "}
+              <Typography
+                component="span"
+                variant="body2"
+                sx={{ color: "gray", ml: 1 }}
+              >
+                USD
+              </Typography>
+            </Typography>
+
+            <Button
+              variant="contained"
+              sx={{
+                mt: 2,
+                bgcolor: "#000",
+                px: 4,
+                py: 1.5,
+                fontWeight: "bold",
+                "&:hover": { bgcolor: "#333" },
+                alignSelf: { xs: "center", md: "flex-start" },
+              }}
+            >
+              CLAIM YOURS
+            </Button>
+          </Box>
+        </Box>
+
+        {/* Pagination Dots */}
+        <Box display="flex" justifyContent="center" mt={10} gap={3}>
+          {carouselItems.map((_, index) => (
+            <Box
+              key={index}
+              component={motion.div}
+              variants={dotVariants}
+              animate={index === activeIndex ? "active" : "inactive"}
+              sx={{
+                width: index === activeIndex ? 50 : 30,
+                height: 4,
+                bgcolor: index === activeIndex ? "#000" : "#e0e0e0",
+                borderRadius: 10,
+                cursor: "pointer",
+              }}
+              onClick={() => setActiveIndex(index)}
+            />
+          ))}
+        </Box>
       </Box>
     </Box>
   );
