@@ -17,7 +17,7 @@ import View from './Components/View';
 import CategorySection from './Components/CategorySection';
 import RegistrationAddress from './Pages/RegistrationAddress';
 
-import './styles/globals.css';
+
 
 export default function App() {
   const location = useLocation();
