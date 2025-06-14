@@ -13,6 +13,7 @@ const View = () => {
   const navigate = useNavigate();
   const artwork = state?.artwork;
 
+  // Debugging: Log on mount
   useEffect(() => {
     console.log("View component mounted");
     console.log("Wall image:", wallImage);
@@ -31,6 +32,7 @@ const View = () => {
           alignItems: "center",
           padding: 4,
           bgcolor: "rgba(255, 255, 255, 0.8)",
+          zIndex: 10,
         }}
       >
         <Typography
@@ -45,16 +47,16 @@ const View = () => {
 
   return (
     <>
-      {/* Prevent page scrolling */}
-      <style>{`
-        html, body {
+      {/* Global style to prevent scrolling */}
+      <style jsx global>{`
+        html,
+        body {
           margin: 0;
           padding: 0;
           overflow: hidden;
           height: 100%;
         }
       `}</style>
-
       <Box
         sx={{
           height: "100vh",
@@ -63,12 +65,14 @@ const View = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
+          bgcolor: "#f0f0f0",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           position: "fixed",
           top: 0,
           left: 0,
+          overflow: "visible",
           zIndex: 1,
         }}
       >
@@ -94,7 +98,7 @@ const View = () => {
           onError={(e) => console.error("Image failed to load:", e)}
           style={{
             position: "fixed",
-            top: "70px",
+            top:"70px",
             transform: "translate(-50%, -50%)",
             width: "200px",
             height: "227px",
@@ -119,7 +123,7 @@ const View = () => {
           transition={{ duration: 0.5 }}
         />
 
-        {/* Measuring Line Scale */}
+        {/* Measuring Line Scale (6 ft) */}
         <Box
           sx={{
             position: "absolute",
@@ -138,7 +142,7 @@ const View = () => {
               top: "60px",
             }}
           >
-            {/* Markers and Line */}
+            {/* Left vertical marker */}
             <Box
               sx={{
                 width: "2px",
@@ -148,7 +152,15 @@ const View = () => {
                 left: 0,
               }}
             />
-            <Box sx={{ height: "2px", width: "100%", bgcolor: "#666" }} />
+            {/* Horizontal line */}
+            <Box
+              sx={{
+                height: "2px",
+                width: "100%",
+                bgcolor: "#666",
+              }}
+            />
+            {/* Right vertical marker */}
             <Box
               sx={{
                 width: "2px",
@@ -158,6 +170,7 @@ const View = () => {
                 right: 0,
               }}
             />
+            {/* Label */}
             <Typography
               variant="body2"
               sx={{
@@ -167,6 +180,7 @@ const View = () => {
                 transform: "translateX(-50%)",
                 fontSize: "16px",
                 color: "#666",
+                fontWeight: "normal",
                 fontFamily: '"Raleway", sans-serif',
               }}
             >
