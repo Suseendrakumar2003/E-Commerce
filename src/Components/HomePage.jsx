@@ -8,7 +8,7 @@ import TrendingArtworks from './TrendingArtworks';
 import LimitedEditionBanner from './LimitedEditionBanner';
 import Newsletter from './Newsletter';
 import Footer from "./Footer";
-import CarouselSlider from './CarouselSlider';
+
 
 const HomePage = () => {
   return (
@@ -21,7 +21,6 @@ const HomePage = () => {
       <TrendingArtworks />
       <LimitedEditionBanner />
       <Newsletter />
-      <CarouselSlider/>
       <Footer />
     </>
   );

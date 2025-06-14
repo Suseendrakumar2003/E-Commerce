@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../Assets/kit.png';
 import Google from '../Assets/google.png';
 import Facebook from '../Assets/facebook.png';
-import StarIcon from '../Assets/star.png';
+import StarIcon from '../Assets/stars.png';
 
 const LoginPage = () => {
   const navigate = useNavigate();

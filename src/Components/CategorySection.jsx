@@ -63,8 +63,10 @@ const ShopByCategory = () => {
         <Typography
           variant="h5"
           sx={{
-            fontWeight: 600,
-            fontSize: '1.5rem',
+            fontWeight: 400,
+            fontSize: '30px',
+            lineHeight: '36px',
+            letterSpacing: '0%',
             color: '#111',
           }}
         >
@@ -94,7 +96,7 @@ const ShopByCategory = () => {
         </Box>
       </Box>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={7}>
         <AnimatePresence>
           {displayedCategories.map((category, index) => (
             <Grid item xs={12} sm={6} md={3} key={category.title}>
@@ -119,13 +121,16 @@ const ShopByCategory = () => {
                     image={category.image}
                     alt={category.title}
                   />
-                  <CardContent sx={{ textAlign: 'center', pt: 2, pb: 0 }}>
+                  <CardContent sx={{ textAlign: 'left', pt: 1, pb: 0 }}>
                     <Typography
                       variant="body1"
                       sx={{
-                        fontSize: '0.9rem',
+                        fontFamily : '',
+                        fontSize: '18px',
                         fontWeight: 400,
                         color: '#555',
+                        lineHeight: '28px',
+                        letterSpacing: '0%'
                       }}
                     >
                       {category.title}
