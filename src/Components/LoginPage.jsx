@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../Assets/kit.png';
 import Google from '../Assets/google.png';
 import Facebook from '../Assets/facebook.png';
-import StarIcon from '../Assets/stars.png';
+import StarIcon from '../Assets/stars.png'; // ✅ Make sure this file exists in /Assets
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -35,24 +35,8 @@ const LoginPage = () => {
   return (
     <Box minHeight="100vh" bgcolor="#fafafa">
       {/* Top Bar */}
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        px={4}
-        py={2}
-        sx={{ backgroundColor: '#FFFFFF' }}
-      >
-        <img
-          src={Logo}
-          alt="logo"
-          style={{
-            height: '50px',
-            width: 'auto',
-            maxWidth: '160px',
-            objectFit: 'contain'
-          }}
-        />
+      <Box display="flex" justifyContent="space-between" alignItems="center" px={4} py={2} sx={{ backgroundColor: '#FFFFFF' }}>
+        <img src={Logo} alt="logo" style={{ height: '50px', maxWidth: '160px', objectFit: 'contain' }} />
         <Typography fontSize={14} color="#65635F">
           Don’t have an account?{' '}
           <Link href="#" sx={{ color: 'blue', textDecoration: 'none' }}>
@@ -65,7 +49,26 @@ const LoginPage = () => {
       <Box display="flex" justifyContent="center" mt={4} px={2}>
         <Paper elevation={3} sx={{ width: '100%', maxWidth: 400, p: 4, borderRadius: 3 }}>
           <Box display="flex" flexDirection="column" alignItems="center">
-            <img src={StarIcon} alt="star" style={{ width: 50, height: 50, marginBottom: 10 }} />
+            {/* ⭐ Star Icon with fallback */}
+            <img
+  src={StarIcon}
+  alt="star"
+  onError={(e) => {
+    e.target.onerror = null;
+    e.target.src = 'https://cdn-icons-png.flaticon.com/512/616/616489.png'; // fallback star
+  }}
+  style={{
+    width: 50,
+    height: 50,
+    marginBottom: 10,
+    objectFit: 'cover',         // crop/cover square shape
+    borderRadius: 12,           // 🔶 this gives rounded corners (adjust as needed)
+    boxShadow: '0 2px 6px rgba(0,0,0,0.15)', // optional subtle shadow
+    backgroundColor: '#fff'     // optional background for clarity
+  }}
+/>
+
+
             <Typography variant="h5" fontWeight="bold" gutterBottom>
               Welcome Back
             </Typography>
@@ -164,11 +167,7 @@ const LoginPage = () => {
 
             <Box display="flex" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
               <FormControlLabel control={<Checkbox />} label="Remember me" />
-              <Link
-                href="#"
-                variant="body2"
-                sx={{ color: '#161412', textDecoration: 'none' }}
-              >
+              <Link href="#" variant="body2" sx={{ color: '#161412', textDecoration: 'none' }}>
                 Forgot password?
               </Link>
             </Box>
@@ -189,12 +188,9 @@ const LoginPage = () => {
             </Button>
           </form>
 
-          <Typography variant="body2" textAlign="center" mt={2} color="#161412">
+          <Typography variant="body2" textAlign="center" mt={2} color="#65635F">
             Don’t have an account?{' '}
-            <Link
-              href="#"
-              sx={{ color: '#161412', textDecoration: 'none' }}
-            >
+            <Link href="#" sx={{ color: '#161412', textDecoration: 'none' }}>
               Sign up
             </Link>
           </Typography>
