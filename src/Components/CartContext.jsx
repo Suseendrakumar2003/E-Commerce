@@ -1,104 +1,14 @@
-// // // // Components/CartContext.js
-// // // import React, { createContext, useContext, useState } from 'react';
-
-// // // const CartContext = createContext();
-
-// // // export const CartProvider = ({ children }) => {
-// // //   const [cart, setCart] = useState([]);
-
-// // //   const updateQuantity = (title, amount) => {
-// // //     setCart((prevCart) =>
-// // //       prevCart.map((item) =>
-// // //         item.title === title
-// // //           ? { ...item, quantity: Math.max(1, item.quantity + amount) }
-// // //           : item
-// // //       )
-// // //     );
-// // //   };
-
-// // //   const removeItem = (title) => {
-// // //     setCart((prevCart) => prevCart.filter((item) => item.title !== title));
-// // //   };
-
-// // //   const addToCart = (newItem) => {
-// // //     setCart((prevCart) => {
-// // //       const existing = prevCart.find((item) => item.title === newItem.title);
-// // //       if (existing) {
-// // //         return prevCart.map((item) =>
-// // //           item.title === newItem.title
-// // //             ? { ...item, quantity: item.quantity + 1 }
-// // //             : item
-// // //         );
-// // //       } else {
-// // //         return [...prevCart, { ...newItem, quantity: 1 }];
-// // //       }
-// // //     });
-// // //   };
-
-// // //   return (
-// // //     <CartContext.Provider value={{ cart, updateQuantity, removeItem, addToCart }}>
-// // //       {children}
-// // //     </CartContext.Provider>
-// // //   );
-// // // };
-
-// // // export const useCart = () => useContext(CartContext);
-
-
-// // import React, { createContext, useContext, useState } from 'react';
-
-// // const CartContext = createContext();
-
-// // export const useCart = () => useContext(CartContext);
-
-// // export const CartProvider = ({ children }) => {
-// //   const [cartItems, setCartItems] = useState([]);
-
-// //   const addToCart = (item) => {
-// //     setCartItems((prev) => [...prev, item]);
-// //   };
-
-// //   const removeFromCart = (title) => {
-// //     setCartItems((prev) => prev.filter((item) => item.title !== title));
-// //   };
-
-// //   return (
-// //     <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
-// //       {children}
-// //     </CartContext.Provider>
-// //   );
-// // };
-
-
-// import React, { createContext, useContext, useState } from 'react';
-
-// const CartContext = createContext();
-
-// export const CartProvider = ({ children }) => {
-//   const [cart, setCart] = useState([]); // Make sure it's an array
-
-//   const addToCart = (item) => {
-//     setCart((prevCart) => [...prevCart, item]);
-//   };
-
-//   return (
-//     <CartContext.Provider value={{ cart, addToCart }}>
-//       {children}
-//     </CartContext.Provider>
-//   );
-// };
-
-// export const useCart = () => useContext(CartContext);
-
-
 // CartContext.js
 import React, { createContext, useContext, useState } from "react";
 
+// Create context
 const CartContext = createContext();
 
+// Provider component
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
+  // Add item to cart
   const addToCart = (newItem) => {
     setCart((prev) => {
       const existing = prev.find((item) => item.title === newItem.title);
@@ -114,6 +24,7 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  // Update quantity
   const updateQuantity = (title, change) => {
     setCart((prev) =>
       prev
@@ -126,10 +37,12 @@ export const CartProvider = ({ children }) => {
     );
   };
 
+  // Remove item
   const removeItem = (title) => {
     setCart((prev) => prev.filter((item) => item.title !== title));
   };
 
+  // Context value
   return (
     <CartContext.Provider
       value={{ cart, addToCart, updateQuantity, removeItem }}
@@ -139,4 +52,11 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-export const useCart = () => useContext(CartContext);
+// Custom hook with safety check
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("❌ useCart must be used within a CartProvider");
+  }
+  return context;
+};
