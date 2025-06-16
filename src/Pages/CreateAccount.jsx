@@ -343,7 +343,7 @@ const CreateAccount = () => {
                 borderWidth: "1px",
               },
             }}
-            InputProps={{
+            InputPropss={{
               style: { fontSize: "0.875rem", fontWeight: 400 },
             }}
             aria-required="true"
