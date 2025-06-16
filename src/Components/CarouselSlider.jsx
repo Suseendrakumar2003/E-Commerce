@@ -4,7 +4,7 @@ import { Box, Typography, Button, IconButton } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import image from "../Assets/hero.png"; // ✅ Make sure this file is inside the src/Assets folder
+import image from "../Assets/hero.png"; // ✅ Ensure this image exists
 
 const slides = [
   {
@@ -27,43 +27,51 @@ const slides = [
   },
 ];
 
+// Left Arrow with only border color
 const ArrowLeft = ({ onClick }) => (
   <IconButton
     onClick={onClick}
     sx={{
       position: "absolute",
       top: "50%",
-      left: 40,
+      left: 75,
       transform: "translateY(-50%)",
       zIndex: 1,
       backgroundColor: "white",
+      border: "2px solid #666666", // ✅ Outline only
       width: 50,
       height: 50,
-      "&:hover": { backgroundColor: "#eee" },
-      color: "#666666",
+      "&:hover": {
+        backgroundColor: "#f5f5f5",
+      },
+      color: "#666666", // arrow color
     }}
   >
-    <ArrowBackIos />
+    <ArrowBackIos fontSize="small" />
   </IconButton>
 );
 
+// Right Arrow with only border color
 const ArrowRight = ({ onClick }) => (
   <IconButton
     onClick={onClick}
     sx={{
       position: "absolute",
       top: "50%",
-      right: 40,
+      right: 75,
       transform: "translateY(-50%)",
       zIndex: 1,
       backgroundColor: "white",
+      border: "2px solid #666666", // ✅ Outline only
       width: 50,
       height: 50,
-      "&:hover": { backgroundColor: "#eee" },
-      color: "#666666",
+      "&:hover": {
+        backgroundColor: "#f5f5f5",
+      },
+      color: "#666666", // arrow color
     }}
   >
-    <ArrowForwardIos />
+    <ArrowForwardIos fontSize="small" />
   </IconButton>
 );
 
@@ -72,7 +80,7 @@ const CarouselSlider = () => {
     dots: false,
     infinite: true,
     autoplay: true,
-    autoplaySpeed: 5000, // 5 seconds
+    autoplaySpeed: 5000,
     speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -81,13 +89,13 @@ const CarouselSlider = () => {
   };
 
   return (
-    <Box sx={{ position: "relative", width: "100%", height: "90vh", overflow: "hidden" }}>
+    <Box sx={{ position: "relative", width: "100%", height: "60vh", overflow: "hidden" }}>
       <Slider {...settings}>
         {slides.map((slide, index) => (
           <Box
             key={index}
             sx={{
-              height: "90vh",
+              height: "60vh",
               backgroundImage: `url(${slide.backgroundImage})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
@@ -97,14 +105,14 @@ const CarouselSlider = () => {
             <Box
               sx={{
                 position: "absolute",
-                bottom: "10%",
-                left: "50%",
-                transform: "translateX(-50%)",
-                textAlign: "center",
-                px: 3,
+                bottom: "20%",
+                left: "12%",
+                textAlign: "left",
+                maxWidth: "500px",
+                px: 2,
               }}
             >
-              <Typography sx={{ color: "#999999", mb: 2, fontSize: "16px" }}>
+              <Typography sx={{ color: "#999999", mb: 3, fontSize: "16px" }}>
                 {slide.date}
               </Typography>
               <Typography
@@ -112,7 +120,7 @@ const CarouselSlider = () => {
                 sx={{
                   fontWeight: "bold",
                   color: "#000000",
-                  mb: 2,
+                  mb: 4,
                 }}
               >
                 {slide.title}
@@ -122,7 +130,7 @@ const CarouselSlider = () => {
                 sx={{
                   color: "#333333",
                   fontSize: "18px",
-                  mb: 3,
+                  mb: 4.5,
                 }}
               >
                 {slide.subtitle}
