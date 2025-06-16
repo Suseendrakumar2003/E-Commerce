@@ -13,16 +13,19 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../Assets/logo.png";
 
-const navItems = ["PAINTINGS", "DRAWINGS", "SCULPTURE", "ARTISTS"];
+const navItems = [
+  { name: "PAINTINGS", path: "/paintings" },
+  { name: "DRAWINGS", path: "/view" },
+  { name: "SCULPTURE", path: "/view" },
+  { name: "ARTISTS", path: "/home" },
+];
 
 const Navbar = ({ onCartClick }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const navigate = useNavigate();
-
   const [showSearch, setShowSearch] = useState(false);
 
   const navVariants = {
@@ -50,6 +53,10 @@ const Navbar = ({ onCartClick }) => {
       opacity: 0,
       transition: { duration: 0.3, ease: "easeInOut" },
     },
+  };
+
+  const handleProfileClick = () => {
+    window.open("/login", "_blank"); // Navigate to /login in a new tab
   };
 
   return (
@@ -87,12 +94,14 @@ const Navbar = ({ onCartClick }) => {
               <Box sx={{ display: "flex", gap: 3, mr: 2 }}>
                 {navItems.map((item, index) => (
                   <motion.div
-                    key={item}
+                    key={item.name}
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 + index * 0.1 }}
                   >
                     <Typography
+                      component={Link}
+                      to={item.path}
                       sx={{
                         fontSize: "0.75rem",
                         fontWeight: 400,
@@ -100,9 +109,11 @@ const Navbar = ({ onCartClick }) => {
                         cursor: "pointer",
                         transition: "0.3s",
                         "&:hover": { color: "#666" },
+                        textDecoration: "none",
+                        color: "inherit",
                       }}
                     >
-                      {item}
+                      {item.name}
                     </Typography>
                   </motion.div>
                 ))}
@@ -137,6 +148,7 @@ const Navbar = ({ onCartClick }) => {
                         color: "#333",
                       }}
                       autoFocus
+                      aria-label="Search artworks"
                     />
                   </motion.div>
                 )}
@@ -147,6 +159,7 @@ const Navbar = ({ onCartClick }) => {
                 <IconButton
                   size="small"
                   onClick={() => setShowSearch((prev) => !prev)}
+                  aria-label="Toggle search bar"
                 >
                   <SearchIcon sx={{ fontSize: 18 }} />
                 </IconButton>
@@ -154,16 +167,21 @@ const Navbar = ({ onCartClick }) => {
 
               {/* Cart Icon */}
               <motion.div whileHover="hover" variants={iconVariants}>
-                <IconButton size="small" onClick={onCartClick}>
+                <IconButton
+                  size="small"
+                  onClick={onCartClick}
+                  aria-label="View cart"
+                >
                   <ShoppingCartOutlinedIcon sx={{ fontSize: 18 }} />
                 </IconButton>
               </motion.div>
 
-              {/* Profile Icon - Navigate to Register Address */}
+              {/* Profile Icon */}
               <motion.div whileHover="hover" variants={iconVariants}>
                 <IconButton
                   size="small"
-                  onClick={() => navigate("/register-address")}
+                  onClick={handleProfileClick}
+                  aria-label="Go to login page in new tab"
                 >
                   <PersonOutlineIcon sx={{ fontSize: 18 }} />
                 </IconButton>

@@ -33,6 +33,8 @@ import { motion } from "framer-motion";
 import LimitedEditionBanner from "../Components/LimitedEditionBanner";
 import Newsletter from "../Components/Newsletter";
 import Footer from "../Components/Footer";
+import { useCart } from "../Components/CartContext"; // Import useCart hook
+import CarouselSlider from "../Components/CarouselSlider";
 
 // Images
 import r1c1 from "../Assets/r1c1.png";
@@ -148,8 +150,7 @@ const paintings = [
     artist: "James Anderson",
     price: 420,
     rating: 4.0,
-    image: r4c2,
-    image: r4c2,
+    image: r4c2, // Fixed duplicate image key
     brand: "Art House",
     isNew: true,
   },
@@ -397,6 +398,7 @@ const PaintingPage = () => {
   const [viewMode, setViewMode] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
+  const { addToCart } = useCart(); // Use the cart context
 
   const filteredPaintings = paintings.filter((painting) => {
     const discountedPrice =
@@ -465,6 +467,21 @@ const PaintingPage = () => {
   const handleViewClick = (painting) =>
     navigate("/view", { state: { artwork: painting } });
 
+  // Handle adding to cart
+  const handleAddToCart = (painting) => {
+    const discountedPrice =
+      painting.status === "Sale"
+        ? Math.round(painting.price * 0.75)
+        : painting.price;
+    const cartItem = {
+      title: painting.title,
+      artist: painting.artist,
+      price: discountedPrice,
+      image: painting.image,
+    };
+    addToCart(cartItem);
+  };
+
   const sortedPaintings = [...filteredPaintings].sort((a, b) => {
     if (sortBy === "Price: Low to High") {
       const priceA = a.status === "Sale" ? Math.round(a.price * 0.75) : a.price;
@@ -487,6 +504,7 @@ const PaintingPage = () => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", bgcolor: "#f5f5f5" }}>
+      <CarouselSlider />
       <Box
         sx={{
           display: "flex",
@@ -847,6 +865,7 @@ const PaintingPage = () => {
                           }}
                           size="small"
                           disabled={painting.status === "Out of Stock"}
+                          onClick={() => handleAddToCart(painting)} // Add to cart on click
                         >
                           Add to Cart
                         </Button>
@@ -1069,6 +1088,7 @@ const PaintingPage = () => {
                             }}
                             size="small"
                             disabled={painting.status === "Out of Stock"}
+                            onClick={() => handleAddToCart(painting)} // Add to cart on click
                           >
                             Add to Cart
                           </Button>
