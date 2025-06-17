@@ -35,6 +35,7 @@ export default function App() {
         <Route path="/artists" element={<ArtistsPage />} />
         <Route path="/view" element={<View />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/flash-sale" element={<PaintingPage />} />
         <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
     </>

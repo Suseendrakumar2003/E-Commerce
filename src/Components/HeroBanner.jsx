@@ -128,7 +128,7 @@ const HeroBanner = () => {
           variant="body1"
           sx={{
             mb: 3,
-            maxWidth: "420px",
+            maxWidth: "520px",
             mx: "auto",
             color: "#333",
             fontSize: "1rem",
@@ -168,6 +168,7 @@ const HeroBanner = () => {
                 top: 500,
                 width: 10,
                 height: 10,
+                mt: 20,
                 backgroundColor: currentSlide === index ? "#000" : "#ccc",
                 borderRadius: "50%",
                 cursor: "pointer",

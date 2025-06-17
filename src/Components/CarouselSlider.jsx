@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "@fontsource/inter"; // Use Inter font
 import image from "../Assets/hero.png"; // Replace with your image path
 
+
 const slides = [
   {
     date: "September 12-22",
