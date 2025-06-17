@@ -1,152 +1,3 @@
-// import { useState } from "react";
-// import {
-//   Box,
-//   Typography,
-//   Grid,
-//   Card,
-//   CardMedia,
-//   CardContent,
-// } from "@mui/material";
-// import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-// import { motion, AnimatePresence } from "framer-motion";
-// import { useNavigate } from "react-router-dom";
-// import image1 from "../Assets/Painting.png";
-// import image2 from "../Assets/Sculptures.png";
-// import image3 from "../Assets/Photography.png";
-// import image4 from "../Assets/Digital Art.png";
-
-// // Extended categories array with 10 items
-// const categories = [
-//   { title: "Paintings", image: image1, path: "/category/paintings" },
-//   { title: "Sculptures", image: image2, path: "/category/sculptures" },
-//   { title: "Photography", image: image3, path: "/category/photography" },
-//   { title: "Digital Art", image: image4, path: "/category/digital-art" },
-//   { title: "Drawings", image: image1, path: "/category/drawings" },
-//   { title: "Mixed Media", image: image2, path: "/category/mixed-media" },
-//   { title: "Prints", image: image3, path: "/category/prints" },
-//   { title: "Ceramics", image: image4, path: "/category/ceramics" },
-//   { title: "Textiles", image: image1, path: "/category/textiles" },
-//   { title: "Installations", image: image2, path: "/category/installations" },
-// ];
-
-// const ShopByCategory = () => {
-//   const [isExpanded, setIsExpanded] = useState(false);
-//   const navigate = useNavigate();
-
-//   // Toggle inline expansion only
-//   const handleToggleView = () => {
-//     setIsExpanded((prev) => !prev);
-//     // ❌ Removed navigation
-//   };
-
-//   const handleCardClick = (path) => {
-//     navigate(path);
-//   };
-
-//   const displayedCategories = isExpanded ? categories : categories.slice(0, 4);
-
-//   const cardVariants = {
-//     hidden: { opacity: 0, y: 20 },
-//     visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-//     exit: { opacity: 0, y: 20, transition: { duration: 0.3 } },
-//   };
-
-//   return (
-//     <Box sx={{ px: { xs: 2, md: 8 }, py: 6 }}>
-//       <Box
-//         sx={{
-//           display: "flex",
-//           justifyContent: "space-between",
-//           alignItems: "center",
-//           mb: 4,
-//         }}
-//       >
-//         <Typography
-//           variant="h5"
-//           sx={{
-//             fontFamily: "Optima, sans-serif", // Add fallback font
-//             fontStyle: "normal",
-//             fontWeight: 400,
-//             fontSize: "30px",
-//             lineHeight: "36px", // Explicitly set line height
-//             color: "#161412", // Match the provided color
-//           }}
-//         >
-//           Shop by Category
-//         </Typography>
-
-//         <Box
-//           sx={{
-//             display: "flex",
-//             alignItems: "center",
-//             cursor: "pointer",
-//             "&:hover": { textDecoration: "underline" },
-//           }}
-//           onClick={handleToggleView}
-//         >
-//           <Typography
-//             sx={{
-//               color: "#111",
-//               fontSize: "0.85rem",
-//               mr: 0.5,
-//             }}
-//           >
-//             {isExpanded ? "Show Less" : "View All"}
-//           </Typography>
-//           <ArrowForwardIcon sx={{ fontSize: "1rem", color: "#111" }} />
-//         </Box>
-//       </Box>
-
-//       <Grid container spacing={7}>
-//         <AnimatePresence>
-//           {displayedCategories.map((category) => (
-//             <Grid item xs={12} sm={6} md={3} key={category.title}>
-//               <motion.div
-//                 variants={cardVariants}
-//                 initial="hidden"
-//                 animate="visible"
-//                 exit="exit"
-//                 layout
-//               >
-//                 <Card
-//                   elevation={0}
-//                   // sx={{
-//                   //   cursor: 'pointer',
-//                   //   '&:hover': { boxShadow: '0 4px 8px rgba(0,0,0,0.1)' },
-//                   // }}
-//                   onClick={() => handleCardClick(category.path)}
-//                 >
-//                   <CardMedia
-//                     component="img"
-//                     height="200"
-//                     image={category.image}
-//                     alt={category.title}
-//                   />
-//                   <CardContent sx={{ textAlign: "left", pt: 0, pb: 0 }}>
-//                     <Typography
-//                       variant="body1"
-//                       sx={{
-//                         fontSize: "18px",
-//                         fontWeight: 400,
-//                         color: "#555",
-//                         lineHeight: "28px",
-//                       }}
-//                     >
-//                       {category.title}
-//                     </Typography>
-//                   </CardContent>
-//                 </Card>
-//               </motion.div>
-//             </Grid>
-//           ))}
-//         </AnimatePresence>
-//       </Grid>
-//     </Box>
-//   );
-// };
-
-// export default ShopByCategory;
-
 import { useState } from 'react';
 import {
   Box,
@@ -156,6 +7,7 @@ import {
   CardMedia,
   CardContent,
 } from '@mui/material';
+import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import image1 from '../Assets/Painting.png';
@@ -174,23 +26,6 @@ import image4 from '../Assets/Digital Art.png';
 // import { ReactComponent as CustomArrowIcon } from '../Assets/arrow-icon.svg';
 
 // Placeholder SVG for the bold, black, right-pointing arrow
-const CustomArrowIcon = () => (
-  <svg
-    width="20" // Matches the prominence of the image (~1.25rem)
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M5 12H18M18 12L12 6M18 12L12 18"
-      stroke="#000000" // Black to match the image
-      strokeWidth="3" // Thicker stroke for a bold appearance
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
 
 const categories = [
   { title: 'Paintings', image: image1, path: '/category/paintings' },
@@ -270,7 +105,13 @@ const ShopByCategory = () => {
           >
             {isExpanded ? 'Show Less' : 'View All'}
           </Typography>
-          <CustomArrowIcon /> {/* Replace with imported SVG once available */}
+          <ArrowForwardIos
+              sx={{
+                fontSize: "1.1rem",
+                cursor: "pointer",
+                color: "black",
+              }}
+            />{/* Replace with imported SVG once available */}
         </button>
       </Box>
 
