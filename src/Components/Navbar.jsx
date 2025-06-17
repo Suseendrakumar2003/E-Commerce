@@ -299,8 +299,6 @@ const Navbar = ({ onCartClick }) => {
       >
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
 
-          {/* Logo with Link to Homepage */}
-
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography
               variant="h6"
@@ -360,7 +358,6 @@ const Navbar = ({ onCartClick }) => {
             )}
 
             <Box sx={{ display: "flex", alignItems: "center", gap: 3.5 }}>
-
               <AnimatePresence>
                 {showSearch && (
                   <motion.div

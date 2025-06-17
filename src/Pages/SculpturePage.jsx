@@ -39,23 +39,23 @@ import CarouselSlider from "../Components/CarouselSlider";
 import { useCart } from "../Components/CartContext";
 
 // Images
-import r1c1 from "../Assets/r1c1.png";
-import r1c2 from "../Assets/r1c2.png";
-import r1c3 from "../Assets/r1c3.png";
-import r2c1 from "../Assets/r2c1.png";
-import r2c2 from "../Assets/r2c2.png";
-import r2c3 from "../Assets/r2c3.png";
-import r3c1 from "../Assets/r3c1.png";
-import r3c2 from "../Assets/r3c2.png";
-import r3c3 from "../Assets/r3c3.png";
-import r4c1 from "../Assets/r4c1.png";
-import r4c2 from "../Assets/r4c2.png";
-import r4c3 from "../Assets/r4c3.png";
+import r1c1 from "../Assets/angel.jpg";
+import r1c2 from "../Assets/christus.jpg";
+import r1c3 from "../Assets/Egyptian.jpg";
+import r2c1 from "../Assets/golden.jpg";
+import r2c2 from "../Assets/indian.jpg";
+import r2c3 from "../Assets/italian.jpg";
+import r3c1 from "../Assets/knifeangel.jpg";
+import r3c2 from "../Assets/liberty.jpg";
+import r3c3 from "../Assets/roman.jpg";
+import r4c1 from "../Assets/wakefield.jpg";
+import r4c2 from "../Assets/western.jpg";
+import r4c3 from "../Assets/face.jpg";
 
 // Sculptures data
 const sculptures = [
   {
-    title: "Bronze Serenity",
+    title: "Angel Sculpture",
     artist: "Clara Evans",
     price: 450,
     rating: 4.7,
@@ -65,7 +65,7 @@ const sculptures = [
     isNew: false,
   },
   {
-    title: "Marble Embrace",
+    title: "Christus",
     artist: "David Kim",
     price: 600,
     rating: 4.3,
@@ -74,7 +74,7 @@ const sculptures = [
     isNew: false,
   },
   {
-    title: "Abstract Form",
+    title: "Egyptian",
     artist: "Sophie Turner",
     price: 520,
     rating: 5.0,
@@ -84,7 +84,7 @@ const sculptures = [
     isNew: true,
   },
   {
-    title: "Iron Horizon",
+    title: "Golden",
     artist: "Michael Reed",
     price: 380,
     rating: 4.1,
@@ -93,7 +93,7 @@ const sculptures = [
     isNew: false,
   },
   {
-    title: "Wooden Grace",
+    title: "Indian",
     artist: "Laura Chen",
     price: 470,
     rating: 4.6,
@@ -102,7 +102,7 @@ const sculptures = [
     isNew: true,
   },
   {
-    title: "Steel Motion",
+    title: "Italian",
     artist: "Ethan Parker",
     price: 410,
     rating: 4.0,
@@ -111,7 +111,7 @@ const sculptures = [
     isNew: false,
   },
   {
-    title: "Ceramic Dream",
+    title: "knifeangel",
     artist: "Isabelle Moore",
     price: 490,
     rating: 4.8,
@@ -120,7 +120,7 @@ const sculptures = [
     isNew: false,
   },
   {
-    title: "Glass Reflection",
+    title: "Liberty",
     artist: "Nathan Scott",
     price: 550,
     rating: 4.5,
@@ -129,7 +129,7 @@ const sculptures = [
     isNew: true,
   },
   {
-    title: "Stone Balance",
+    title: "Roman",
     artist: "Olivia Hayes",
     price: 430,
     rating: 4.2,
@@ -139,7 +139,7 @@ const sculptures = [
     isNew: false,
   },
   {
-    title: "Copper Wave",
+    title: "Wakefield",
     artist: "Daniel Lee",
     price: 510,
     rating: 4.9,
@@ -148,7 +148,7 @@ const sculptures = [
     isNew: false,
   },
   {
-    title: "Terracotta Soul",
+    title: "Western",
     artist: "Emma Brooks",
     price: 460,
     rating: 4.4,
@@ -157,7 +157,7 @@ const sculptures = [
     isNew: true,
   },
   {
-    title: "Metal Harmony",
+    title: "Face Sculpture",
     artist: "Lucas Wright",
     price: 580,
     rating: 5.0,

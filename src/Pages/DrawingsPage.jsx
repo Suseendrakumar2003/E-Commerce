@@ -39,23 +39,23 @@ import CarouselSlider from "../Components/CarouselSlider";
 import { useCart } from "../Components/CartContext";
 
 // Images
-import r1c1 from "../Assets/r1c1.png";
-import r1c2 from "../Assets/r1c2.png";
-import r1c3 from "../Assets/r1c3.png";
-import r2c1 from "../Assets/r2c1.png";
-import r2c2 from "../Assets/r2c2.png";
-import r2c3 from "../Assets/r2c3.png";
-import r3c1 from "../Assets/r3c1.png";
-import r3c2 from "../Assets/r3c2.png";
-import r3c3 from "../Assets/r3c3.png";
-import r4c1 from "../Assets/r4c1.png";
-import r4c2 from "../Assets/r4c2.png";
-import r4c3 from "../Assets/r4c3.png";
+import r1c1 from "../Assets/Bird.jpg";
+import r1c2 from "../Assets/Butterfly.jpg";
+import r1c3 from "../Assets/Duck.jpg";
+import r2c1 from "../Assets/Home.jpg";
+import r2c2 from "../Assets/House.jpg";
+import r2c3 from "../Assets/Nature.jpg";
+import r3c1 from "../Assets/Owl.png";
+import r3c2 from "../Assets/Rainbow.jpg";
+import r3c3 from "../Assets/Sparrow.jpg";
+import r4c1 from "../Assets/Subway.jpg";
+import r4c2 from "../Assets/tradition.jpg";
+import r4c3 from "../Assets/Facepaint.jpg";
 
 // Drawings data
 const drawings = [
   {
-    title: "Sketch of Serenity",
+    title: "Bird",
     artist: "Emma Stone",
     price: 150,
     rating: 4.8,
@@ -65,7 +65,7 @@ const drawings = [
     isNew: false,
   },
   {
-    title: "Urban Lines",
+    title: "Butterfly",
     artist: "Liam Gray",
     price: 200,
     rating: 4.5,
@@ -74,7 +74,7 @@ const drawings = [
     isNew: false,
   },
   {
-    title: "Nature's Whisper",
+    title: "Duck",
     artist: "Ava Lee",
     price: 180,
     rating: 5.0,
@@ -84,7 +84,7 @@ const drawings = [
     isNew: true,
   },
   {
-    title: "City Shadows",
+    title: "Street",
     artist: "Noah Brown",
     price: 120,
     rating: 4.0,
@@ -93,7 +93,7 @@ const drawings = [
     isNew: false,
   },
   {
-    title: "Dreamy Contours",
+    title: "Home",
     artist: "Sophie Kim",
     price: 250,
     rating: 4.7,
@@ -102,7 +102,7 @@ const drawings = [
     isNew: true,
   },
   {
-    title: "Bold Strokes",
+    title: "Nature",
     artist: "Henry Adams",
     price: 170,
     rating: 4.2,
@@ -111,7 +111,7 @@ const drawings = [
     isNew: false,
   },
   {
-    title: "Quiet Moments",
+    title: "Owl",
     artist: "Isabella Cruz",
     price: 190,
     rating: 4.9,
@@ -120,7 +120,7 @@ const drawings = [
     isNew: false,
   },
   {
-    title: "Abstract Flow",
+    title: "Rainbow",
     artist: "James Carter",
     price: 210,
     rating: 4.6,
@@ -129,7 +129,7 @@ const drawings = [
     isNew: true,
   },
   {
-    title: "Morning Light",
+    title: "Sparrow",
     artist: "Olivia Green",
     price: 140,
     rating: 4.3,
@@ -139,7 +139,7 @@ const drawings = [
     isNew: false,
   },
   {
-    title: "Silent Echoes",
+    title: "SubWay Path",
     artist: "Jacob Lee",
     price: 230,
     rating: 4.8,
@@ -148,7 +148,7 @@ const drawings = [
     isNew: false,
   },
   {
-    title: "Vivid Lines",
+    title: "Tradition",
     artist: "Maria Santos",
     price: 160,
     rating: 4.4,
@@ -157,7 +157,7 @@ const drawings = [
     isNew: true,
   },
   {
-    title: "Eternal Sketch",
+    title: "Face-Drawing",
     artist: "Elena Ruiz",
     price: 200,
     rating: 5.0,
