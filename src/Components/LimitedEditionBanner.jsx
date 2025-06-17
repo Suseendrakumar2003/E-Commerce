@@ -219,6 +219,7 @@ const LimitedEditionBanner = () => {
             <Typography
               variant="overline"
               sx={{
+                width:"115px",
                 fontWeight: "bold",
                 backgroundColor: "#f2f2f2",
                 px: 2,

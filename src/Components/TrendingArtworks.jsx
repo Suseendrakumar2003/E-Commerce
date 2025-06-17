@@ -430,7 +430,7 @@ const TrendingArtworks = () => {
             <Typography
               variant="body1"
               sx={{
-                color: "#1976d2",
+                
                 cursor: "pointer",
               }}
               onClick={() => navigate("/paintings")} // Navigate to /paintings
@@ -439,7 +439,7 @@ const TrendingArtworks = () => {
             </Typography>
             <ArrowForwardIcon
               sx={{
-                color: "#1976d2",
+               
                 fontSize: "1.2rem",
               }}
             />

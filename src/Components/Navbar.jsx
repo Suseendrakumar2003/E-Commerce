@@ -62,13 +62,13 @@ const Navbar = ({ onCartClick }) => {
   return (
     <motion.div initial="hidden" animate="visible" variants={navVariants}>
       <AppBar
-        position="static"
+        position="fixed"
         elevation={0}
         sx={{
           backgroundColor: "#ffffff",
           color: "#000",
-          px: { xs: 2, md: 4 },
-          py: 1,
+          px: { xs: 2, md: 6 },
+          py: 3,
         }}
       >
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
@@ -91,7 +91,7 @@ const Navbar = ({ onCartClick }) => {
           {/* Right Section */}
           <Box sx={{ display: "flex", alignItems: "center" }}>
             {!isMobile && (
-              <Box sx={{ display: "flex", gap: 3, mr: 2 }}>
+              <Box sx={{ display: "flex", gap: 5, mr: 4 }}>
                 {navItems.map((item, index) => (
                   <motion.div
                     key={item.name}
@@ -120,7 +120,7 @@ const Navbar = ({ onCartClick }) => {
               </Box>
             )}
 
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 3.5 }}>
               {/* Search Bar */}
               <AnimatePresence>
                 {showSearch && (
@@ -157,33 +157,33 @@ const Navbar = ({ onCartClick }) => {
               {/* Search Icon */}
               <motion.div whileHover="hover" variants={iconVariants}>
                 <IconButton
-                  size="small"
+                  size="medium"
                   onClick={() => setShowSearch((prev) => !prev)}
                   aria-label="Toggle search bar"
                 >
-                  <SearchIcon sx={{ fontSize: 18 }} />
+                  <SearchIcon sx={{ fontSize: 20 }} />
                 </IconButton>
               </motion.div>
 
               {/* Cart Icon */}
               <motion.div whileHover="hover" variants={iconVariants}>
                 <IconButton
-                  size="small"
+                  size="medium"
                   onClick={onCartClick}
                   aria-label="View cart"
                 >
-                  <ShoppingCartOutlinedIcon sx={{ fontSize: 18 }} />
+                  <ShoppingCartOutlinedIcon sx={{ fontSize: 20 }} />
                 </IconButton>
               </motion.div>
 
               {/* Profile Icon */}
               <motion.div whileHover="hover" variants={iconVariants}>
                 <IconButton
-                  size="small"
+                  size="medium"
                   onClick={handleProfileClick}
                   aria-label="Go to login page in new tab"
                 >
-                  <PersonOutlineIcon sx={{ fontSize: 18 }} />
+                  <PersonOutlineIcon sx={{ fontSize: 20}} />
                 </IconButton>
               </motion.div>
             </Box>

@@ -81,7 +81,7 @@ const View = () => {
           onClick={() => navigate(-1)}
           sx={{
             position: "absolute",
-            top: 20,
+            top: 120,
             left: 20,
             bgcolor: "rgba(255, 255, 255, 0.8)",
             boxShadow: "0 2px 6px rgba(0, 0, 0, 0.3)",
@@ -98,7 +98,7 @@ const View = () => {
           onError={(e) => console.error("Image failed to load:", e)}
           style={{
             position: "fixed",
-            top:"70px",
+            top:"130px",
             transform: "translate(-50%, -50%)",
             width: "200px",
             height: "227px",

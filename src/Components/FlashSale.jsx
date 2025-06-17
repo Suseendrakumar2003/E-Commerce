@@ -253,7 +253,7 @@ const FlashSaleSection = () => {
               sx={{
                 color: "Black",
                 cursor: "pointer",
-                fontFamily: '"Raleway", sans-serif',
+                
               }}
             >
               View All Deals
@@ -494,7 +494,7 @@ const FlashSaleSection = () => {
               variant="h6"
               sx={{
                 fontWeight: 500,
-                fontSize: "1.25rem",
+                fontSize: "30px",
                 mb: 1,
                 fontFamily: '"Raleway", sans-serif',
                 textAlign: "right",
@@ -504,7 +504,7 @@ const FlashSaleSection = () => {
             </Typography>
             <Typography
               sx={{
-                fontSize: "12px",
+                fontSize: "16px",
                 color: "gray",
                 mt: 1,
                 mb: 3,
@@ -512,9 +512,9 @@ const FlashSaleSection = () => {
                 textAlign: "right",
               }}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Scelerisque duis ultrices sollicitudin aliquam sem. Scelerisque
-              duis ultrices sollicitudin
+              Lorem ipsum dolor sit amet, consectetur <br /> adipiscing elit.
+              Scelerisque duis ultrices <br /> sollicitudin aliquam sem. Scelerisque
+              duis <br /> ultrices sollicitudin
             </Typography>
             <Box
               sx={{
@@ -525,7 +525,7 @@ const FlashSaleSection = () => {
                 textAlign: "center",
                 cursor: "pointer",
                 "&:hover": { backgroundColor: "#f5f5f5" },
-                mb: 4,
+                mb: 1,
                 fontFamily: '"Raleway", sans-serif',
                 display: "inline-block",
               }}
@@ -535,7 +535,7 @@ const FlashSaleSection = () => {
             </Box>
             <Typography
               sx={{
-                mt: 2,
+                mt: 12,
                 mb: 1,
                 fontSize: "12px",
                 textTransform: "uppercase",
