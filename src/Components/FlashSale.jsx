@@ -14,12 +14,10 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
+import { useCart } from "./CartContext";
 import Design1 from "../Assets/design 1.png";
 import Design2 from "../Assets/sculpture 1.png";
 import Design3 from "../Assets/brothers 1.png";
-
-// Import the font (Google Fonts - Raleway)
 import "@fontsource/raleway/400.css";
 import "@fontsource/raleway/700.css";
 
@@ -116,17 +114,12 @@ const flashDeals = [
   },
 ];
 
-// Animation variants for the card
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
   visible: (index) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      delay: index * 0.2,
-      duration: 0.6,
-      ease: "easeOut",
-    },
+    transition: { delay: index * 0.2, duration: 0.6, ease: "easeOut" },
   }),
   hover: {
     scale: 1.05,
@@ -135,7 +128,6 @@ const cardVariants = {
   },
 };
 
-// Animation variants for the header
 const headerVariants = {
   hidden: { opacity: 0, x: -50 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
@@ -168,6 +160,7 @@ const FlashSaleSection = () => {
   const [isScrolling, setIsScrolling] = useState(true);
   const scrollRef = useRef(null);
   const navigate = useNavigate();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const endTime = new Date().getTime() + 24 * 60 * 60 * 1000;
@@ -186,7 +179,6 @@ const FlashSaleSection = () => {
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
       setTimeLeft({ hours, minutes, seconds });
     }, 1000);
-
     return () => clearInterval(timer);
   }, []);
 
@@ -204,12 +196,18 @@ const FlashSaleSection = () => {
       }
       scrollContainer.scrollLeft = scrollAmount;
     };
-    const scrollInterval = setInterval(scroll, 30);
+    const scrollInterval = setInterval(scroll, 50);
     return () => clearInterval(scrollInterval);
   }, [isScrolling]);
 
   const handleAddToCart = (item) => {
-    console.log(`Clicked Add to Cart for ${item.title}`);
+    addToCart({
+      title: item.title,
+      artist: item.artist,
+      price: item.price,
+      image: item.image,
+    });
+    console.log(`Added ${item.title} to cart`);
   };
 
   const handleCardClick = (path) => navigate(path);
@@ -219,23 +217,20 @@ const FlashSaleSection = () => {
   const handleView = (item) => navigate("/view", { state: { artwork: item } });
 
   return (
-    <Box sx={{ px: { xs: 2, md: 10 }, py: 6, backgroundColor: "#f5f2ef" }}>
-      {/* Header Section with Animation */}
+    <Box sx={{ px: { xs: 2, md: 4 }, py: 6, backgroundColor: "#f5f2ef" }}>
       <motion.div variants={headerVariants} initial="hidden" animate="visible">
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            mb: 6,
+            mb: 4,
+            padding: 1,
           }}
         >
           <Typography
             variant="h4"
-            sx={{
-              fontWeight: 100,
-              fontFamily: '"Raleway", sans-serif',
-            }}
+            sx={{ fontWeight: 700, fontFamily: '"Raleway", sans-serif' }}
           >
             Flash Sale
           </Typography>
@@ -251,19 +246,18 @@ const FlashSaleSection = () => {
             <Typography
               variant="body1"
               sx={{
-                color: "Black",
-                cursor: "pointer",
-                
+                color: "#65635F",
+                fontFamily: '"Raleway", sans-serif',
+                marginRight: "50px",
               }}
             >
               View All Deals
             </Typography>
-            <span style={{ fontSize: "1rem", color: "#1976d2" }}>→</span>
           </Box>
         </Box>
       </motion.div>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         <Grid item xs={12} md={9}>
           <Box
             ref={scrollRef}
@@ -271,7 +265,7 @@ const FlashSaleSection = () => {
               display: "flex",
               overflowX: "auto",
               scrollBehavior: "smooth",
-              gap: 3,
+              gap: 2,
               pb: 2,
               width: "900px",
               "&::-webkit-scrollbar": { display: "none" },
@@ -290,11 +284,10 @@ const FlashSaleSection = () => {
               >
                 <Card
                   sx={{
-                    position: "relative",
                     borderRadius: 0,
-                    boxShadow: 0,
-                    width: 290,
-                    height: 454,
+                    boxShadow: "none",
+                    width: { xs: 200, sm: 256 },
+                    height: 424,
                     border: "1px solid",
                     borderColor: "grey.300",
                     display: "flex",
@@ -303,7 +296,6 @@ const FlashSaleSection = () => {
                   }}
                   onClick={() => handleCardClick(item.path)}
                 >
-                  {/* Image Section */}
                   <Box sx={{ position: "relative", flexShrink: 0 }}>
                     <CardMedia
                       component="img"
@@ -311,17 +303,23 @@ const FlashSaleSection = () => {
                       image={item.image}
                       alt={item.title}
                       sx={{ objectFit: "cover", width: "100%" }}
+                      loading="lazy"
+                      onError={(e) =>
+                        (e.target.src = "/path/to/placeholder.jpg")
+                      }
                     />
                     <Box
                       sx={{
                         position: "absolute",
                         top: 8,
                         left: 8,
-                        background: "#000",
+                        background: "rgba(0, 0, 0, 0.7)",
                         color: "#fff",
                         px: 1,
+                        py: 0.5,
                         fontSize: "12px",
                         fontFamily: '"Raleway", sans-serif',
+                        borderRadius: "4px",
                       }}
                     >
                       SALE
@@ -334,42 +332,44 @@ const FlashSaleSection = () => {
                         display: "flex",
                         flexDirection: "column",
                         gap: 1,
-                        width: "33px",
-                        height: "auto",
                       }}
                     >
                       <IconButton
                         sx={{
                           backgroundColor: "white",
                           "&:hover": { backgroundColor: "#f0f0f0" },
-                          width: "33px",
-                          height: "33px",
+                          width: 32,
+                          height: 32,
+                          borderRadius: "50%",
+                          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
                         }}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleFavorite(item.title);
                         }}
+                        aria-label={`Add ${item.title} to favorites`}
                       >
-                        <FavoriteBorderIcon />
+                        <FavoriteBorderIcon fontSize="small" />
                       </IconButton>
                       <IconButton
                         sx={{
                           backgroundColor: "white",
                           "&:hover": { backgroundColor: "#f0f0f0" },
-                          width: "33px",
-                          height: "33px",
+                          width: 32,
+                          height: 32,
+                          borderRadius: "50%",
+                          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
                         }}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleView(item);
                         }}
+                        aria-label={`View details of ${item.title}`}
                       >
-                        <VisibilityIcon />
+                        <VisibilityIcon fontSize="small" />
                       </IconButton>
                     </Box>
                   </Box>
-
-                  {/* Card Content */}
                   <CardContent
                     sx={{
                       textAlign: "left",
@@ -377,14 +377,16 @@ const FlashSaleSection = () => {
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "space-between",
+                      p: 2,
                     }}
                   >
                     <Box>
                       <Typography
                         variant="h6"
                         sx={{
-                          fontWeight: "bold",
+                          fontWeight: 700,
                           fontFamily: '"Raleway", sans-serif',
+                          fontSize: "18px",
                         }}
                       >
                         {item.title}
@@ -392,7 +394,11 @@ const FlashSaleSection = () => {
                       <Typography
                         variant="body2"
                         color="text.secondary"
-                        sx={{ fontFamily: '"Raleway", sans-serif' }}
+                        sx={{
+                          fontFamily: '"Raleway", sans-serif',
+                          fontSize: "14px",
+                          mt: 0.5,
+                        }}
                       >
                         {item.artist}
                       </Typography>
@@ -408,7 +414,11 @@ const FlashSaleSection = () => {
                         />
                         <Typography
                           variant="body2"
-                          sx={{ ml: 1, fontFamily: '"Raleway", sans-serif' }}
+                          sx={{
+                            ml: 1,
+                            fontFamily: '"Raleway", sans-serif',
+                            fontSize: "12px",
+                          }}
                         >
                           {item.rating}
                         </Typography>
@@ -427,10 +437,7 @@ const FlashSaleSection = () => {
                       >
                         <Typography
                           variant="h6"
-                          sx={{
-                            fontWeight: "bold",
-                          
-                          }}
+                          sx={{ fontWeight: 700, fontSize: "18px" }}
                         >
                           ${item.price}
                         </Typography>
@@ -439,7 +446,7 @@ const FlashSaleSection = () => {
                           sx={{
                             color: "gray",
                             textDecoration: "line-through",
-                            
+                            fontSize: "14px",
                           }}
                         >
                           ${item.oldPrice}
@@ -471,33 +478,28 @@ const FlashSaleSection = () => {
             ))}
           </Box>
         </Grid>
-
-        <Grid
-          item
-          xs={12}
-          md={3}
-          ml={8.72}
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-          }}
-        >
+        <Grid item xs={12} md={3}>
           <Box
             sx={{
-              width: "319px",
-              height: "374px",
-              p: 2,
-              textAlign: "right",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: { xs: "center", md: "flex-end" },
+              width: { xs: "100%", md: "329px" },
+              height: { xs: "auto", md: "394px" },
+              p: 0,
+              gap: "1rem", // Adjusted gap for better spacing
+              mt: { xs: 4, md: 0 },
+              marginLeft: "150px",
             }}
           >
             <Typography
               variant="h6"
               sx={{
-                fontWeight: 500,
+                fontWeight: 700,
                 fontSize: "30px",
-                mb: 1,
+                mt: 2,
+
                 fontFamily: '"Raleway", sans-serif',
-                textAlign: "right",
               }}
             >
               Deals Of The Month
@@ -506,50 +508,52 @@ const FlashSaleSection = () => {
               sx={{
                 fontSize: "16px",
                 color: "gray",
-                mt: 1,
                 mb: 3,
                 fontFamily: '"Raleway", sans-serif',
-                textAlign: "right",
+                textAlign: { xs: "center", md: "right" },
               }}
             >
-              Lorem ipsum dolor sit amet, consectetur <br /> adipiscing elit.
-              Scelerisque duis ultrices <br /> sollicitudin aliquam sem. Scelerisque
-              duis <br /> ultrices sollicitudin
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Scelerisque duis ultrices sollicitudin aliquam sem.
             </Typography>
-            <Box
+            <Button
+              variant="contained" // Changed to contained to support background color
               sx={{
-                border: "1px solid #111",
+                backgroundColor: "#fff", // Black background as requested
+                color: "#000", // White text for contrast
+                border: "1px solid #111", // Kept the border style
                 px: 3,
                 py: 1,
+                mt: 0,
+                mb: 4,
                 fontSize: "14px",
-                textAlign: "center",
-                cursor: "pointer",
-                "&:hover": { backgroundColor: "#f5f5f5" },
-                mb: 1,
                 fontFamily: '"Raleway", sans-serif',
-                display: "inline-block",
+                "&:hover": {
+                  backgroundColor: "Red", // Slightly lighter black on hover for contrast
+                  border: "1px solid #111",
+                },
               }}
               onClick={handleBuyNow}
             >
               Buy Now
-            </Box>
+            </Button>
             <Typography
               sx={{
-                mt: 12,
-                mb: 1,
+                mt: 3,
+                mb: 2,
                 fontSize: "12px",
                 textTransform: "uppercase",
                 fontFamily: '"Raleway", sans-serif',
-                textAlign: "right",
+                textAlign: { xs: "center", md: "right" },
               }}
             >
-              Offer Closes Soon!
+              Hurry, Before It’s Too Late!
             </Typography>
             <Box
               sx={{
                 display: "flex",
                 gap: 1,
-                justifyContent: "flex-end",
+                justifyContent: { xs: "center", md: "flex-end" },
               }}
             >
               <CountdownBox value={String(timeLeft.hours).padStart(2, "0")} />

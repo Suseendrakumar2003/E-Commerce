@@ -4,8 +4,12 @@ import { Box, Typography, Button, IconButton } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+<<<<<<< HEAD
 import "@fontsource/inter"; // Use Inter font
 import image from "../Assets/hero.png"; // Replace with your image path
+=======
+import image from "../Assets/hero.png"; 
+>>>>>>> 49a9fc7 (i push my changes code)
 
 const slides = [
   {
