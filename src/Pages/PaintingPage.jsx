@@ -539,8 +539,8 @@ const PaintingPage = () => {
             fontSize: "0.9rem",
             color: "black",
             position: 'absolute',
-            top: '445px',
-            left: '42px',
+            top: '520px',
+            left: '45px',
             "& a": {
               color: "#65635F",
               textDecoration: "none",
