@@ -14,8 +14,8 @@ import {
   Select,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GoogleIcon from "@mui/icons-material/Google";
+import FacebookIcon from "../Assets/facebook.png"; // Ensure these paths are correct
+import GoogleIcon from "../Assets/google.png";
 import { useNavigate } from "react-router-dom";
 
 const CreateAccount = () => {
@@ -172,10 +172,18 @@ const CreateAccount = () => {
           </Step>
         </Stepper>
 
-        <Box sx={{ position: "absolute", top: 140, left: 192, display: "flex", gap: 2 }}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: 140,
+            left: 192,
+            display: "flex",
+            gap: 2,
+          }}
+        >
           <Button
             variant="outlined"
-            startIcon={<GoogleIcon />}
+            startIcon={<img src={GoogleIcon} alt="Google" style={{ width: 20, height: 20 }} />}
             sx={buttonStyle}
             onClick={() => window.open("https://accounts.google.com", "_blank")}
           >
@@ -183,26 +191,65 @@ const CreateAccount = () => {
           </Button>
           <Button
             variant="outlined"
-            startIcon={<FacebookIcon />}
+            startIcon={<img src={FacebookIcon} alt="Facebook" style={{ width: 20, height: 20 }} />}
             sx={buttonStyle}
-            onClick={() => window.open("https://www.facebook.com/login", "_blank")}
+            onClick={() =>
+              window.open("https://www.facebook.com/login", "_blank")
+            }
           >
             Facebook
           </Button>
         </Box>
 
-        <Box sx={{ position: "absolute", top: 215, left: 192, display: "flex", alignItems: "center", width: 716 }}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: 215,
+            left: 192,
+            display: "flex",
+            alignItems: "center",
+            width: 716,
+          }}
+        >
           <Box sx={{ flexGrow: 1, height: "1px", bgcolor: "grey.500" }} />
-          <Typography variant="body2" color="grey.500" sx={{ mx: 2 }}>or</Typography>
+          <Typography variant="body2" color="grey.500" sx={{ mx: 2 }}>
+            or
+          </Typography>
           <Box sx={{ flexGrow: 1, height: "1px", bgcolor: "grey.500" }} />
         </Box>
 
-        <TextField {...inputProps} label="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} sx={{ ...inputPosition(277, 192) }} />
-        <TextField {...inputProps} label="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} sx={{ ...inputPosition(277, 560) }} />
-        <TextField {...inputProps} label="Email" value={email} onChange={(e) => setEmail(e.target.value)} sx={{ ...inputPosition(355, 192), width: 578 }} />
+        <TextField
+          {...inputProps}
+          label="First Name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          sx={{ ...inputPosition(277, 192) }}
+        />
+        <TextField
+          {...inputProps}
+          label="Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          sx={{ ...inputPosition(277, 560) }}
+        />
+        <TextField
+          {...inputProps}
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          sx={{ ...inputPosition(355, 192), width: 578 }}
+        />
 
         {/* Mobile with Country Code */}
-        <Box sx={{ position: "absolute", top: 433, left: 192, display: "flex", gap: 2 }}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: 433,
+            left: 192,
+            display: "flex",
+            gap: 2,
+          }}
+        >
           <Select
             value={countryCode}
             onChange={(e) => setCountryCode(e.target.value)}
@@ -283,7 +330,10 @@ const CreateAccount = () => {
                 },
               }}
             />
-            <Typography variant="caption" color={passwordStrength >= 100 ? "green" : "text.secondary"}>
+            <Typography
+              variant="caption"
+              color={passwordStrength >= 100 ? "green" : "text.secondary"}
+            >
               {passwordStrength >= 100 ? "Strong" : "Weak"}
             </Typography>
           </Box>
@@ -339,7 +389,11 @@ const CreateAccount = () => {
           }}
           onClick={handleContinue}
           disabled={
-            !firstName || !lastName || !email || !isPasswordStrong || !doPasswordsMatch
+            !firstName ||
+            !lastName ||
+            !email ||
+            !isPasswordStrong ||
+            !doPasswordsMatch
           }
         >
           Continue to Address

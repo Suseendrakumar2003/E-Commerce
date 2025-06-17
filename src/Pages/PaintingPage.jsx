@@ -23,6 +23,7 @@ import {
   PaginationItem,
   Snackbar,
   Alert,
+  Tooltip,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -180,6 +181,13 @@ const cardVariants = {
       ease: "easeOut",
     },
   }),
+  hover: {
+    scale: 1.05,
+    transition: {
+      duration: 0.3,
+      ease: "easeInOut",
+    },
+  },
 };
 
 // Animation variants for the header
@@ -190,8 +198,8 @@ const headerVariants = {
 
 // Animation variants for the heart icon
 const heartVariants = {
-  unfavorited: { scale: 1, color: "#000", transform: "translateY(2px)"},
-  favorited: { scale: [1, 1.2, 1], color: "#ff0000", transition: { duration: 0.3 },transform: "translateY(2px)" },
+  unfavorited: { scale: 1, color: "#000", transform: "translateY(2px)" },
+  favorited: { scale: [1, 1.2, 1], color: "#ff0000", transition: { duration: 0.3 }, transform: "translateY(2px)" },
 };
 
 const FilterSection = ({
@@ -207,12 +215,12 @@ const FilterSection = ({
 }) => (
   <Box
     sx={{
-      width: 256,
-      height: 796,
+      width: '256px',
+      height: '796px',
       bgcolor: "#FBF6F4",
       borderRadius: 0,
       p: 3,
-      lineHeight:'0px',
+      lineHeight: '0px',
       fontFamily: "Arial",
       overflow: "auto",
       boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.05)",
@@ -220,37 +228,21 @@ const FilterSection = ({
       top: { md: 10 },
     }}
   >
-    <Box sx={{ mb: 2 }}>
-      <Typography
-        variant="body2"
-        sx={{
-          fontSize: "0.9rem",
-          color: "#333",
-          "& a": {
-            color: "#1976d2",
-            textDecoration: "none",
-          },
-        }}
-      >
-        <Link to="/">Home</Link> / Paintings
-      </Typography>
-</Box>
-
-<Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
-      <Typography fontWeight="bold" sx={{ fontSize: "1.2rem", color: "#333" }}>
+    <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3}}>
+      <Typography fontWeight="bold" sx={{ fontSize: "1.2rem", color: "#161412" }}>
         Filters
       </Typography>
       <Typography
         variant="body2"
-        color="primary"
+        color="#65635F"
         onClick={handleClearAll}
-        sx={{ cursor: "pointer", fontWeight: 500,lineHeight:'0px' }}
+        sx={{ cursor: "pointer", fontWeight: 500, lineHeight: '0px' }}
       >
         Clear All
       </Typography>
     </Box>
 
-    <Typography fontWeight={600} fontSize={14} sx={{ mb: 1, color: "#444",lineHeight:'4px' }}>
+    <Typography fontWeight={600} fontSize={14} sx={{ mb: 1, color: "#444", lineHeight: '4px' }}>
       Price Range
     </Typography>
     <Slider
@@ -265,17 +257,17 @@ const FilterSection = ({
           borderRadius: "50%",
           width: 16,
           height: 16,
-          lineHeight:'0px'
+          lineHeight: '0px'
         },
         "& .MuiSlider-track": {
           borderRadius: 10,
           height: 4,
-          lineHeight:'0px'
+          lineHeight: '0px'
         },
         "& .MuiSlider-rail": {
           borderRadius: 10,
           height: 4,
-          lineHeight:'0px'
+          lineHeight: '0px'
         },
       }}
     />
@@ -293,7 +285,7 @@ const FilterSection = ({
         fontWeight={600}
         fontSize={14}
         gutterBottom
-        sx={{ color: "#444" ,lineHeight:'20px'}}
+        sx={{ color: "#444", lineHeight: '20px' }}
       >
         Brands
       </Typography>
@@ -312,7 +304,7 @@ const FilterSection = ({
               }
               label={brand}
               sx={{
-                "& .MuiTypography-root": { fontSize: "0.9rem", color: "#555" ,lineHeight:'0px'},
+                "& .MuiTypography-root": { fontSize: "0.9rem", color: "#555", lineHeight: '0px' },
                 mb: 0.5,
               }}
             />
@@ -326,7 +318,7 @@ const FilterSection = ({
         fontWeight={600}
         fontSize={14}
         gutterBottom
-        sx={{ color: "#444",lineHeight:'20px' }}
+        sx={{ color: "#444", lineHeight: '20px' }}
       >
         Customer Rating
       </Typography>
@@ -339,7 +331,7 @@ const FilterSection = ({
                 size="small"
                 checked={ratings[rating]}
                 onChange={() => handleRatingChange(rating)}
-                sx={{ color: "#000", "&.Mui-checked": { color: "#1976d2" }}}
+                sx={{ color: "#000", "&.Mui-checked": { color: "#1976d2" } }}
               />
             }
             label={
@@ -414,6 +406,7 @@ const PaintingPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [favoritedPaintings, setFavoritedPaintings] = useState({});
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [favoriteSnackbarOpen, setFavoriteSnackbarOpen] = useState(false);
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
@@ -488,6 +481,9 @@ const PaintingPage = () => {
       ...prev,
       [paintingTitle]: !prev[paintingTitle],
     }));
+    if (!favoritedPaintings[paintingTitle]) {
+      setFavoriteSnackbarOpen(true);
+    }
   };
 
   const handleAddToCart = (painting) => {
@@ -510,6 +506,7 @@ const PaintingPage = () => {
       return;
     }
     setSnackbarOpen(false);
+    setFavoriteSnackbarOpen(false);
   };
 
   const sortedPaintings = [...filteredPaintings].sort((a, b) => {
@@ -535,6 +532,25 @@ const PaintingPage = () => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", bgcolor: "#f5f5f5" }}>
       <CarouselSlider />
+      <Box sx={{ mb: 4 }}>
+        <Typography
+          variant="body2"
+          sx={{
+            fontSize: "0.9rem",
+            color: "black",
+            position: 'absolute',
+            top: '445px',
+            left: '42px',
+            "& a": {
+              color: "#65635F",
+              textDecoration: "none",
+            },
+          }}
+        >
+          <Link to="/">Home</Link> <Link to='/'> / Categories </Link> / Paintings
+        </Typography>
+      </Box>
+
       <Box
         sx={{
           display: "flex",
@@ -543,7 +559,7 @@ const PaintingPage = () => {
           gap: 4,
         }}
       >
-        <Box sx={{ display: { xs: "none", md: "block" } }}>
+        <Box sx={{ display: { xs: "none", md: "block"} }}>
           <FilterSection
             maxPrice={maxPrice}
             handlePriceChange={handlePriceChange}
@@ -703,6 +719,7 @@ const PaintingPage = () => {
                     variants={cardVariants}
                     initial="hidden"
                     animate="visible"
+                    whileHover="hover"
                     custom={index}
                   >
                     <Card
@@ -758,45 +775,46 @@ const PaintingPage = () => {
                           }}
                         >
                           {[
-                            { icon: "Favorite", action: () => handleFavoriteClick(painting.title) },
-                            { icon: "VisibilityIcon", action: () => handleViewClick(painting) },
-                            { icon: "BarChartIcon", action: undefined },
-                          ].map(({ icon, action }, i) => (
-                            <IconButtonMui
-                              key={i}
-                              size="small"
-                              onClick={action}
-                              sx={{
-                                bgcolor: "white",
-                                boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
-                                borderRadius: "50%",
-                                width: 32,
-                                height: 32,
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                 transform: "translateY(6px)"
-                              }}
-                            >
-                              {icon === "Favorite" && (
-                                <motion.div
-                                  variants={heartVariants}
-                                  animate={favoritedPaintings[painting.title] ? "favorited" : "unfavorited"}
-                                >
-                                  {favoritedPaintings[painting.title] ? (
-                                    <FavoriteIcon fontSize="small" />
-                                  ) : (
-                                    <FavoriteBorderIcon fontSize="small" />
-                                  )}
-                                </motion.div>
-                              )}
-                              {icon === "VisibilityIcon" && (
-                                <VisibilityIcon fontSize="small" />
-                              )}
-                              {icon === "BarChartIcon" && (
-                                <BarChartIcon fontSize="small" />
-                              )}
-                            </IconButtonMui>
+                            { icon: "Favorite", label: "Favorites", action: () => handleFavoriteClick(painting.title) },
+                            { icon: "VisibilityIcon", label: "View in room", action: () => handleViewClick(painting) },
+                            { icon: "BarChartIcon", label: "Insights", action: undefined },
+                          ].map(({ icon, label, action }, i) => (
+                            <Tooltip title={label} key={i}>
+                              <IconButtonMui
+                                size="small"
+                                onClick={action}
+                                sx={{
+                                  bgcolor: "white",
+                                  boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
+                                  borderRadius: "50%",
+                                  width: 32,
+                                  height: 32,
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  transform: "translateY(6px)"
+                                }}
+                              >
+                                {icon === "Favorite" && (
+                                  <motion.div
+                                    variants={heartVariants}
+                                    animate={favoritedPaintings[painting.title] ? "favorited" : "unfavorited"}
+                                  >
+                                    {favoritedPaintings[painting.title] ? (
+                                      <FavoriteIcon fontSize="small" />
+                                    ) : (
+                                      <FavoriteBorderIcon fontSize="small" />
+                                    )}
+                                  </motion.div>
+                                )}
+                                {icon === "VisibilityIcon" && (
+                                  <VisibilityIcon fontSize="small" />
+                                )}
+                                {icon === "BarChartIcon" && (
+                                  <BarChartIcon fontSize="small" />
+                                )}
+                              </IconButtonMui>
+                            </Tooltip>
                           ))}
                         </Box>
                       </Box>
@@ -856,14 +874,14 @@ const PaintingPage = () => {
                               sx={{
                                 width: 43,
                                 height: 20,
-                                bgcolor: "#000",
+                                bgcolor: "#FFFFFF33",
                                 color: "#fff",
                                 borderRadius: "4px",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 position: "absolute",
-                                top: 340,
+                                top: 16,
                               }}
                             >
                               <Typography
@@ -923,12 +941,13 @@ const PaintingPage = () => {
                   variants={cardVariants}
                   initial="hidden"
                   animate="visible"
+                  whileHover="hover"
                   custom={index}
                 >
                   <Box
                     sx={{
                       display: "flex",
-                      width: "100%",
+                      width: "91.5%",
                       height: 200,
                       border: "1px solid #e0e0e0",
                       borderRadius: 0,
@@ -1081,48 +1100,47 @@ const PaintingPage = () => {
                         >
                           <Box sx={{ display: "flex", gap: 1 }}>
                             {[
-                              { icon: "Favorite", action: () => handleFavoriteClick(painting.title) },
-                              { icon: "VisibilityIcon", action: () => handleViewClick(painting) },
-                              { icon: "BarChartIcon", action: undefined },
-                            ].map(({ icon, action }, i) => (
-                              <IconButtonMui
-                                key={i}
-                                size="small"
-                                onClick={action}
-                                sx={{
-                                  position: "relative",
-                                  top: "-80px",
-                                  bgcolor: "white",
-                                  boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
-                                  borderRadius: "50%",
-                                  width: 32,
-                                  height: 32,
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  
-                                  
-                                }}
-                              >
-                                {icon === "Favorite" && (
-                                  <motion.div
-                                    variants={heartVariants}
-                                    animate={favoritedPaintings[painting.title] ? "favorited" : "unfavorited"}
-                                  >
-                                    {favoritedPaintings[painting.title] ? (
-                                      <FavoriteIcon fontSize="small" />
-                                    ) : (
-                                      <FavoriteBorderIcon fontSize="small" />
-                                    )}
-                                  </motion.div>
-                                )}
-                                {icon === "VisibilityIcon" && (
-                                  <VisibilityIcon fontSize="small" />
-                                )}
-                                {icon === "BarChartIcon" && (
-                                  <BarChartIcon fontSize="small" />
-                                )}
-                              </IconButtonMui>
+                              { icon: "Favorite", label: "Favorites", action: () => handleFavoriteClick(painting.title) },
+                              { icon: "VisibilityIcon", label: "View in room", action: () => handleViewClick(painting) },
+                              { icon: "BarChartIcon", label: "Insights", action: undefined },
+                            ].map(({ icon, label, action }, i) => (
+                              <Tooltip title={label} key={i}>
+                                <IconButtonMui
+                                  size="small"
+                                  onClick={action}
+                                  sx={{
+                                    position: "relative",
+                                    top: "-80px",
+                                    bgcolor: "white",
+                                    boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
+                                    borderRadius: "50%",
+                                    width: 32,
+                                    height: 32,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                  }}
+                                >
+                                  {icon === "Favorite" && (
+                                    <motion.div
+                                      variants={heartVariants}
+                                      animate={favoritedPaintings[painting.title] ? "favorited" : "unfavorited"}
+                                    >
+                                      {favoritedPaintings[painting.title] ? (
+                                        <FavoriteIcon fontSize="small" />
+                                      ) : (
+                                        <FavoriteBorderIcon fontSize="small" />
+                                      )}
+                                    </motion.div>
+                                  )}
+                                  {icon === "VisibilityIcon" && (
+                                    <VisibilityIcon fontSize="small" />
+                                  )}
+                                  {icon === "BarChartIcon" && (
+                                    <BarChartIcon fontSize="small" />
+                                  )}
+                                </IconButtonMui>
+                              </Tooltip>
                             ))}
                           </Box>
                           <Button
@@ -1143,7 +1161,7 @@ const PaintingPage = () => {
                             disabled={painting.status === "Out of Stock"}
                             onClick={() => handleAddToCart(painting)}
                           >
-                            Add to Cart
+                            Add to cart
                           </Button>
                         </Box>
                       </Box>
@@ -1200,6 +1218,20 @@ const PaintingPage = () => {
           sx={{ width: '100%' }}
         >
           Item added to cart successfully!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={favoriteSnackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="success"
+          sx={{ width: '100%' }}
+        >
+          Added to favorites!
         </Alert>
       </Snackbar>
     </Box>
