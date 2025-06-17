@@ -14,8 +14,8 @@ import {
   Select,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GoogleIcon from "@mui/icons-material/Google";
+import FacebookIcon from "../Assets/facebook.png";
+import GoogleIcon from "../Assets/google.png";
 import { useNavigate } from "react-router-dom";
 
 const CreateAccount = () => {

@@ -18,9 +18,9 @@ import logo from "../Assets/logo.png";
 
 const navItems = [
   { name: "PAINTINGS", path: "/paintings" },
-  { name: "DRAWINGS", path: "/view" },
-  { name: "SCULPTURE", path: "/view" },
-  { name: "ARTISTS", path: "/home" },
+  { name: "DRAWINGS", path: "/drawings" },
+  { name: "SCULPTURE", path: "/sculpture" },
+  { name: "ARTISTS", path: "/artists" },
 ];
 
 const Navbar = ({ onCartClick }) => {
@@ -56,7 +56,7 @@ const Navbar = ({ onCartClick }) => {
   };
 
   const handleProfileClick = () => {
-    window.open("/login", "_blank"); // Navigate to /login in a new tab
+    window.open("/login", "_blank");
   };
 
   return (
@@ -72,7 +72,6 @@ const Navbar = ({ onCartClick }) => {
         }}
       >
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
-          {/* Logo */}
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography
               variant="h6"
@@ -87,8 +86,6 @@ const Navbar = ({ onCartClick }) => {
               kid.
             </Typography>
           </Box>
-
-          {/* Right Section */}
           <Box sx={{ display: "flex", alignItems: "center" }}>
             {!isMobile && (
               <Box sx={{ display: "flex", gap: 5, mr: 4 }}>
@@ -119,9 +116,7 @@ const Navbar = ({ onCartClick }) => {
                 ))}
               </Box>
             )}
-
             <Box sx={{ display: "flex", alignItems: "center", gap: 3.5 }}>
-              {/* Search Bar */}
               <AnimatePresence>
                 {showSearch && (
                   <motion.div
@@ -153,8 +148,6 @@ const Navbar = ({ onCartClick }) => {
                   </motion.div>
                 )}
               </AnimatePresence>
-
-              {/* Search Icon */}
               <motion.div whileHover="hover" variants={iconVariants}>
                 <IconButton
                   size="medium"
@@ -164,8 +157,6 @@ const Navbar = ({ onCartClick }) => {
                   <SearchIcon sx={{ fontSize: 20 }} />
                 </IconButton>
               </motion.div>
-
-              {/* Cart Icon */}
               <motion.div whileHover="hover" variants={iconVariants}>
                 <IconButton
                   size="medium"
@@ -175,15 +166,13 @@ const Navbar = ({ onCartClick }) => {
                   <ShoppingCartOutlinedIcon sx={{ fontSize: 20 }} />
                 </IconButton>
               </motion.div>
-
-              {/* Profile Icon */}
               <motion.div whileHover="hover" variants={iconVariants}>
                 <IconButton
                   size="medium"
                   onClick={handleProfileClick}
                   aria-label="Go to login page in new tab"
                 >
-                  <PersonOutlineIcon sx={{ fontSize: 20}} />
+                  <PersonOutlineIcon sx={{ fontSize: 20 }} />
                 </IconButton>
               </motion.div>
             </Box>
