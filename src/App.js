@@ -15,7 +15,7 @@ import CartModal from './Components/CartModal';
 
 export default function App() {
   const location = useLocation();
-  const showNavbar = ['/home', '/paintings', '/drawings', '/sculpture', '/artists', '/view'].includes(location.pathname);
+  const showNavbar = ['/home', '/paintings', '/drawings', '/sculpture', '/artists'].includes(location.pathname);
   const showAuthNavbar = ['/create-account', '/register-address'].includes(location.pathname);
   const [isCartOpen, setCartOpen] = useState(false);
 
