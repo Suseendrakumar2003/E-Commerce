@@ -14,8 +14,8 @@ import {
   Select,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GoogleIcon from "@mui/icons-material/Google";
+import FacebookIcon from "../Assets/facebook.png"; // Ensure these paths are correct
+import GoogleIcon from "../Assets/google.png";
 import { useNavigate } from "react-router-dom";
 
 const CreateAccount = () => {
@@ -183,7 +183,11 @@ const CreateAccount = () => {
         >
           <Button
             variant="outlined"
+<<<<<<< HEAD
             startIcon={<GoogleIcon />}
+=======
+            startIcon={<img src={GoogleIcon} alt="Google" style={{ width: 20, height: 20 }} />}
+>>>>>>> 23d7dbe483e889fc837fb9b6e4c62f09c9e6bfbd
             sx={buttonStyle}
             onClick={() => window.open("https://accounts.google.com", "_blank")}
           >
@@ -191,7 +195,11 @@ const CreateAccount = () => {
           </Button>
           <Button
             variant="outlined"
+<<<<<<< HEAD
             startIcon={<FacebookIcon />}
+=======
+            startIcon={<img src={FacebookIcon} alt="Facebook" style={{ width: 20, height: 20 }} />}
+>>>>>>> 23d7dbe483e889fc837fb9b6e4c62f09c9e6bfbd
             sx={buttonStyle}
             onClick={() =>
               window.open("https://www.facebook.com/login", "_blank")
@@ -446,4 +454,8 @@ const inputPosition = (top, left) => ({
   top: top,
   left: left,
   width: 348,
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 23d7dbe483e889fc837fb9b6e4c62f09c9e6bfbd
