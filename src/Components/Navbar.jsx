@@ -315,6 +315,7 @@ const Navbar = ({ onCartClick }) => {
                 color: "#000000", // Set logo text to black
                 display: "flex",
                 alignItems: "center",
+                gap: 1,
               }}
             >
               <img src={logo} alt="logo" width="33px" height="20px" /> cultured
