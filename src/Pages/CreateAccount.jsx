@@ -183,7 +183,10 @@ const CreateAccount = () => {
         >
           <Button
             variant="outlined"
-            startIcon={<GoogleIcon />}
+          
+
+            startIcon={<img src={GoogleIcon} alt="Google" style={{ width: 20, height: 20 }} />}
+
             sx={buttonStyle}
             onClick={() => window.open("https://accounts.google.com", "_blank")}
           >
@@ -191,7 +194,8 @@ const CreateAccount = () => {
           </Button>
           <Button
             variant="outlined"
-            startIcon={<FacebookIcon />}
+            startIcon={<img src={FacebookIcon} alt="Facebook" style={{ width: 20, height: 20 }} />}
+
             sx={buttonStyle}
             onClick={() =>
               window.open("https://www.facebook.com/login", "_blank")
@@ -446,4 +450,5 @@ const inputPosition = (top, left) => ({
   top: top,
   left: left,
   width: 348,
+
 });
