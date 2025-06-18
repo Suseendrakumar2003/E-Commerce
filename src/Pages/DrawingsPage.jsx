@@ -600,7 +600,7 @@ const DrawingsPage = () => {
               </Box>
               <Box sx={{ flex: 1 }} />
               <Box
-                sx={{ display: "flex", alignItems: "center", gap: 1, mr: -100 }}
+                sx={{ display: "flex", alignItems: "center", gap: 1, mr: -12.5 }}
               >
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <Typography
