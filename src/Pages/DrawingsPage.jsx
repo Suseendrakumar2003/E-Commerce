@@ -403,7 +403,9 @@ const DrawingsPage = () => {
 
   const filteredDrawings = drawings.filter((drawing) => {
     const discountedPrice =
-      drawing.status === "Sale" ? Math.round(drawing.price * 0.75) : drawing.price;
+      drawing.status === "Sale"
+        ? Math.round(drawing.price * 0.75)
+        : drawing.price;
     if (discountedPrice > maxPrice) return false;
 
     const selectedBrands = Object.keys(brands).filter((brand) => brands[brand]);
@@ -472,7 +474,9 @@ const DrawingsPage = () => {
   };
   const handleAddToCart = (drawing) => {
     const discountedPrice =
-      drawing.status === "Sale" ? Math.round(drawing.price * 0.75) : drawing.price;
+      drawing.status === "Sale"
+        ? Math.round(drawing.price * 0.75)
+        : drawing.price;
     const cartItem = {
       title: drawing.title,
       artist: drawing.artist,
@@ -559,24 +563,49 @@ const DrawingsPage = () => {
           />
         </Drawer>
         <Box sx={{ flex: 1 }}>
-          <motion.div variants={headerVariants} initial="hidden" animate="visible">
-            <Box sx={{ display: "flex", alignItems: "center", mb: 3, maxWidth: 912 }}>
+          <motion.div
+            variants={headerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                mb: 3,
+                maxWidth: 912,
+              }}
+            >
               <Box sx={{ display: "flex", alignItems: "baseline" }}>
                 <Typography
-                  sx={{ fontSize: 24, fontWeight: "bold", display: "inline", color: "#333" }}
+                  sx={{
+                    fontSize: 24,
+                    fontWeight: "bold",
+                    display: "inline",
+                    color: "#333",
+                  }}
                 >
                   Drawings
                 </Typography>
                 <Typography
-                  sx={{ fontSize: 14, color: "text.secondary", display: "inline", ml: 1 }}
+                  sx={{
+                    fontSize: 14,
+                    color: "text.secondary",
+                    display: "inline",
+                    ml: 1,
+                  }}
                 >
                   ({filteredDrawings.length} products)
                 </Typography>
               </Box>
               <Box sx={{ flex: 1 }} />
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1, mr: -100 }}>
+              <Box
+                sx={{ display: "flex", alignItems: "center", gap: 1, mr: -100 }}
+              >
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <Typography sx={{ fontSize: 14, color: "text.secondary", mr: 1 }}>
+                  <Typography
+                    sx={{ fontSize: 14, color: "text.secondary", mr: 1 }}
+                  >
                     Sort by:
                   </Typography>
                   <FormControl sx={{ minWidth: 120 }}>
@@ -593,8 +622,12 @@ const DrawingsPage = () => {
                       }}
                     >
                       <MenuItem value="Popularity">Popularity</MenuItem>
-                      <MenuItem value="Price: Low to High">Price: Low to High</MenuItem>
-                      <MenuItem value="Price: High to Low">Price: High to Low</MenuItem>
+                      <MenuItem value="Price: Low to High">
+                        Price: Low to High
+                      </MenuItem>
+                      <MenuItem value="Price: High to Low">
+                        Price: High to Low
+                      </MenuItem>
                     </Select>
                   </FormControl>
                 </Box>
@@ -654,7 +687,12 @@ const DrawingsPage = () => {
                       <Box sx={{ position: "relative" }}>
                         <CardMedia
                           component="img"
-                          sx={{ width: 320, height: 370, objectFit: "cover", borderRadius: 0 }}
+                          sx={{
+                            width: 320,
+                            height: 370,
+                            objectFit: "cover",
+                            borderRadius: 0,
+                          }}
                           image={drawing.image}
                           alt={drawing.title}
                         />
@@ -685,8 +723,14 @@ const DrawingsPage = () => {
                           }}
                         >
                           {[
-                            { icon: "Favorite", action: () => handleFavoriteClick(drawing.title) },
-                            { icon: "Visibility", action: () => handleViewClick(drawing) },
+                            {
+                              icon: "Favorite",
+                              action: () => handleFavoriteClick(drawing.title),
+                            },
+                            {
+                              icon: "Visibility",
+                              action: () => handleViewClick(drawing),
+                            },
                             { icon: "BarChart", action: () => {} },
                           ].map(({ icon, action }, i) => (
                             <IconButton
@@ -709,7 +753,9 @@ const DrawingsPage = () => {
                                 <motion.div
                                   variants={heartVariants}
                                   animate={
-                                    favoritedDrawings[drawing.title] ? "favorited" : "unfavorited"
+                                    favoritedDrawings[drawing.title]
+                                      ? "favorited"
+                                      : "unfavorited"
                                   }
                                 >
                                   {favoritedDrawings[drawing.title] ? (
@@ -719,8 +765,12 @@ const DrawingsPage = () => {
                                   )}
                                 </motion.div>
                               )}
-                              {icon === "Visibility" && <VisibilityIcon fontSize="small" />}
-                              {icon === "BarChart" && <BarChartIcon fontSize="small" />}
+                              {icon === "Visibility" && (
+                                <VisibilityIcon fontSize="small" />
+                              )}
+                              {icon === "BarChart" && (
+                                <BarChartIcon fontSize="small" />
+                              )}
                             </IconButton>
                           ))}
                         </Box>
@@ -728,7 +778,12 @@ const DrawingsPage = () => {
                       <CardContent sx={{ p: 2, pb: 1 }}>
                         <Typography
                           variant="h6"
-                          sx={{ fontSize: "1.1rem", mb: 0.5, color: "#333", fontWeight: 600 }}
+                          sx={{
+                            fontSize: "1.1rem",
+                            mb: 0.5,
+                            color: "#333",
+                            fontWeight: 600,
+                          }}
                         >
                           {drawing.title}
                         </Typography>
@@ -739,22 +794,38 @@ const DrawingsPage = () => {
                         >
                           {drawing.artist}
                         </Typography>
-                        <Box sx={{ display: "flex", alignItems: "center", mb: 0.5 }}>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            mb: 0.5,
+                          }}
+                        >
                           <Rating
                             value={drawing.rating}
                             readOnly
                             precision={0.5}
                             size="small"
                           />
-                          <Typography variant="body2" sx={{ ml: 0.5, color: "#555" }}>
+                          <Typography
+                            variant="body2"
+                            sx={{ ml: 0.5, color: "#555" }}
+                          >
                             {drawing.rating}
                           </Typography>
                         </Box>
                       </CardContent>
                       <CardActions
-                        sx={{ p: 2, pt: 0, justifyContent: "space-between", alignItems: "center" }}
+                        sx={{
+                          p: 2,
+                          pt: 0,
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
                       >
-                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                        <Box
+                          sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                        >
                           {drawing.status === "Sale" && (
                             <Box
                               sx={{
@@ -790,7 +861,10 @@ const DrawingsPage = () => {
                           {drawing.status === "Sale" && (
                             <Typography
                               variant="body1"
-                              sx={{ color: "#65635F", textDecoration: "line-through" }}
+                              sx={{
+                                color: "#65635F",
+                                textDecoration: "line-through",
+                              }}
                             >
                               ${drawing.price}
                             </Typography>
@@ -838,10 +912,22 @@ const DrawingsPage = () => {
                       bgcolor: "white",
                     }}
                   >
-                    <Box sx={{ position: "relative", width: 160, height: 180, m: 1 }}>
+                    <Box
+                      sx={{
+                        position: "relative",
+                        width: 160,
+                        height: 180,
+                        m: 1,
+                      }}
+                    >
                       <CardMedia
                         component="img"
-                        sx={{ width: 160, height: 180, objectFit: "cover", borderRadius: 0 }}
+                        sx={{
+                          width: 160,
+                          height: 180,
+                          objectFit: "cover",
+                          borderRadius: 0,
+                        }}
                         image={drawing.image}
                         alt={drawing.title}
                       />
@@ -873,7 +959,12 @@ const DrawingsPage = () => {
                     >
                       <Typography
                         variant="h6"
-                        sx={{ fontSize: "1.1rem", mb: 0.5, color: "#333", fontWeight: 600 }}
+                        sx={{
+                          fontSize: "1.1rem",
+                          mb: 0.5,
+                          color: "#333",
+                          fontWeight: 600,
+                        }}
                       >
                         {drawing.title}
                       </Typography>
@@ -884,14 +975,19 @@ const DrawingsPage = () => {
                       >
                         {drawing.artist}
                       </Typography>
-                      <Box sx={{ display: "flex", alignItems: "center", mb: 0.5 }}>
+                      <Box
+                        sx={{ display: "flex", alignItems: "center", mb: 0.5 }}
+                      >
                         <Rating
                           value={drawing.rating}
                           readOnly
                           precision={0.5}
                           size="small"
                         />
-                        <Typography variant="body2" sx={{ ml: 0.5, color: "#555" }}>
+                        <Typography
+                          variant="body2"
+                          sx={{ ml: 0.5, color: "#555" }}
+                        >
                           {drawing.rating}
                         </Typography>
                       </Box>
@@ -903,7 +999,9 @@ const DrawingsPage = () => {
                           mt: 1,
                         }}
                       >
-                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                        <Box
+                          sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                        >
                           {drawing.status === "Sale" && (
                             <Box
                               sx={{
@@ -939,7 +1037,10 @@ const DrawingsPage = () => {
                           {drawing.status === "Sale" && (
                             <Typography
                               variant="body1"
-                              sx={{ color: "#65635F", textDecoration: "line-through" }}
+                              sx={{
+                                color: "#65635F",
+                                textDecoration: "line-through",
+                              }}
                             >
                               ${drawing.price}
                             </Typography>
@@ -955,8 +1056,15 @@ const DrawingsPage = () => {
                         >
                           <Box sx={{ display: "flex", gap: 1 }}>
                             {[
-                              { icon: "Favorite", action: () => handleFavoriteClick(drawing.title) },
-                              { icon: "Visibility", action: () => handleViewClick(drawing) },
+                              {
+                                icon: "Favorite",
+                                action: () =>
+                                  handleFavoriteClick(drawing.title),
+                              },
+                              {
+                                icon: "Visibility",
+                                action: () => handleViewClick(drawing),
+                              },
                               { icon: "BarChart", action: () => {} },
                             ].map(({ icon, action }, i) => (
                               <IconButton
@@ -980,7 +1088,9 @@ const DrawingsPage = () => {
                                   <motion.div
                                     variants={heartVariants}
                                     animate={
-                                      favoritedDrawings[drawing.title] ? "favorited" : "unfavorited"
+                                      favoritedDrawings[drawing.title]
+                                        ? "favorited"
+                                        : "unfavorited"
                                     }
                                   >
                                     {favoritedDrawings[drawing.title] ? (
@@ -990,8 +1100,12 @@ const DrawingsPage = () => {
                                     )}
                                   </motion.div>
                                 )}
-                                {icon === "Visibility" && <VisibilityIcon fontSize="small" />}
-                                {icon === "BarChart" && <BarChartIcon fontSize="small" />}
+                                {icon === "Visibility" && (
+                                  <VisibilityIcon fontSize="small" />
+                                )}
+                                {icon === "BarChart" && (
+                                  <BarChartIcon fontSize="small" />
+                                )}
                               </IconButton>
                             ))}
                           </Box>
@@ -1035,7 +1149,10 @@ const DrawingsPage = () => {
                     sx={{
                       borderRadius: 0,
                       margin: "0 2px",
-                      "&.Mui-selected": { backgroundColor: "#000", color: "#fff" },
+                      "&.Mui-selected": {
+                        backgroundColor: "#000",
+                        color: "#fff",
+                      },
                       "& .MuiPaginationItem-ellipsis": {
                         display: "flex",
                         alignItems: "center",

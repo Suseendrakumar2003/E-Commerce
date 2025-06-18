@@ -21,6 +21,8 @@ import {
   FormControl,
   Pagination,
   PaginationItem,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -207,7 +209,7 @@ const FilterSection = ({
   <Box
     sx={{
       width: 256,
-      height: "auto",
+      height: 796,
       bgcolor: "#FBF6F4",
       borderRadius: 0,
       p: 3,
@@ -216,24 +218,11 @@ const FilterSection = ({
       boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.05)",
     }}
   >
-    <Box sx={{ mb: 2 }}>
+    <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
       <Typography
-        variant="body2"
-        sx={{
-          fontSize: "0.9rem",
-          color: "#333",
-          "& a": {
-            color: "#1976d2",
-            textDecoration: "none",
-          },
-        }}
+        fontWeight="bold"
+        sx={{ fontSize: "1.2rem", color: "#161412" }}
       >
-        <Link to="/">Home</Link> / Paintings
-      </Typography>
-    </Box>
-
-    <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
-      <Typography fontWeight="bold" sx={{ fontSize: "1.2rem", color: "#333" }}>
         Filters
       </Typography>
       <Typography
@@ -405,6 +394,8 @@ const PaintingPage = () => {
   const [sortBy, setSortBy] = useState("Popularity");
   const [viewMode, setViewMode] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
+  const [favoritedPaintings, setFavoritedPaintings] = useState({});
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
@@ -474,8 +465,13 @@ const PaintingPage = () => {
   const handlePageChange = (event, page) => setCurrentPage(page);
   const handleViewClick = (painting) =>
     navigate("/view", { state: { artwork: painting } });
+  const handleFavoriteClick = (paintingTitle) => {
+    setFavoritedPaintings((prev) => ({
+      ...prev,
+      [paintingTitle]: !prev[paintingTitle],
+    }));
+  };
 
-  // Handle adding to cart
   const handleAddToCart = (painting) => {
     const discountedPrice =
       painting.status === "Sale"
@@ -488,6 +484,14 @@ const PaintingPage = () => {
       image: painting.image,
     };
     addToCart(cartItem);
+    setSnackbarOpen(true);
+  };
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbarOpen(false);
   };
 
   const sortedPaintings = [...filteredPaintings].sort((a, b) => {
@@ -513,25 +517,6 @@ const PaintingPage = () => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", bgcolor: "#f5f5f5" }}>
       <CarouselSlider />
-      <Box sx={{ mb: 4 }}>
-        <Typography
-          variant="body2"
-          sx={{
-            fontSize: "0.9rem",
-            color: "black",
-            position: 'absolute',
-            top: '520px',
-            left: '45px',
-            "& a": {
-              color: "#65635F",
-              textDecoration: "none",
-            },
-          }}
-        >
-          <Link to="/">Home</Link> <Link to='/'> / Categories </Link> / Paintings
-        </Typography>
-      </Box>
-
       <Box
         sx={{
           display: "flex",
@@ -756,26 +741,47 @@ const PaintingPage = () => {
                           }}
                         >
                           {[
-                            "FavoriteBorderIcon",
-                            "VisibilityIcon",
-                            "BarChartIcon",
-                          ].map((icon, i) => (
+                            {
+                              icon: "Favorite",
+                              action: () => handleFavoriteClick(painting.title),
+                            },
+                            {
+                              icon: "VisibilityIcon",
+                              action: () => handleViewClick(painting),
+                            },
+                            { icon: "BarChartIcon", action: undefined },
+                          ].map(({ icon, action }, i) => (
                             <IconButtonMui
                               key={i}
                               size="small"
-                              onClick={
-                                icon === "VisibilityIcon"
-                                  ? () => handleViewClick(painting)
-                                  : undefined
-                              }
+                              onClick={action}
                               sx={{
                                 bgcolor: "white",
                                 boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
                                 borderRadius: "50%",
+                                width: 32,
+                                height: 32,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                transform: "translateY(6px)",
                               }}
                             >
-                              {icon === "FavoriteBorderIcon" && (
-                                <FavoriteBorderIcon fontSize="small" />
+                              {icon === "Favorite" && (
+                                <motion.div
+                                  variants={heartVariants}
+                                  animate={
+                                    favoritedPaintings[painting.title]
+                                      ? "favorited"
+                                      : "unfavorited"
+                                  }
+                                >
+                                  {favoritedPaintings[painting.title] ? (
+                                    <FavoriteIcon fontSize="small" />
+                                  ) : (
+                                    <FavoriteBorderIcon fontSize="small" />
+                                  )}
+                                </motion.div>
                               )}
                               {icon === "VisibilityIcon" && (
                                 <VisibilityIcon fontSize="small" />
@@ -1069,28 +1075,49 @@ const PaintingPage = () => {
                         >
                           <Box sx={{ display: "flex", gap: 1 }}>
                             {[
-                              "FavoriteBorderIcon",
-                              "VisibilityIcon",
-                              "BarChartIcon",
-                            ].map((icon, i) => (
+                              {
+                                icon: "Favorite",
+                                action: () =>
+                                  handleFavoriteClick(painting.title),
+                              },
+                              {
+                                icon: "VisibilityIcon",
+                                action: () => handleViewClick(painting),
+                              },
+                              { icon: "BarChartIcon", action: undefined },
+                            ].map(({ icon, action }, i) => (
                               <IconButtonMui
                                 key={i}
                                 size="small"
-                                onClick={
-                                  icon === "VisibilityIcon"
-                                    ? () => handleViewClick(painting)
-                                    : undefined
-                                }
+                                onClick={action}
                                 sx={{
                                   position: "relative",
                                   top: "-80px",
                                   bgcolor: "white",
                                   boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
                                   borderRadius: "50%",
+                                  width: 32,
+                                  height: 32,
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
                                 }}
                               >
-                                {icon === "FavoriteBorderIcon" && (
-                                  <FavoriteBorderIcon fontSize="small" />
+                                {icon === "Favorite" && (
+                                  <motion.div
+                                    variants={heartVariants}
+                                    animate={
+                                      favoritedPaintings[painting.title]
+                                        ? "favorited"
+                                        : "unfavorited"
+                                    }
+                                  >
+                                    {favoritedPaintings[painting.title] ? (
+                                      <FavoriteIcon fontSize="small" />
+                                    ) : (
+                                      <FavoriteBorderIcon fontSize="small" />
+                                    )}
+                                  </motion.div>
                                 )}
                                 {icon === "VisibilityIcon" && (
                                   <VisibilityIcon fontSize="small" />
@@ -1164,6 +1191,20 @@ const PaintingPage = () => {
         <Newsletter />
         <Footer />
       </Box>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Item added to cart successfully!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

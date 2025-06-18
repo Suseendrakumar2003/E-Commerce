@@ -14,7 +14,7 @@ import {
   Select,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import FacebookIcon from "../Assets/facebook.png";
+import FacebookIcon from "../Assets/facebook.png"; // Ensure these paths are correct
 import GoogleIcon from "../Assets/google.png";
 import { useNavigate } from "react-router-dom";
 
@@ -183,10 +183,7 @@ const CreateAccount = () => {
         >
           <Button
             variant="outlined"
-          
-
-            startIcon={<img src={GoogleIcon} alt="Google" style={{ width: 20, height: 20 }} />}
-
+            startIcon={<GoogleIcon />}
             sx={buttonStyle}
             onClick={() => window.open("https://accounts.google.com", "_blank")}
           >
@@ -194,8 +191,7 @@ const CreateAccount = () => {
           </Button>
           <Button
             variant="outlined"
-            startIcon={<img src={FacebookIcon} alt="Facebook" style={{ width: 20, height: 20 }} />}
-
+            startIcon={<FacebookIcon />}
             sx={buttonStyle}
             onClick={() =>
               window.open("https://www.facebook.com/login", "_blank")

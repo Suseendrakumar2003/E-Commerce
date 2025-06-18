@@ -237,7 +237,9 @@ const FilterSection = ({
       </Typography>
     </Box>
     <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
-      <Typography sx={{ fontSize: "1.2rem", fontWeight: "bold", color: "#333" }}>
+      <Typography
+        sx={{ fontSize: "1.2rem", fontWeight: "bold", color: "#333" }}
+      >
         Filters
       </Typography>
       <Typography
@@ -250,7 +252,13 @@ const FilterSection = ({
       </Typography>
     </Box>
     <Typography
-      sx={{ mb: 1, fontSize: 14, fontWeight: 600, color: "#444", lineHeight: "4px" }}
+      sx={{
+        mb: 1,
+        fontSize: 14,
+        fontWeight: 600,
+        color: "#444",
+        lineHeight: "4px",
+      }}
     >
       Price Range
     </Typography>
@@ -277,7 +285,12 @@ const FilterSection = ({
     </Box>
     <Box sx={{ mt: 3 }}>
       <Typography
-        sx={{ fontSize: 14, fontWeight: 600, color: "#444", lineHeight: "20px" }}
+        sx={{
+          fontSize: 14,
+          fontWeight: 600,
+          color: "#444",
+          lineHeight: "20px",
+        }}
         gutterBottom
       >
         Brands
@@ -305,7 +318,12 @@ const FilterSection = ({
     </Box>
     <Box sx={{ mt: 3 }}>
       <Typography
-        sx={{ fontSize: 14, fontWeight: 600, color: "#444", lineHeight: "20px" }}
+        sx={{
+          fontSize: 14,
+          fontWeight: 600,
+          color: "#444",
+          lineHeight: "20px",
+        }}
         gutterBottom
       >
         Customer Rating
@@ -395,7 +413,9 @@ const SculpturesPage = () => {
 
   const filteredSculptures = sculptures.filter((sculpture) => {
     const discountedPrice =
-      sculpture.status === "Sale" ? Math.round(sculpture.price * 0.75) : sculpture.price;
+      sculpture.status === "Sale"
+        ? Math.round(sculpture.price * 0.75)
+        : sculpture.price;
     if (discountedPrice > maxPrice) return false;
 
     const selectedBrands = Object.keys(brands).filter((brand) => brands[brand]);
@@ -464,7 +484,9 @@ const SculpturesPage = () => {
   };
   const handleAddToCart = (sculpture) => {
     const discountedPrice =
-      sculpture.status === "Sale" ? Math.round(sculpture.price * 0.75) : sculpture.price;
+      sculpture.status === "Sale"
+        ? Math.round(sculpture.price * 0.75)
+        : sculpture.price;
     const cartItem = {
       title: sculpture.title,
       artist: sculpture.artist,
@@ -551,24 +573,49 @@ const SculpturesPage = () => {
           />
         </Drawer>
         <Box sx={{ flex: 1 }}>
-          <motion.div variants={headerVariants} initial="hidden" animate="visible">
-            <Box sx={{ display: "flex", alignItems: "center", mb: 3, maxWidth: 912 }}>
+          <motion.div
+            variants={headerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                mb: 3,
+                maxWidth: 912,
+              }}
+            >
               <Box sx={{ display: "flex", alignItems: "baseline" }}>
                 <Typography
-                  sx={{ fontSize: 24, fontWeight: "bold", display: "inline", color: "#333" }}
+                  sx={{
+                    fontSize: 24,
+                    fontWeight: "bold",
+                    display: "inline",
+                    color: "#333",
+                  }}
                 >
                   Sculptures
                 </Typography>
                 <Typography
-                  sx={{ fontSize: 14, color: "text.secondary", display: "inline", ml: 1 }}
+                  sx={{
+                    fontSize: 14,
+                    color: "text.secondary",
+                    display: "inline",
+                    ml: 1,
+                  }}
                 >
                   ({filteredSculptures.length} products)
                 </Typography>
               </Box>
               <Box sx={{ flex: 1 }} />
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1, mr: -100 }}>
+              <Box
+                sx={{ display: "flex", alignItems: "center", gap: 1, mr: -100 }}
+              >
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <Typography sx={{ fontSize: 14, color: "text.secondary", mr: 1 }}>
+                  <Typography
+                    sx={{ fontSize: 14, color: "text.secondary", mr: 1 }}
+                  >
                     Sort by:
                   </Typography>
                   <FormControl sx={{ minWidth: 120 }}>
@@ -585,8 +632,12 @@ const SculpturesPage = () => {
                       }}
                     >
                       <MenuItem value="Popularity">Popularity</MenuItem>
-                      <MenuItem value="Price: Low to High">Price: Low to High</MenuItem>
-                      <MenuItem value="Price: High to Low">Price: High to Low</MenuItem>
+                      <MenuItem value="Price: Low to High">
+                        Price: Low to High
+                      </MenuItem>
+                      <MenuItem value="Price: High to Low">
+                        Price: High to Low
+                      </MenuItem>
                     </Select>
                   </FormControl>
                 </Box>
@@ -646,7 +697,12 @@ const SculpturesPage = () => {
                       <Box sx={{ position: "relative" }}>
                         <CardMedia
                           component="img"
-                          sx={{ width: 320, height: 370, objectFit: "cover", borderRadius: 0 }}
+                          sx={{
+                            width: 320,
+                            height: 370,
+                            objectFit: "cover",
+                            borderRadius: 0,
+                          }}
                           image={sculpture.image}
                           alt={sculpture.title}
                         />
@@ -677,8 +733,15 @@ const SculpturesPage = () => {
                           }}
                         >
                           {[
-                            { icon: "Favorite", action: () => handleFavoriteClick(sculpture.title) },
-                            { icon: "Visibility", action: () => handleViewClick(sculpture) },
+                            {
+                              icon: "Favorite",
+                              action: () =>
+                                handleFavoriteClick(sculpture.title),
+                            },
+                            {
+                              icon: "Visibility",
+                              action: () => handleViewClick(sculpture),
+                            },
                             { icon: "BarChart", action: () => {} },
                           ].map(({ icon, action }, i) => (
                             <IconButton
@@ -701,7 +764,9 @@ const SculpturesPage = () => {
                                 <motion.div
                                   variants={heartVariants}
                                   animate={
-                                    favoritedSculptures[sculpture.title] ? "favorited" : "unfavorited"
+                                    favoritedSculptures[sculpture.title]
+                                      ? "favorited"
+                                      : "unfavorited"
                                   }
                                 >
                                   {favoritedSculptures[sculpture.title] ? (
@@ -711,8 +776,12 @@ const SculpturesPage = () => {
                                   )}
                                 </motion.div>
                               )}
-                              {icon === "Visibility" && <VisibilityIcon fontSize="small" />}
-                              {icon === "BarChart" && <BarChartIcon fontSize="small" />}
+                              {icon === "Visibility" && (
+                                <VisibilityIcon fontSize="small" />
+                              )}
+                              {icon === "BarChart" && (
+                                <BarChartIcon fontSize="small" />
+                              )}
                             </IconButton>
                           ))}
                         </Box>
@@ -720,7 +789,12 @@ const SculpturesPage = () => {
                       <CardContent sx={{ p: 2, pb: 1 }}>
                         <Typography
                           variant="h6"
-                          sx={{ fontSize: "1.1rem", mb: 0.5, color: "#333", fontWeight: 600 }}
+                          sx={{
+                            fontSize: "1.1rem",
+                            mb: 0.5,
+                            color: "#333",
+                            fontWeight: 600,
+                          }}
                         >
                           {sculpture.title}
                         </Typography>
@@ -731,22 +805,38 @@ const SculpturesPage = () => {
                         >
                           {sculpture.artist}
                         </Typography>
-                        <Box sx={{ display: "flex", alignItems: "center", mb: 0.5 }}>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            mb: 0.5,
+                          }}
+                        >
                           <Rating
                             value={sculpture.rating}
                             readOnly
                             precision={0.5}
                             size="small"
                           />
-                          <Typography variant="body2" sx={{ ml: 0.5, color: "#555" }}>
+                          <Typography
+                            variant="body2"
+                            sx={{ ml: 0.5, color: "#555" }}
+                          >
                             {sculpture.rating}
                           </Typography>
                         </Box>
                       </CardContent>
                       <CardActions
-                        sx={{ p: 2, pt: 0, justifyContent: "space-between", alignItems: "center" }}
+                        sx={{
+                          p: 2,
+                          pt: 0,
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
                       >
-                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                        <Box
+                          sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                        >
                           {sculpture.status === "Sale" && (
                             <Box
                               sx={{
@@ -782,7 +872,10 @@ const SculpturesPage = () => {
                           {sculpture.status === "Sale" && (
                             <Typography
                               variant="body1"
-                              sx={{ color: "#65635F", textDecoration: "line-through" }}
+                              sx={{
+                                color: "#65635F",
+                                textDecoration: "line-through",
+                              }}
                             >
                               ${sculpture.price}
                             </Typography>
@@ -830,10 +923,22 @@ const SculpturesPage = () => {
                       bgcolor: "white",
                     }}
                   >
-                    <Box sx={{ position: "relative", width: 160, height: 180, m: 1 }}>
+                    <Box
+                      sx={{
+                        position: "relative",
+                        width: 160,
+                        height: 180,
+                        m: 1,
+                      }}
+                    >
                       <CardMedia
                         component="img"
-                        sx={{ width: 160, height: 180, objectFit: "cover", borderRadius: 0 }}
+                        sx={{
+                          width: 160,
+                          height: 180,
+                          objectFit: "cover",
+                          borderRadius: 0,
+                        }}
                         image={sculpture.image}
                         alt={sculpture.title}
                       />
@@ -865,7 +970,12 @@ const SculpturesPage = () => {
                     >
                       <Typography
                         variant="h6"
-                        sx={{ fontSize: "1.1rem", mb: 0.5, color: "#333", fontWeight: 600 }}
+                        sx={{
+                          fontSize: "1.1rem",
+                          mb: 0.5,
+                          color: "#333",
+                          fontWeight: 600,
+                        }}
                       >
                         {sculpture.title}
                       </Typography>
@@ -876,14 +986,19 @@ const SculpturesPage = () => {
                       >
                         {sculpture.artist}
                       </Typography>
-                      <Box sx={{ display: "flex", alignItems: "center", mb: 0.5 }}>
+                      <Box
+                        sx={{ display: "flex", alignItems: "center", mb: 0.5 }}
+                      >
                         <Rating
                           value={sculpture.rating}
                           readOnly
                           precision={0.5}
                           size="small"
                         />
-                        <Typography variant="body2" sx={{ ml: 0.5, color: "#555" }}>
+                        <Typography
+                          variant="body2"
+                          sx={{ ml: 0.5, color: "#555" }}
+                        >
                           {sculpture.rating}
                         </Typography>
                       </Box>
@@ -895,7 +1010,9 @@ const SculpturesPage = () => {
                           mt: 1,
                         }}
                       >
-                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                        <Box
+                          sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                        >
                           {sculpture.status === "Sale" && (
                             <Box
                               sx={{
@@ -931,7 +1048,10 @@ const SculpturesPage = () => {
                           {sculpture.status === "Sale" && (
                             <Typography
                               variant="body1"
-                              sx={{ color: "#65635F", textDecoration: "line-through" }}
+                              sx={{
+                                color: "#65635F",
+                                textDecoration: "line-through",
+                              }}
                             >
                               ${sculpture.price}
                             </Typography>
@@ -947,8 +1067,15 @@ const SculpturesPage = () => {
                         >
                           <Box sx={{ display: "flex", gap: 1 }}>
                             {[
-                              { icon: "Favorite", action: () => handleFavoriteClick(sculpture.title) },
-                              { icon: "Visibility", action: () => handleViewClick(sculpture) },
+                              {
+                                icon: "Favorite",
+                                action: () =>
+                                  handleFavoriteClick(sculpture.title),
+                              },
+                              {
+                                icon: "Visibility",
+                                action: () => handleViewClick(sculpture),
+                              },
                               { icon: "BarChart", action: () => {} },
                             ].map(({ icon, action }, i) => (
                               <IconButton
@@ -972,7 +1099,9 @@ const SculpturesPage = () => {
                                   <motion.div
                                     variants={heartVariants}
                                     animate={
-                                      favoritedSculptures[sculpture.title] ? "favorited" : "unfavorited"
+                                      favoritedSculptures[sculpture.title]
+                                        ? "favorited"
+                                        : "unfavorited"
                                     }
                                   >
                                     {favoritedSculptures[sculpture.title] ? (
@@ -982,8 +1111,12 @@ const SculpturesPage = () => {
                                     )}
                                   </motion.div>
                                 )}
-                                {icon === "Visibility" && <VisibilityIcon fontSize="small" />}
-                                {icon === "BarChart" && <BarChartIcon fontSize="small" />}
+                                {icon === "Visibility" && (
+                                  <VisibilityIcon fontSize="small" />
+                                )}
+                                {icon === "BarChart" && (
+                                  <BarChartIcon fontSize="small" />
+                                )}
                               </IconButton>
                             ))}
                           </Box>
@@ -1027,7 +1160,10 @@ const SculpturesPage = () => {
                     sx={{
                       borderRadius: 0,
                       margin: "0 2px",
-                      "&.Mui-selected": { backgroundColor: "#000", color: "#fff" },
+                      "&.Mui-selected": {
+                        backgroundColor: "#000",
+                        color: "#fff",
+                      },
                       "& .MuiPaginationItem-ellipsis": {
                         display: "flex",
                         alignItems: "center",

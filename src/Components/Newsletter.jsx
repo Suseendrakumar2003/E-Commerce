@@ -126,7 +126,7 @@ const Newsletter = () => {
               color: "#fff",
               px: 4,
               "&:hover": {
-                bgcolor: "#444",
+                bgcolor: "#dd4b39",
               },
             }}
           >

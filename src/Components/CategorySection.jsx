@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Box,
   Typography,
@@ -6,14 +6,14 @@ import {
   Card,
   CardMedia,
   CardContent,
-} from '@mui/material';
+} from "@mui/material";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
-import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import image1 from '../Assets/Painting.png';
-import image2 from '../Assets/Sculptures.png';
-import image3 from '../Assets/Photography.png';
-import image4 from '../Assets/Digital Art.png';
+import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import image1 from "../Assets/Painting.png";
+import image2 from "../Assets/Sculptures.png";
+import image3 from "../Assets/Photography.png";
+import image4 from "../Assets/Digital Art.png";
 // TODO: Add unique images for remaining categories
 // import image5 from '../Assets/Drawings.png';
 // import image6 from '../Assets/MixedMedia.png';
@@ -32,12 +32,12 @@ const categories = [
   { title: 'Sculptures', image: image2, path: '/category/sculptures' },
   { title: 'Photography', image: image3, path: '/category/photography' },
   { title: 'Digital Art', image: image4, path: '/category/digital-art' },
-  { title: 'Drawings', image: image1, path: '/category/drawings' }, // TODO: Replace with unique image
-  { title: 'Mixed Media', image: image2, path: '/category/mixed-media' }, // TODO: Replace with unique image
-  { title: 'Prints', image: image3, path: '/category/prints' }, // TODO: Replace with unique image
-  { title: 'Ceramics', image: image4, path: '/category/ceramics' }, // TODO: Replace with unique image
-  { title: 'Textiles', image: image1, path: '/category/textiles' }, // TODO: Replace with unique image
-  { title: 'Installations', image: image2, path: '/category/installations' }, // TODO: Replace with unique image
+  { title: 'Drawings', image: image1, path: '/category/drawings' },
+  { title: 'Mixed Media', image: image2, path: '/category/mixed-media' },
+  { title: 'Prints', image: image3, path: '/category/prints' },
+  { title: 'Ceramics', image: image4, path: '/category/ceramics' },
+  { title: 'Textiles', image: image1, path: '/category/textiles' },
+  { title: 'Installations', image: image2, path: '/category/installations' },
 ];
 
 const ShopByCategory = () => {
@@ -64,58 +64,46 @@ const ShopByCategory = () => {
     <Box sx={{ px: { xs: 2, md: 8 }, py: 6 }}>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
           mb: 4,
         }}
       >
         <Typography
           variant="h5"
           sx={{
-            fontFamily: 'Optima, sans-serif', // Fallback to sans-serif if Optima is unavailable
-            fontStyle: 'normal',
             fontWeight: 400,
             fontSize: '30px',
-            lineHeight: '36px',
-            color: '#161412',
+            color: '#111',
           }}
         >
           Shop by Category
         </Typography>
 
-        <button
-          style={{
+        <Box
+          sx={{
             display: 'flex',
             alignItems: 'center',
             cursor: 'pointer',
-            background: 'none',
-            border: 'none',
-            padding: 0,
+            '&:hover': { textDecoration: 'underline' },
           }}
           onClick={handleToggleView}
-          aria-label={isExpanded ? 'Show fewer categories' : 'Show all categories'}
         >
           <Typography
             sx={{
-              color: '#111',
-              fontSize: '0.85rem',
+              color: "#111",
+              fontSize: "0.85rem",
               mr: 0.5,
             }}
           >
-            {isExpanded ? 'Show Less' : 'View All'}
+            {isExpanded ? "Show Less" : "View All"}
           </Typography>
-          <ArrowForwardIos
-              sx={{
-                fontSize: "1.1rem",
-                cursor: "pointer",
-                color: "black",
-              }}
-            />{/* Replace with imported SVG once available */}
-        </button>
+          <ArrowForwardIcon sx={{ fontSize: '1rem', color: '#111' }} />
+        </Box>
       </Box>
 
-      <Grid container spacing={7} sx={{ transition: 'all 0.3s ease' }}>
+      <Grid container spacing={7}>
         <AnimatePresence>
           {displayedCategories.map((category) => (
             <Grid item xs={12} sm={6} md={3} key={category.title}>
@@ -129,42 +117,28 @@ const ShopByCategory = () => {
                   elevation={0}
                   sx={{
                     cursor: 'pointer',
-                    borderRadius: 0, // Card border radius set to 0
-                    transition: 'box-shadow 0.3s ease, transform 0.3s ease',
-                    '&:hover': {
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                      transform: 'translateY(-4px)',
-                    },
+                    '&:hover': { boxShadow: '0 4px 8px rgba(0,0,0,0.1)' },
                   }}
                   role="button"
                   tabIndex={0}
                   aria-label={`View ${category.title} category`}
                   onClick={() => handleCardClick(category.path)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      handleCardClick(category.path);
-                    }
-                  }}
                 >
                   <CardMedia
                     component="img"
-                    sx={{
-                      height: { xs: 150, sm: 200 },
-                      objectFit: 'cover',
-                      borderRadius: 0, // Image border radius set to 0
-                    }}
-                    image={category.image || '/path/to/placeholder.png'} // Fallback image
+                    height="200"
+                    image={category.image}
                     alt={category.title}
                     loading="lazy" // Lazy-load images for performance
                   />
-                  <CardContent sx={{ textAlign: 'left', pt: 0, pb: 0 }}>
+                  <CardContent sx={{ textAlign: 'left', pt: 1, pb: 0 }}>
                     <Typography
                       variant="body1"
                       sx={{
-                        fontSize: '18px',
+                        fontSize: "18px",
                         fontWeight: 400,
-                        color: '#555',
-                        lineHeight: '28px',
+                        color: "#555",
+                        lineHeight: "28px",
                       }}
                     >
                       {category.title}

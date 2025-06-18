@@ -14,7 +14,7 @@ const textStyles = {
   letterSpacing: 0,
 };
 
-// Social media icon styles
+// Unified social media icon styles
 const socialIconStyles = {
   width: 60,
   height: 60,
@@ -47,7 +47,7 @@ const socialIconStyles = {
     left: 0,
     width: "100%",
     height: "100%",
-    background: "#000",
+    background: " #3b5999", // Unified hover background color
     transition: "0.5s",
     zIndex: 2,
   },
@@ -55,7 +55,85 @@ const socialIconStyles = {
     top: 0,
   },
 };
-
+const socialIconStyles2 = {
+  width: 60,
+  height: 60,
+  backgroundColor: "#fff",
+  textAlign: "center",
+  lineHeight: "60px",
+  fontSize: 28,
+  margin: "0 8px",
+  display: "block",
+  borderRadius: "50%",
+  position: "relative",
+  overflow: "hidden",
+  border: "3px solid #fff",
+  zIndex: 1,
+  textDecoration: "none",
+  "& .icon": {
+    position: "relative",
+    color: "#262626",
+    transition: "0.5s",
+    zIndex: 3,
+  },
+  "&:hover .icon": {
+    color: "#fff",
+    transform: "rotateY(360deg)",
+  },
+  "&:before": {
+    content: '""',
+    position: "absolute",
+    top: "100%",
+    left: 0,
+    width: "100%",
+    height: "100%",
+    background: "#dd4b39", // Unified hover background color
+    transition: "0.5s",
+    zIndex: 2,
+  },
+  "&:hover:before": {
+    top: 0,
+  },
+};const socialIconStyles3 = {
+  width: 60,
+  height: 60,
+  backgroundColor: "#fff",
+  textAlign: "center",
+  lineHeight: "60px",
+  fontSize: 28,
+  margin: "0 8px",
+  display: "block",
+  borderRadius: "50%",
+  position: "relative",
+  overflow: "hidden",
+  border: "3px solid #fff",
+  zIndex: 1,
+  textDecoration: "none",
+  "& .icon": {
+    position: "relative",
+    color: "#262626",
+    transition: "0.5s",
+    zIndex: 3,
+  },
+  "&:hover .icon": {
+    color: "#fff",
+    transform: "rotateY(360deg)",
+  },
+  "&:before": {
+    content: '""',
+    position: "absolute",
+    top: "100%",
+    left: 0,
+    width: "100%",
+    height: "100%",
+    background: " #55acee", // Unified hover background color
+    transition: "0.5s",
+    zIndex: 2,
+  },
+  "&:hover:before": {
+    top: 0,
+  },
+};
 const Footer = () => {
   return (
     <Box
@@ -96,7 +174,7 @@ const Footer = () => {
             trusted partner for wedding and <br />
             candid photography in Coimbatore.
           </Typography>
-          <Box sx={{ display: "flex", gap: 0, mt: 2,ml:"-5.5%"}}>
+          <Box sx={{ display: "flex", gap: 0, mt: 2, ml: "-5.5%" }}>
             <Link
               href="https://www.facebook.com/"
               sx={socialIconStyles}
@@ -106,14 +184,14 @@ const Footer = () => {
             </Link>
             <Link
               href="https://www.instagram.com/"
-              sx={socialIconStyles}
+              sx={socialIconStyles2}
               aria-label="Instagram"
             >
               <InstagramIcon className="icon" />
             </Link>
             <Link
               href="https://twitter.com/"
-              sx={socialIconStyles}
+              sx={socialIconStyles3}
               aria-label="Twitter"
             >
               <TwitterIcon className="icon" />
@@ -122,7 +200,7 @@ const Footer = () => {
         </Grid>
 
         {/* Right Side: Categories */}
-        <Grid item xs={12} md={6} >
+        <Grid item xs={12} md={6}>
           <Grid container spacing={20}>
             {/* Shop */}
             <Grid item xs={6} sm={3}>
@@ -301,8 +379,8 @@ const Footer = () => {
 
       {/* Copyright */}
       <Box textAlign="center" mt={4} color="grey.600">
-        <Typography variant="caption" sx={textStyles}>
-          © {new Date().getFullYear()} Artistry. All rights reserved.
+        <Typography variant="caption">
+          © {new Date().getFullYear()} Cultured Kid. All rights reserved.
         </Typography>
       </Box>
     </Box>
