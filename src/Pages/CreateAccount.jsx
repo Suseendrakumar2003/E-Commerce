@@ -14,8 +14,8 @@ import {
   Select,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import FacebookIcon from "../Assets/facebook.png"; // Ensure these paths are correct
-import GoogleIcon from "../Assets/google.png";
+import FacebookIcon from "../Assets/facebook.png"; // ✅ This is now a valid image import
+import GoogleIcon from "../Assets/google.png"; // ✅ This is now a valid image import
 import { useNavigate } from "react-router-dom";
 
 const CreateAccount = () => {
@@ -65,7 +65,6 @@ const CreateAccount = () => {
     }
   };
 
-  // Prevent pasting in Confirm Password field
   const handlePaste = (e) => {
     e.preventDefault();
   };
@@ -115,12 +114,7 @@ const CreateAccount = () => {
         <Stepper
           activeStep={0}
           alternativeLabel
-          sx={{
-            position: "absolute",
-            width: 269,
-            top: 97,
-            left: 416,
-          }}
+          sx={{ position: "absolute", width: 269, top: 97, left: 416 }}
         >
           <Step key="Account">
             <StepLabel
@@ -183,15 +177,28 @@ const CreateAccount = () => {
         >
           <Button
             variant="outlined"
-            startIcon={<GoogleIcon />}
+            startIcon={
+              <img
+                src={GoogleIcon}
+                alt="Google"
+                style={{ width: 20, height: 20 }}
+              />
+            }
             sx={buttonStyle}
             onClick={() => window.open("https://accounts.google.com", "_blank")}
           >
             Google
           </Button>
+
           <Button
             variant="outlined"
-            startIcon={<FacebookIcon />}
+            startIcon={
+              <img
+                src={FacebookIcon}
+                alt="Facebook"
+                style={{ width: 20, height: 20 }}
+              />
+            }
             sx={buttonStyle}
             onClick={() =>
               window.open("https://www.facebook.com/login", "_blank")
@@ -218,6 +225,7 @@ const CreateAccount = () => {
           <Box sx={{ flexGrow: 1, height: "1px", bgcolor: "grey.500" }} />
         </Box>
 
+        {/* Input Fields */}
         <TextField
           {...inputProps}
           label="First Name"
@@ -240,7 +248,7 @@ const CreateAccount = () => {
           sx={{ ...inputPosition(355, 192), width: 578 }}
         />
 
-        {/* Mobile with Country Code */}
+        {/* Phone with Country Code */}
         <Box
           sx={{
             position: "absolute",
@@ -295,7 +303,7 @@ const CreateAccount = () => {
           </Button>
         </Box>
 
-        {/* Password */}
+        {/* Password Field */}
         <Box sx={{ position: "absolute", top: 511, left: 192 }}>
           <TextField
             {...inputProps}
@@ -342,7 +350,7 @@ const CreateAccount = () => {
           </Typography>
         </Box>
 
-        {/* Confirm Password */}
+        {/* Confirm Password Field */}
         <Box sx={{ position: "absolute", top: 625, left: 192 }}>
           <TextField
             {...inputProps}
@@ -371,7 +379,7 @@ const CreateAccount = () => {
           />
         </Box>
 
-        {/* Continue Button */}
+        {/* Submit Button */}
         <Button
           variant="contained"
           sx={{
@@ -446,5 +454,4 @@ const inputPosition = (top, left) => ({
   top: top,
   left: left,
   width: 348,
-
 });
