@@ -14,6 +14,8 @@ import image1 from "../Assets/Painting.png";
 import image2 from "../Assets/Sculptures.png";
 import image3 from "../Assets/Photography.png";
 import image4 from "../Assets/Digital Art.png";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 // TODO: Add unique images for remaining categories
 // import image5 from '../Assets/Drawings.png';
 // import image6 from '../Assets/MixedMedia.png';

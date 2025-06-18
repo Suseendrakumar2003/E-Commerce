@@ -240,6 +240,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../Assets/logo.png";
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 
 const navItems = [
   { name: "PAINTINGS", path: "/paintings" },

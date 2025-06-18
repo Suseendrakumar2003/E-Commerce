@@ -23,6 +23,7 @@ import {
   PaginationItem,
   Snackbar,
   Alert,
+  Tooltip,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -195,6 +196,17 @@ const headerVariants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
+// Animation variants for the heart icon
+const heartVariants = {
+  unfavorited: { scale: 1, color: "#000", transform: "translateY(2px)" },
+  favorited: {
+    scale: [1, 1.2, 1],
+    color: "#ff0000",
+    transition: { duration: 0.3 },
+    transform: "translateY(2px)",
+  },
+};
+
 const FilterSection = ({
   maxPrice,
   handlePriceChange,
@@ -208,14 +220,17 @@ const FilterSection = ({
 }) => (
   <Box
     sx={{
-      width: 256,
-      height: 796,
+      width: "256px",
+      height: "796px",
       bgcolor: "#FBF6F4",
       borderRadius: 0,
       p: 3,
+      lineHeight: "0px",
       fontFamily: "Arial",
       overflow: "auto",
       boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.05)",
+      position: { md: "sticky" },
+      top: { md: 10 },
     }}
   >
     <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
@@ -229,13 +244,17 @@ const FilterSection = ({
         variant="body2"
         color="#65635F"
         onClick={handleClearAll}
-        sx={{ cursor: "pointer", fontWeight: 500 }}
+        sx={{ cursor: "pointer", fontWeight: 500, lineHeight: "0px" }}
       >
         Clear All
       </Typography>
     </Box>
 
-    <Typography fontWeight={600} fontSize={14} sx={{ mb: 1, color: "#444" }}>
+    <Typography
+      fontWeight={600}
+      fontSize={14}
+      sx={{ mb: 1, color: "#444", lineHeight: "4px" }}
+    >
       Price Range
     </Typography>
     <Slider
@@ -250,14 +269,17 @@ const FilterSection = ({
           borderRadius: "50%",
           width: 16,
           height: 16,
+          lineHeight: "0px",
         },
         "& .MuiSlider-track": {
           borderRadius: 10,
           height: 4,
+          lineHeight: "0px",
         },
         "& .MuiSlider-rail": {
           borderRadius: 10,
           height: 4,
+          lineHeight: "0px",
         },
       }}
     />
@@ -275,7 +297,7 @@ const FilterSection = ({
         fontWeight={600}
         fontSize={14}
         gutterBottom
-        sx={{ color: "#444" }}
+        sx={{ color: "#444", lineHeight: "20px" }}
       >
         Brands
       </Typography>
@@ -294,7 +316,11 @@ const FilterSection = ({
               }
               label={brand}
               sx={{
-                "& .MuiTypography-root": { fontSize: "0.9rem", color: "#555" },
+                "& .MuiTypography-root": {
+                  fontSize: "0.9rem",
+                  color: "#555",
+                  lineHeight: "0px",
+                },
                 mb: 0.5,
               }}
             />
@@ -308,7 +334,7 @@ const FilterSection = ({
         fontWeight={600}
         fontSize={14}
         gutterBottom
-        sx={{ color: "#444" }}
+        sx={{ color: "#444", lineHeight: "20px" }}
       >
         Customer Rating
       </Typography>
@@ -396,6 +422,7 @@ const PaintingPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [favoritedPaintings, setFavoritedPaintings] = useState({});
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [favoriteSnackbarOpen, setFavoriteSnackbarOpen] = useState(false);
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
@@ -470,6 +497,9 @@ const PaintingPage = () => {
       ...prev,
       [paintingTitle]: !prev[paintingTitle],
     }));
+    if (!favoritedPaintings[paintingTitle]) {
+      setFavoriteSnackbarOpen(true);
+    }
   };
 
   const handleAddToCart = (painting) => {
@@ -492,6 +522,7 @@ const PaintingPage = () => {
       return;
     }
     setSnackbarOpen(false);
+    setFavoriteSnackbarOpen(false);
   };
 
   const sortedPaintings = [...filteredPaintings].sort((a, b) => {
@@ -517,6 +548,26 @@ const PaintingPage = () => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", bgcolor: "#f5f5f5" }}>
       <CarouselSlider />
+      <Box sx={{ mb: 4 }}>
+        <Typography
+          variant="body2"
+          sx={{
+            fontSize: "0.9rem",
+            color: "black",
+            position: "absolute",
+            top: "445px",
+            left: "42px",
+            "& a": {
+              color: "#65635F",
+              textDecoration: "none",
+            },
+          }}
+        >
+          <Link to="/">Home</Link> <Link to="/"> / Categories </Link> /
+          Paintings
+        </Typography>
+      </Box>
+
       <Box
         sx={{
           display: "flex",
@@ -525,7 +576,7 @@ const PaintingPage = () => {
           gap: 4,
         }}
       >
-        <Box sx={{ display: { xs: "none", md: "block"} }}>
+        <Box sx={{ display: { xs: "none", md: "block" } }}>
           <FilterSection
             maxPrice={maxPrice}
             handlePriceChange={handlePriceChange}
@@ -743,53 +794,60 @@ const PaintingPage = () => {
                           {[
                             {
                               icon: "Favorite",
+                              label: "Favorites",
                               action: () => handleFavoriteClick(painting.title),
                             },
                             {
                               icon: "VisibilityIcon",
+                              label: "View in room",
                               action: () => handleViewClick(painting),
                             },
-                            { icon: "BarChartIcon", action: undefined },
-                          ].map(({ icon, action }, i) => (
-                            <IconButtonMui
-                              key={i}
-                              size="small"
-                              onClick={action}
-                              sx={{
-                                bgcolor: "white",
-                                boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
-                                borderRadius: "50%",
-                                width: 32,
-                                height: 32,
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                transform: "translateY(6px)",
-                              }}
-                            >
-                              {icon === "Favorite" && (
-                                <motion.div
-                                  variants={heartVariants}
-                                  animate={
-                                    favoritedPaintings[painting.title]
-                                      ? "favorited"
-                                      : "unfavorited"
-                                  }
-                                >
-                                  {favoritedPaintings[painting.title] ? (
-                                    <FavoriteIcon fontSize="small" />
-                                  ) : (
-                                    <FavoriteBorderIcon fontSize="small" />
-                                  )}
-                                </motion.div>
-                              )}
-                              {icon === "VisibilityIcon" && (
-                                <VisibilityIcon fontSize="small" />
-                              )}
-                              {icon === "BarChartIcon" && (
-                                <BarChartIcon fontSize="small" />
-                              )}
-                            </IconButtonMui>
+                            {
+                              icon: "BarChartIcon",
+                              label: "Insights",
+                              action: undefined,
+                            },
+                          ].map(({ icon, label, action }, i) => (
+                            <Tooltip title={label} key={i}>
+                              <IconButtonMui
+                                size="small"
+                                onClick={action}
+                                sx={{
+                                  bgcolor: "white",
+                                  boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
+                                  borderRadius: "50%",
+                                  width: 32,
+                                  height: 32,
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  transform: "translateY(6px)",
+                                }}
+                              >
+                                {icon === "Favorite" && (
+                                  <motion.div
+                                    variants={heartVariants}
+                                    animate={
+                                      favoritedPaintings[painting.title]
+                                        ? "favorited"
+                                        : "unfavorited"
+                                    }
+                                  >
+                                    {favoritedPaintings[painting.title] ? (
+                                      <FavoriteIcon fontSize="small" />
+                                    ) : (
+                                      <FavoriteBorderIcon fontSize="small" />
+                                    )}
+                                  </motion.div>
+                                )}
+                                {icon === "VisibilityIcon" && (
+                                  <VisibilityIcon fontSize="small" />
+                                )}
+                                {icon === "BarChartIcon" && (
+                                  <BarChartIcon fontSize="small" />
+                                )}
+                              </IconButtonMui>
+                            </Tooltip>
                           ))}
                         </Box>
                       </Box>
@@ -1077,55 +1135,62 @@ const PaintingPage = () => {
                             {[
                               {
                                 icon: "Favorite",
+                                label: "Favorites",
                                 action: () =>
                                   handleFavoriteClick(painting.title),
                               },
                               {
                                 icon: "VisibilityIcon",
+                                label: "View in room",
                                 action: () => handleViewClick(painting),
                               },
-                              { icon: "BarChartIcon", action: undefined },
-                            ].map(({ icon, action }, i) => (
-                              <IconButtonMui
-                                key={i}
-                                size="small"
-                                onClick={action}
-                                sx={{
-                                  position: "relative",
-                                  top: "-80px",
-                                  bgcolor: "white",
-                                  boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
-                                  borderRadius: "50%",
-                                  width: 32,
-                                  height: 32,
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                }}
-                              >
-                                {icon === "Favorite" && (
-                                  <motion.div
-                                    variants={heartVariants}
-                                    animate={
-                                      favoritedPaintings[painting.title]
-                                        ? "favorited"
-                                        : "unfavorited"
-                                    }
-                                  >
-                                    {favoritedPaintings[painting.title] ? (
-                                      <FavoriteIcon fontSize="small" />
-                                    ) : (
-                                      <FavoriteBorderIcon fontSize="small" />
-                                    )}
-                                  </motion.div>
-                                )}
-                                {icon === "VisibilityIcon" && (
-                                  <VisibilityIcon fontSize="small" />
-                                )}
-                                {icon === "BarChartIcon" && (
-                                  <BarChartIcon fontSize="small" />
-                                )}
-                              </IconButtonMui>
+                              {
+                                icon: "BarChartIcon",
+                                label: "Insights",
+                                action: undefined,
+                              },
+                            ].map(({ icon, label, action }, i) => (
+                              <Tooltip title={label} key={i}>
+                                <IconButtonMui
+                                  size="small"
+                                  onClick={action}
+                                  sx={{
+                                    position: "relative",
+                                    top: "-80px",
+                                    bgcolor: "white",
+                                    boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
+                                    borderRadius: "50%",
+                                    width: 32,
+                                    height: 32,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                  }}
+                                >
+                                  {icon === "Favorite" && (
+                                    <motion.div
+                                      variants={heartVariants}
+                                      animate={
+                                        favoritedPaintings[painting.title]
+                                          ? "favorited"
+                                          : "unfavorited"
+                                      }
+                                    >
+                                      {favoritedPaintings[painting.title] ? (
+                                        <FavoriteIcon fontSize="small" />
+                                      ) : (
+                                        <FavoriteBorderIcon fontSize="small" />
+                                      )}
+                                    </motion.div>
+                                  )}
+                                  {icon === "VisibilityIcon" && (
+                                    <VisibilityIcon fontSize="small" />
+                                  )}
+                                  {icon === "BarChartIcon" && (
+                                    <BarChartIcon fontSize="small" />
+                                  )}
+                                </IconButtonMui>
+                              </Tooltip>
                             ))}
                           </Box>
                           <Button
@@ -1203,6 +1268,20 @@ const PaintingPage = () => {
           sx={{ width: "100%" }}
         >
           Item added to cart successfully!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={favoriteSnackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Added to favorites!
         </Alert>
       </Snackbar>
     </Box>
