@@ -240,6 +240,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../Assets/logo.png";
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 
 const navItems = [
   { name: "PAINTINGS", path: "/paintings" },
@@ -298,6 +299,7 @@ const Navbar = ({ onCartClick }) => {
         }}
       >
         <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+          {/* Logo */}
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography
               variant="h6"
@@ -434,18 +436,7 @@ const Navbar = ({ onCartClick }) => {
                   onClick={handleProfileClick}
                   aria-label="Go to login page in new tab"
                 >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z"
-                      fill="#000000" // Set profile icon to black
-                    />
-                  </svg>
+                  <PersonOutlineIcon sx={{ fontSize: 20}} />
                 </IconButton>
               </motion.div>
             </Box>

@@ -14,6 +14,8 @@ import image1 from "../Assets/Painting.png";
 import image2 from "../Assets/Sculptures.png";
 import image3 from "../Assets/Photography.png";
 import image4 from "../Assets/Digital Art.png";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 // TODO: Add unique images for remaining categories
 // import image5 from '../Assets/Drawings.png';
 // import image6 from '../Assets/MixedMedia.png';
@@ -28,16 +30,16 @@ import image4 from "../Assets/Digital Art.png";
 // Placeholder SVG for the bold, black, right-pointing arrow
 
 const categories = [
-  { title: "Paintings", image: image1, path: "/category/paintings" },
-  { title: "Sculptures", image: image2, path: "/category/sculptures" },
-  { title: "Photography", image: image3, path: "/category/photography" },
-  { title: "Digital Art", image: image4, path: "/category/digital-art" },
-  { title: "Drawings", image: image1, path: "/category/drawings" }, // TODO: Replace with unique image
-  { title: "Mixed Media", image: image2, path: "/category/mixed-media" }, // TODO: Replace with unique image
-  { title: "Prints", image: image3, path: "/category/prints" }, // TODO: Replace with unique image
-  { title: "Ceramics", image: image4, path: "/category/ceramics" }, // TODO: Replace with unique image
-  { title: "Textiles", image: image1, path: "/category/textiles" }, // TODO: Replace with unique image
-  { title: "Installations", image: image2, path: "/category/installations" }, // TODO: Replace with unique image
+  { title: 'Paintings', image: image1, path: '/category/paintings' },
+  { title: 'Sculptures', image: image2, path: '/category/sculptures' },
+  { title: 'Photography', image: image3, path: '/category/photography' },
+  { title: 'Digital Art', image: image4, path: '/category/digital-art' },
+  { title: 'Drawings', image: image1, path: '/category/drawings' },
+  { title: 'Mixed Media', image: image2, path: '/category/mixed-media' },
+  { title: 'Prints', image: image3, path: '/category/prints' },
+  { title: 'Ceramics', image: image4, path: '/category/ceramics' },
+  { title: 'Textiles', image: image1, path: '/category/textiles' },
+  { title: 'Installations', image: image2, path: '/category/installations' },
 ];
 
 const ShopByCategory = () => {
@@ -73,30 +75,22 @@ const ShopByCategory = () => {
         <Typography
           variant="h5"
           sx={{
-            fontFamily: "Optima, sans-serif", // Fallback to sans-serif if Optima is unavailable
-            fontStyle: "normal",
             fontWeight: 400,
-            fontSize: "30px",
-            lineHeight: "36px",
-            color: "#161412",
+            fontSize: '30px',
+            color: '#111',
           }}
         >
           Shop by Category
         </Typography>
 
-        <button
-          style={{
-            display: "flex",
-            alignItems: "center",
-            cursor: "pointer",
-            background: "none",
-            border: "none",
-            padding: 0,
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            cursor: 'pointer',
+            '&:hover': { textDecoration: 'underline' },
           }}
           onClick={handleToggleView}
-          aria-label={
-            isExpanded ? "Show fewer categories" : "Show all categories"
-          }
         >
           <Typography
             sx={{
@@ -107,18 +101,11 @@ const ShopByCategory = () => {
           >
             {isExpanded ? "Show Less" : "View All"}
           </Typography>
-          <ArrowForwardIos
-            sx={{
-              fontSize: "1.1rem",
-              cursor: "pointer",
-              color: "black",
-            }}
-          />
-          {/* Replace with imported SVG once available */}
-        </button>
+          <ArrowForwardIcon sx={{ fontSize: '1rem', color: '#111' }} />
+        </Box>
       </Box>
 
-      <Grid container spacing={7} sx={{ transition: "all 0.3s ease" }}>
+      <Grid container spacing={7}>
         <AnimatePresence>
           {displayedCategories.map((category) => (
             <Grid item xs={12} sm={6} md={3} key={category.title}>
@@ -131,36 +118,22 @@ const ShopByCategory = () => {
                 <Card
                   elevation={0}
                   sx={{
-                    cursor: "pointer",
-                    borderRadius: 0, // Card border radius set to 0
-                    transition: "box-shadow 0.3s ease, transform 0.3s ease",
-                    "&:hover": {
-                      boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                      transform: "translateY(-4px)",
-                    },
+                    cursor: 'pointer',
+                    '&:hover': { boxShadow: '0 4px 8px rgba(0,0,0,0.1)' },
                   }}
                   role="button"
                   tabIndex={0}
                   aria-label={`View ${category.title} category`}
                   onClick={() => handleCardClick(category.path)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      handleCardClick(category.path);
-                    }
-                  }}
                 >
                   <CardMedia
                     component="img"
-                    sx={{
-                      height: { xs: 150, sm: 200 },
-                      objectFit: "cover",
-                      borderRadius: 0, // Image border radius set to 0
-                    }}
-                    image={category.image || "/path/to/placeholder.png"} // Fallback image
+                    height="200"
+                    image={category.image}
                     alt={category.title}
                     loading="lazy" // Lazy-load images for performance
                   />
-                  <CardContent sx={{ textAlign: "left", pt: 0, pb: 0 }}>
+                  <CardContent sx={{ textAlign: 'left', pt: 1, pb: 0 }}>
                     <Typography
                       variant="body1"
                       sx={{

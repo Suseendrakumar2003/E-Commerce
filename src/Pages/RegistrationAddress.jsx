@@ -11,8 +11,6 @@ import {
   FormControlLabel,
   Button,
 } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useNavigate } from "react-router-dom";
 
 const RegistrationAddress = () => {
@@ -144,6 +142,44 @@ const RegistrationAddress = () => {
   const handleBackClick = () => {
     navigate("/create-account");
   };
+
+  // Custom SVG for the Back button (bold, black, left-pointing arrow)
+  const CustomBackArrowIcon = () => (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M19 12H6M6 12L12 6M6 12L12 18"
+        stroke="#65635F"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+
+  // Custom SVG for the dropdown icon (bold, black, downward arrow)
+  const CustomDownArrowIcon = () => (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 9L12 15L18 9"
+        stroke="#000000"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 
   return (
     <Box
@@ -281,6 +317,7 @@ const RegistrationAddress = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              position: "relative",
             }}
           >
             <Typography
@@ -290,15 +327,25 @@ const RegistrationAddress = () => {
                 fontSize: "18px",
                 lineHeight: "27px",
                 color: "#161412",
+                position: "absolute",
+                left: 0,
+                top: 0,
               }}
             >
               Shipping Address & Preferences
             </Typography>
             <Box
               onClick={handleBackClick}
-              sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                cursor: "pointer",
+                position: "absolute",
+                right: 0,
+                top: 4,
+              }}
             >
-              <ArrowBackIcon sx={{ color: "#65635F", fontSize: "20px" }} />
+              <CustomBackArrowIcon />
               <Typography
                 sx={{
                   ml: "8px",
@@ -314,7 +361,7 @@ const RegistrationAddress = () => {
             </Box>
           </Box>
 
-          <Box sx={{ display: "flex", justifyContent: "flex-end", mt: "32px" }}>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", mt: "64px" }}>
             <Typography
               sx={{
                 fontFamily: "Inter",
@@ -360,9 +407,7 @@ const RegistrationAddress = () => {
                 value={formData.addressType}
                 onChange={handleChange}
                 label="Address Type *"
-                IconComponent={() => (
-                  <KeyboardArrowDownIcon sx={{ color: "#000000" }} />
-                )}
+                IconComponent={() => <CustomDownArrowIcon />}
               >
                 {addressTypes.map((type) => (
                   <MenuItem
@@ -591,9 +636,7 @@ const RegistrationAddress = () => {
                 value={formData.country}
                 onChange={handleChange}
                 label="Country *"
-                IconComponent={() => (
-                  <KeyboardArrowDownIcon sx={{ color: "#000000" }} />
-                )}
+                IconComponent={() => <CustomDownArrowIcon />}
               >
                 <MenuItem
                   value="India"
@@ -649,9 +692,7 @@ const RegistrationAddress = () => {
                 value={formData.state}
                 onChange={handleChange}
                 label="State / Province *"
-                IconComponent={() => (
-                  <KeyboardArrowDownIcon sx={{ color: "#000000" }} />
-                )}
+                IconComponent={() => <CustomDownArrowIcon />}
               >
                 <MenuItem
                   value=""
@@ -783,11 +824,12 @@ const RegistrationAddress = () => {
                 checked={formData.saveAsDefault}
                 name="saveAsDefault"
                 onChange={handleChange}
-                color="primary"
                 size="small"
                 sx={{
                   color: "#333333",
-                  "&.Mui-checked": { color: "#000000" },
+                  "&.Mui-checked": {
+                    color: "#FFFFFF",
+                  },
                   "& .MuiSvgIcon-root": {
                     fontSize: 16,
                     borderRadius: "2px",
@@ -795,6 +837,9 @@ const RegistrationAddress = () => {
                     backgroundColor: formData.saveAsDefault
                       ? "#000000"
                       : "#FFFFFF",
+                    "& path": {
+                      fill: formData.saveAsDefault ? "#FFFFFF" : "none",
+                    },
                   },
                 }}
               />
@@ -868,9 +913,7 @@ const RegistrationAddress = () => {
                 value={formData.language}
                 onChange={handleChange}
                 label="Preferred Language"
-                IconComponent={() => (
-                  <KeyboardArrowDownIcon sx={{ color: "#000000" }} />
-                )}
+                IconComponent={() => <CustomDownArrowIcon />}
               >
                 {languages.map((lang) => (
                   <MenuItem
@@ -910,7 +953,7 @@ const RegistrationAddress = () => {
                 mt: "16px",
               }}
             >
-              {interests.map((interest, index) => {
+              {interests.map((interest) => {
                 const paddingMap = {
                   "Home & Kitchen": "4px 12px",
                   Toys: "4px 12px",
@@ -922,12 +965,13 @@ const RegistrationAddress = () => {
                   Automotive: "4px 12px",
                   Health: "4px 12px",
                 };
+                const isSelected = formData.selectedInterests.includes(interest);
                 return (
                   <FormControlLabel
                     key={interest}
                     control={
                       <Checkbox
-                        checked={formData.selectedInterests.includes(interest)}
+                        checked={isSelected}
                         onChange={() => handleInterestToggle(interest)}
                         size="small"
                         color="primary"
@@ -938,11 +982,13 @@ const RegistrationAddress = () => {
                       <Box
                         sx={{
                           padding: paddingMap[interest],
-                          bgcolor: "#FFFFFF",
-                          border: "1px solid rgba(101, 99, 95, 0.2)",
+                          bgcolor: isSelected ? "#FFFFFF" : "#F4F4F2",
+                          border: isSelected
+                            ? "1px solid rgba(101, 99, 95, 0.2)"
+                            : "2px solid #161412",
                           borderRadius: "4px",
                           cursor: "pointer",
-                          "&:hover": { bgcolor: "#F4F4F2" },
+                          "&:hover": { bgcolor: isSelected ? "#F4F4F2" : "#E0E0E0" },
                         }}
                       >
                         <Typography
@@ -951,7 +997,7 @@ const RegistrationAddress = () => {
                             fontSize: 10,
                             fontWeight: 500,
                             lineHeight: "15px",
-                            color: "#65635F",
+                            color: isSelected ? "#65635F" : "#161412",
                             textAlign: "center",
                           }}
                         >
@@ -975,8 +1021,7 @@ const RegistrationAddress = () => {
                 mt: "16px",
               }}
             >
-              Select categories you're interested in for personalized
-              recommendations
+              Select categories you're interested in for personalized recommendations
             </Typography>
 
             <FormControlLabel
@@ -985,11 +1030,12 @@ const RegistrationAddress = () => {
                   checked={formData.receiveOffers}
                   name="receiveOffers"
                   onChange={handleChange}
-                  color="primary"
                   size="small"
                   sx={{
                     color: "#333333",
-                    "&.Mui-checked": { color: "#000000" },
+                    "&.Mui-checked": {
+                      color: "#FFFFFF",
+                    },
                     "& .MuiSvgIcon-root": {
                       fontSize: 16,
                       borderRadius: "2px",
@@ -997,6 +1043,9 @@ const RegistrationAddress = () => {
                       backgroundColor: formData.receiveOffers
                         ? "#000000"
                         : "#FFFFFF",
+                      "& path": {
+                        fill: formData.receiveOffers ? "#FFFFFF" : "none",
+                      },
                     },
                   }}
                 />
@@ -1034,11 +1083,12 @@ const RegistrationAddress = () => {
                   name="acceptedTerms"
                   onChange={handleChange}
                   required
-                  color="primary"
                   size="small"
                   sx={{
                     color: "#666666",
-                    "&.Mui-checked": { color: "#000000" },
+                    "&.Mui-checked": {
+                      color: "#FFFFFF",
+                    },
                     "& .MuiSvgIcon-root": {
                       fontSize: 16,
                       borderRadius: "2px",
@@ -1046,6 +1096,9 @@ const RegistrationAddress = () => {
                       backgroundColor: formData.acceptedTerms
                         ? "#000000"
                         : "#FFFFFF",
+                      "& path": {
+                        fill: formData.acceptedTerms ? "#FFFFFF" : "none",
+                      },
                     },
                   }}
                 />
@@ -1107,8 +1160,7 @@ const RegistrationAddress = () => {
               mt: "16px",
             }}
           >
-            By creating an account, you'll enjoy faster checkout and
-            personalized shopping experience
+            By creating an account, you'll enjoy faster checkout and personalized shopping experience
           </Typography>
         </Box>
       </Box>
