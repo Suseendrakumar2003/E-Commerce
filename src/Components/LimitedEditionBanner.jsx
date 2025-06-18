@@ -219,19 +219,20 @@ const LimitedEditionBanner = () => {
             <Typography
               variant="overline"
               sx={{
-                width:"115px",
+                width: "170px",
                 fontWeight: "bold",
                 backgroundColor: "#f2f2f2",
                 px: 2,
                 py: 0.5,
                 borderRadius: 1,
                 display: "inline-block",
+                fontSize: "16px",
               }}
             >
               LIMITED EDITION
             </Typography>
 
-            <Typography variant="h5" fontWeight="bold" mt={2}>
+            <Typography variant="h4" fontWeight="bold" mt={2}>
               {carouselItems[activeIndex].title}
             </Typography>
 
@@ -240,12 +241,13 @@ const LimitedEditionBanner = () => {
               color="text.secondary"
               mt={1}
               mb={2}
+              fontSize={"16px"}
               maxWidth="400px"
             >
               {carouselItems[activeIndex].description}
             </Typography>
 
-            <Typography variant="h6" fontWeight="bold">
+            <Typography variant="h4" fontWeight="bold">
               $599{" "}
               <Typography
                 component="span"
@@ -263,6 +265,8 @@ const LimitedEditionBanner = () => {
                 bgcolor: "#000",
                 px: 4,
                 py: 1.5,
+                borderRadius: 0,
+                boxShadow: "None",
                 fontWeight: "bold",
                 "&:hover": { bgcolor: "#333" },
                 alignSelf: { xs: "center", md: "flex-start" },

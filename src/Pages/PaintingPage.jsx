@@ -921,6 +921,7 @@ const PaintingPage = () => {
                         <Button
                           variant="contained"
                           sx={{
+                            
                             bgcolor: "#000",
                             color: "#fff",
                             borderRadius: 0,

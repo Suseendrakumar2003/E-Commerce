@@ -1,298 +1,4 @@
-// import React from "react";
-// import {
-//   Box,
-//   Typography,
-//   Grid,
-//   Card,
-//   CardMedia,
-//   CardContent,
-//   Button,
-//   IconButton,
-//   Rating,
-// } from "@mui/material";
-// import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-// import VisibilityIcon from "@mui/icons-material/Visibility";
-// import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-// import { motion } from "framer-motion";
-// import { useNavigate } from "react-router-dom";
-
-// // Import the images from the Assets folder
-// import artwork1 from "../Assets/artwork 1.png";
-// import artwork2 from "../Assets/artwork 2.png";
-// import artwork3 from "../Assets/artwork 3.png";
-// import artwork4 from "../Assets/artwork 4.png";
-
-// // Import the font (Google Fonts - Raleway)
-// import "@fontsource/raleway/400.css";
-// import "@fontsource/raleway/700.css";
-
-// const artworks = [
-//   {
-//     title: "Ocean Waves",
-//     artist: "Thomas Miller",
-//     medium: "Oil on canvas",
-//     year: 2023,
-//     rating: 4.9,
-//     price: 450,
-//     image: artwork1,
-//   },
-//   {
-//     title: "City Lights",
-//     artist: "Sarah Johnson",
-//     medium: "Acrylic on wood",
-//     year: 2023,
-//     rating: 4.6,
-//     price: 320,
-//     image: artwork2,
-//   },
-//   {
-//     title: "Forest Path",
-//     artist: "Michael Brown",
-//     medium: "Watercolor",
-//     year: 2023,
-//     rating: 4.8,
-//     price: 380,
-//     image: artwork3,
-//   },
-//   {
-//     title: "Desert Sunset",
-//     artist: "Lisa Wang",
-//     medium: "Digital art",
-//     year: 2023,
-//     rating: 4.7,
-//     price: 290,
-//     image: artwork4,
-//   },
-// ];
-
-// // Animation variants for the card
-// const cardVariants = {
-//   hidden: { opacity: 0, y: 50 },
-//   visible: (index) => ({
-//     opacity: 1,
-//     y: 0,
-//     transition: {
-//       delay: index * 0.2,
-//       duration: 0.6,
-//       ease: "easeOut",
-//     },
-//   }),
-//   hover: {
-//     scale: 1.05,
-//     boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.2)",
-//     transition: { duration: 0.3 },
-//   },
-// };
-
-// // Animation variants for the header
-// const headerVariants = {
-//   hidden: { opacity: 0, x: -50 },
-//   visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
-// };
-
-// const TrendingArtworks = () => {
-//   const navigate = useNavigate(); // Initialize useNavigate
-
-//   // Handle navigation to View.jsx with artwork data
-//   const handleViewClick = (artwork) => {
-//     navigate("/view", { state: { artwork } });
-//   };
-
-//   return (
-//     <Box sx={{ padding: 10, backgroundColor: "#f5f2ef" }}>
-//       {/* Header Section with Animation */}
-//       <motion.div variants={headerVariants} initial="hidden" animate="visible">
-//         <Box
-//           sx={{
-//             display: "flex",
-//             justifyContent: "space-between",
-//             alignItems: "center",
-//             mb: 6,
-//           }}
-//         >
-//           <Typography
-//             variant="h4"
-//             sx={{
-//               fontWeight: 100,
-//               fontFamily: '"Raleway", sans-serif',
-//             }}
-//           >
-//             Trending Artworks
-//           </Typography>
-//           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-//             <Typography
-//               variant="body1"
-//               sx={{
-//                 color: "#1976d2",
-//                 cursor: "pointer",
-//               }}
-//               onClick={() => navigate("/paintings")} // Navigate to /paintings
-//             >
-//               View All
-//             </Typography>
-//             <ArrowForwardIcon
-//               sx={{
-//                 color: "#1976d2",
-//                 fontSize: "1.2rem",
-//               }}
-//             />
-//           </Box>
-//         </Box>
-//       </motion.div>
-
-//       {/* Artworks Grid */}
-//       <Grid
-//         container
-//         spacing={3}
-//         sx={{
-//           alignItems: "center",
-//           justifyContent: "space-between",
-//         }}
-//       >
-//         {artworks.map((artwork, index) => (
-//           <Grid item xs={12} sm={6} md={3} key={index} component="div">
-//             <motion.div
-//               variants={cardVariants}
-//               initial="hidden"
-//               animate="visible"
-//               whileHover="hover"
-//               custom={index}
-//             >
-//               <Card
-//                 sx={{
-//                   position: "relative",
-//                   borderRadius: 0,
-//                   boxShadow: 0,
-//                   width: 290,
-//                   height: 454,
-//                   border: "1px solid",
-//                   borderColor: "grey.300",
-//                   display: "flex",
-//                   flexDirection: "column",
-//                 }}
-//               >
-//                 {/* Image Section */}
-//                 <Box sx={{ position: "relative", flexShrink: 0 }}>
-//                   <CardMedia
-//                     component="img"
-//                     height="256"
-//                     image={artwork.image}
-//                     alt={artwork.title}
-//                     sx={{ objectFit: "cover", width: "100%" }}
-//                   />
-//                   {/* Icons on the Image */}
-//                   <Box
-//                     sx={{
-//                       position: "absolute",
-//                       top: 8,
-//                       right: 8,
-//                       display: "flex",
-//                       flexDirection: "column",
-//                       gap: 1,
-//                       width: "33px",
-//                       height: "auto",
-//                     }}
-//                   >
-//                     <IconButton
-//                       sx={{
-//                         backgroundColor: "white",
-//                         "&:hover": { backgroundColor: "#f0f0f0" },
-//                         width: "33px",
-//                         height: "33px",
-//                       }}
-//                     >
-//                       <FavoriteBorderIcon />
-//                     </IconButton>
-//                     <IconButton
-//                       onClick={() => handleViewClick(artwork)} // Navigate on click
-//                       sx={{
-//                         backgroundColor: "white",
-//                         "&:hover": { backgroundColor: "#f0f0f0" },
-//                         width: "33px",
-//                         height: "33px",
-//                       }}
-//                     >
-//                       <VisibilityIcon />
-//                     </IconButton>
-//                   </Box>
-//                 </Box>
-
-//                 {/* Card Content */}
-//                 <CardContent
-//                   sx={{
-//                     textAlign: "left",
-//                     flexGrow: 1,
-//                     display: "flex",
-//                     flexDirection: "column",
-//                     justifyContent: "space-between",
-//                   }}
-//                 >
-//                   <Box>
-//                     <Typography
-//                       variant="h6"
-//                       sx={{
-//                         fontWeight: "bold",
-//                         fontFamily: '"Raleway", sans-serif',
-//                       }}
-//                     >
-//                       {artwork.title}
-//                     </Typography>
-//                     <Typography variant="body2" color="text.secondary">
-//                       {artwork.artist}
-//                     </Typography>
-//                     <Typography variant="body2" color="text.secondary">
-//                       {artwork.medium}, {artwork.year}
-//                     </Typography>
-//                     <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-//                       <Rating
-//                         value={artwork.rating}
-//                         precision={0.1}
-//                         readOnly
-//                         size="small"
-//                       />
-//                       <Typography variant="body2" sx={{ ml: 1 }}>
-//                         {artwork.rating}
-//                       </Typography>
-//                     </Box>
-//                   </Box>
-//                   <Box
-//                     sx={{
-//                       display: "flex",
-//                       justifyContent: "space-between",
-//                       alignItems: "center",
-//                       mt: 2,
-//                     }}
-//                   >
-//                     <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-//                       ${artwork.price}
-//                     </Typography>
-//                     <Button
-//                       variant="contained"
-//                       sx={{
-//                         backgroundColor: "#000",
-//                         borderRadius: 0,
-//                         "&:hover": { backgroundColor: "#333" },
-//                         fontFamily: '"Raleway", sans-serif',
-//                         fontWeight: 700,
-//                       }}
-//                     >
-//                       Add to Cart
-//                     </Button>
-//                   </Box>
-//                 </CardContent>
-//               </Card>
-//             </motion.div>
-//           </Grid>
-//         ))}
-//       </Grid>
-//     </Box>
-//   );
-// };
-
-// export default TrendingArtworks;
-
-
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -303,13 +9,15 @@ import {
   Button,
   IconButton,
   Rating,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../Components/CartContext"; // Import useCart hook
+import { useCart } from "../Components/CartContext";
 
 // Import the images from the Assets folder
 import artwork1 from "../Assets/artwork 1.png";
@@ -317,9 +25,8 @@ import artwork2 from "../Assets/artwork 2.png";
 import artwork3 from "../Assets/artwork 3.png";
 import artwork4 from "../Assets/artwork 4.png";
 
-// Import the font (Google Fonts - Raleway)
-import "@fontsource/raleway/400.css";
-import "@fontsource/raleway/700.css";
+// Import fonts
+import "@fontsource/inter";
 
 const artworks = [
   {
@@ -330,6 +37,10 @@ const artworks = [
     rating: 4.9,
     price: 450,
     image: artwork1,
+    description:
+      "A vibrant depiction of crashing ocean waves under a stormy sky.",
+    usersPurchased: 120,
+    itemsSold: 85,
   },
   {
     title: "City Lights",
@@ -339,6 +50,9 @@ const artworks = [
     rating: 4.6,
     price: 320,
     image: artwork2,
+    description: "An abstract representation of a bustling city at night.",
+    usersPurchased: 95,
+    itemsSold: 60,
   },
   {
     title: "Forest Path",
@@ -348,6 +62,9 @@ const artworks = [
     rating: 4.8,
     price: 380,
     image: artwork3,
+    description: "A serene watercolor of a quiet path through a lush forest.",
+    usersPurchased: 110,
+    itemsSold: 75,
   },
   {
     title: "Desert Sunset",
@@ -357,27 +74,12 @@ const artworks = [
     rating: 4.7,
     price: 290,
     image: artwork4,
+    description:
+      "A digital artwork capturing the warm hues of a desert sunset.",
+    usersPurchased: 80,
+    itemsSold: 50,
   },
 ];
-
-// Animation variants for the card
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: (index) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: index * 0.2,
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  }),
-  hover: {
-    scale: 1.05,
-    boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.2)",
-    transition: { duration: 0.3 },
-  },
-};
 
 // Animation variants for the header
 const headerVariants = {
@@ -386,8 +88,10 @@ const headerVariants = {
 };
 
 const TrendingArtworks = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
-  const { addToCart } = useCart(); // Use the cart context
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
+  const [flippedCards, setFlippedCards] = useState({});
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   // Handle navigation to View.jsx with artwork data
   const handleViewClick = (artwork) => {
@@ -403,6 +107,23 @@ const TrendingArtworks = () => {
       image: artwork.image,
     };
     addToCart(cartItem);
+    setSnackbarOpen(true); // Show the snackbar alert
+  };
+
+  // Handle snackbar close
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
+
+  // Toggle flip state on card click
+  const handleCardClick = (index) => {
+    setFlippedCards((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
   };
 
   return (
@@ -421,7 +142,7 @@ const TrendingArtworks = () => {
             variant="h4"
             sx={{
               fontWeight: 100,
-              fontFamily: '"Raleway", sans-serif',
+              fontFamily: '"Optima", "Raleway", sans-serif',
             }}
           >
             Trending Artworks
@@ -430,17 +151,19 @@ const TrendingArtworks = () => {
             <Typography
               variant="body1"
               sx={{
-                
                 cursor: "pointer",
+                fontSize: "14px",
+                color: "#65635F",
               }}
-              onClick={() => navigate("/paintings")} // Navigate to /paintings
+              onClick={() => navigate("/paintings")}
             >
               View All
             </Typography>
-            <ArrowForwardIcon
+            <ArrowForwardIos
               sx={{
-               
-                fontSize: "1.2rem",
+                fontSize: "1.1rem",
+                cursor: "pointer",
+                color: "black",
               }}
             />
           </Box>
@@ -459,140 +182,457 @@ const TrendingArtworks = () => {
         {artworks.map((artwork, index) => (
           <Grid item xs={12} sm={6} md={3} key={index} component="div">
             <motion.div
-              variants={cardVariants}
-              initial="hidden"
-              animate="visible"
-              whileHover="hover"
-              custom={index}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: index * 0.2,
+                duration: 0.6,
+                ease: "easeOut",
+              }}
             >
-              <Card
+              <Box
                 sx={{
-                  position: "relative",
-                  borderRadius: 0,
-                  boxShadow: 0,
                   width: 290,
                   height: 454,
-                  border: "1px solid",
-                  borderColor: "grey.300",
-                  display: "flex",
-                  flexDirection: "column",
+                  margin: "1rem auto",
+                  perspective: "1000px",
+                  cursor: "pointer",
                 }}
+                onClick={() => handleCardClick(index)}
               >
-                {/* Image Section */}
-                <Box sx={{ position: "relative", flexShrink: 0 }}>
-                  <CardMedia
-                    component="img"
-                    height="256"
-                    image={artwork.image}
-                    alt={artwork.title}
-                    sx={{ objectFit: "cover", width: "100%" }}
-                  />
-                  {/* Icons on the Image */}
+                <Box
+                  sx={{
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                    transition: "transform 0.6s",
+                    transformStyle: "preserve-3d",
+                    transform: flippedCards[index]
+                      ? "rotateY(180deg)"
+                      : "rotateY(0deg)",
+                  }}
+                >
+                  {/* Front Side */}
+                  <Card
+                    sx={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%",
+                      backfaceVisibility: "hidden",
+                      boxSizing: "border-box",
+                      background: "#FFFFFF",
+                      border: "1px solid rgba(101, 99, 95, 0.2)",
+                      borderRadius: 0,
+                      boxShadow: "none",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    {/* Image Section */}
+                    <Box sx={{ position: "relative", flexShrink: 0 }}>
+                      <CardMedia
+                        component="img"
+                        sx={{
+                          width: 288,
+                          height: 256,
+                          objectFit: "cover",
+                          position: "relative",
+                          left: 1,
+                          top: 1,
+                        }}
+                        image={artwork.image}
+                        alt={artwork.title}
+                      />
+                      {/* Icons on the Image */}
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          top: 12,
+                          right: 8,
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: 1,
+                          width: 33,
+                        }}
+                      >
+                        <IconButton
+                          sx={{
+                            width: 33,
+                            height: 32,
+                            background: "#FFFFFF",
+                            boxShadow:
+                              "0px 2px 4px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.1)",
+                            borderRadius: "50%",
+                            "&:hover": { background: "#f0f0f0" },
+                            padding: 0,
+                          }}
+                        >
+                          <FavoriteBorderIcon
+                            sx={{ width: 16, height: 16, color: "#000" }}
+                          />
+                        </IconButton>
+                        <IconButton
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent card flip
+                            handleViewClick(artwork);
+                          }}
+                          sx={{
+                            width: 33,
+                            height: 32,
+                            background: "#FFFFFF",
+                            boxShadow:
+                              "0px 2px 4px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.1)",
+                            borderRadius: "50%",
+                            "&:hover": { background: "#f0f0f0" },
+                            padding: 0,
+                          }}
+                        >
+                          <VisibilityIcon
+                            sx={{ width: 16, height: 16, color: "#000" }}
+                          />
+                        </IconButton>
+                      </Box>
+                    </Box>
+
+                    {/* Card Content */}
+                    <CardContent
+                      sx={{
+                        flexGrow: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                        position: "relative",
+                        padding: "16px",
+                      }}
+                    >
+                      <Box>
+                        <Typography
+                          sx={{
+                            fontFamily: '"Optima", "Raleway", sans-serif',
+                            fontWeight: 400,
+                            fontSize: "18px",
+                            lineHeight: "28px",
+                            color: "#161412",
+                          }}
+                        >
+                          {artwork.title}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontFamily: '"Inter", sans-serif',
+                            fontWeight: 400,
+                            fontSize: "14px",
+                            lineHeight: "20px",
+                            color: "#65635F",
+                            mt: "4px",
+                          }}
+                        >
+                          {artwork.artist}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontFamily: '"Inter", sans-serif',
+                            fontWeight: 400,
+                            fontSize: "12px",
+                            lineHeight: "16px",
+                            color: "#65635F",
+                            mt: "4px",
+                          }}
+                        >
+                          {artwork.medium}, {artwork.year}
+                        </Typography>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            mt: "12px",
+                          }}
+                        >
+                          <Rating
+                            value={artwork.rating}
+                            precision={0.1}
+                            readOnly
+                            size="small"
+                            sx={{
+                              "& .MuiRating-icon": {
+                                width: 17,
+                                height: 16,
+                                mr: "3px",
+                              },
+                            }}
+                          />
+                          <Typography
+                            sx={{
+                              fontFamily: '"Inter", sans-serif',
+                              fontWeight: 400,
+                              fontSize: "12px",
+                              lineHeight: "16px",
+                              color: "#65635F",
+                              ml: "8px",
+                            }}
+                          >
+                            {artwork.rating}
+                          </Typography>
+                        </Box>
+                      </Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          mt: "14px",
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontFamily: '"Inter", sans-serif',
+                            fontWeight: 400,
+                            fontSize: "18px",
+                            lineHeight: "28px",
+                            color: "#161412",
+                          }}
+                        >
+                          ${artwork.price}
+                        </Typography>
+                        <Button
+                          variant="contained"
+                          sx={{
+                            width: 110,
+                            height: 36,
+                            background: "#161412",
+                            borderRadius: 0,
+                            boxShadow: "none",
+                            padding: "8px",
+                            "&:hover": { background: "#333" },
+                            fontFamily: '"Inter", sans-serif',
+                            fontWeight: 400,
+                            fontSize: "14px",
+                            color: "#FFFFFF",
+                            textTransform: "none",
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent card flip
+                            handleAddToCart(artwork);
+                          }}
+                        >
+                          Add to Cart
+                        </Button>
+                      </Box>
+                    </CardContent>
+                  </Card>
+
+                  {/* Back Side */}
                   <Box
                     sx={{
                       position: "absolute",
-                      top: 8,
-                      right: 8,
+                      width: "100%",
+                      height: "100%",
+                      backfaceVisibility: "hidden",
+                      boxSizing: "border-box",
+                      background: "#616161",
+                      border: "1px solid rgba(101, 99, 95, 0.2)",
+                      borderRadius: 0,
+                      transform: "rotateY(180deg)",
                       display: "flex",
                       flexDirection: "column",
-                      gap: 1,
-                      width: "33px",
-                      height: "auto",
+                      padding: "16px",
                     }}
                   >
-                    <IconButton
+                    <Box
                       sx={{
-                        backgroundColor: "white",
-                        "&:hover": { backgroundColor: "#f0f0f0" },
-                        width: "33px",
-                        height: "33px",
+                        flexGrow: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
                       }}
                     >
-                      <FavoriteBorderIcon />
-                    </IconButton>
-                    <IconButton
-                      onClick={() => handleViewClick(artwork)} // Navigate on click
-                      sx={{
-                        backgroundColor: "white",
-                        "&:hover": { backgroundColor: "#f0f0f0" },
-                        width: "33px",
-                        height: "33px",
-                      }}
-                    >
-                      <VisibilityIcon />
-                    </IconButton>
-                  </Box>
-                </Box>
-
-                {/* Card Content */}
-                <CardContent
-                  sx={{
-                    textAlign: "left",
-                    flexGrow: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Box>
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        fontWeight: "bold",
-                        fontFamily: '"Raleway", sans-serif',
-                      }}
-                    >
-                      {artwork.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {artwork.artist}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {artwork.medium}, {artwork.year}
-                    </Typography>
-                    <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
-                      <Rating
-                        value={artwork.rating}
-                        precision={0.1}
-                        readOnly
-                        size="small"
-                      />
-                      <Typography variant="body2" sx={{ ml: 1 }}>
-                        {artwork.rating}
-                      </Typography>
+                      <Box>
+                        <Typography
+                          sx={{
+                            fontFamily: '"Optima", "Raleway", sans-serif',
+                            fontWeight: 600,
+                            fontSize: "18px",
+                            lineHeight: "28px",
+                            color: "#fff",
+                            letterSpacing: "0.02em",
+                          }}
+                        >
+                          {artwork.title}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontFamily: '"Inter", sans-serif',
+                            fontWeight: 400,
+                            fontSize: "13px",
+                            lineHeight: "20px",
+                            color: "#fff",
+                            mt: "6px",
+                            fontStyle: "italic",
+                          }}
+                        >
+                          By {artwork.artist}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontFamily: '"Inter", sans-serif',
+                            fontWeight: 400,
+                            fontSize: "12px",
+                            lineHeight: "16px",
+                            color: "#fff",
+                            mt: "6px",
+                            backgroundColor: "#757575",
+                            padding: "4px 8px",
+                            borderRadius: "4px",
+                            display: "inline-block",
+                          }}
+                        >
+                          {artwork.medium}, {artwork.year}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontFamily: '"Inter", sans-serif',
+                            fontWeight: 400,
+                            fontSize: "12px",
+                            lineHeight: "18px",
+                            color: "#fff",
+                            mt: "10px",
+                            opacity: 0.9,
+                          }}
+                        >
+                          {artwork.description}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontFamily: '"Inter", sans-serif',
+                            fontWeight: 600,
+                            fontSize: "12px",
+                            lineHeight: "16px",
+                            color: "#fff",
+                            mt: "10px",
+                          }}
+                        >
+                          Purchased by {artwork.usersPurchased} users
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontFamily: '"Inter", sans-serif',
+                            fontWeight: 500,
+                            fontSize: "12px",
+                            lineHeight: "16px",
+                            color: "#fff",
+                            mt: "6px",
+                          }}
+                        >
+                          {artwork.itemsSold} items sold
+                        </Typography>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            mt: "12px",
+                          }}
+                        >
+                          <Rating
+                            value={artwork.rating}
+                            precision={0.1}
+                            readOnly
+                            size="small"
+                            sx={{
+                              "& .MuiRating-iconFilled": {
+                                width: 17,
+                                height: 16,
+                                mr: "3px",
+                                color: "#FFD700",
+                              },
+                              "& .MuiRating-iconEmpty": {
+                                width: 17,
+                                height: 16,
+                                mr: "3px",
+                                color: "#FFD700",
+                              },
+                            }}
+                          />
+                          <Typography
+                            sx={{
+                              fontFamily: '"Inter", sans-serif',
+                              fontWeight: 400,
+                              fontSize: "12px",
+                              lineHeight: "16px",
+                              color: "#fff",
+                              ml: "8px",
+                              textDecoration: "underline",
+                            }}
+                          >
+                            {artwork.rating}
+                          </Typography>
+                        </Box>
+                      </Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          mt: "14px",
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontFamily: '"Inter", sans-serif',
+                            fontWeight: 400,
+                            fontSize: "18px",
+                            lineHeight: "28px",
+                            color: "#fff",
+                          }}
+                        >
+                          ${artwork.price}
+                        </Typography>
+                        <Button
+                          variant="contained"
+                          sx={{
+                            width: 110,
+                            height: 36,
+                            background: "#fff",
+                            color: "#333",
+                            "&:hover": { background: "#e0e0e0" },
+                            borderRadius: 0,
+                            padding: "8px",
+                            fontFamily: '"Inter", sans-serif',
+                            fontWeight: 400,
+                            fontSize: "14px",
+                            textTransform: "none",
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent card flip
+                            handleViewClick(artwork);
+                          }}
+                        >
+                          View
+                        </Button>
+                      </Box>
                     </Box>
                   </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      mt: 2,
-                    }}
-                  >
-                    <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                      ${artwork.price}
-                    </Typography>
-                    <Button
-                      variant="contained"
-                      sx={{
-                        backgroundColor: "#000",
-                        borderRadius: 0,
-                        "&:hover": { backgroundColor: "#333" },
-                        fontFamily: '"Raleway", sans-serif',
-                        fontWeight: 700,
-                      }}
-                      onClick={() => handleAddToCart(artwork)} // Add to cart on click
-                    >
-                      Add to Cart
-                    </Button>
-                  </Box>
-                </CardContent>
-              </Card>
+                </Box>
+              </Box>
             </motion.div>
           </Grid>
         ))}
       </Grid>
+
+      {/* Snackbar for Add to Cart Alert */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Item added to cart successfully!
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

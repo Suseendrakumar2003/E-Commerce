@@ -14,7 +14,8 @@ import CartModal from './Components/CartModal';
 
 export default function App() {
   const location = useLocation();
-  const showNavbar = ['/home', '/paintings', '/view'].includes(location.pathname);
+  // Removed '/view' from the showNavbar array
+  const showNavbar = ['/home', '/paintings'].includes(location.pathname);
   const showAuthNavbar = ['/create-account', '/register-address'].includes(location.pathname);
   const [isCartOpen, setCartOpen] = useState(false);
 
