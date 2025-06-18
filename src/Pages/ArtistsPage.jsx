@@ -15,7 +15,6 @@ import {
   Drawer,
   IconButton,
   Chip,
-  IconButton as IconButtonMui,
   Select,
   MenuItem,
   FormControl,
@@ -23,7 +22,6 @@ import {
   PaginationItem,
   Snackbar,
   Alert,
-  Tooltip,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -37,8 +35,8 @@ import { motion } from "framer-motion";
 import LimitedEditionBanner from "../Components/LimitedEditionBanner";
 import Newsletter from "../Components/Newsletter";
 import Footer from "../Components/Footer";
-import { useCart } from "../Components/CartContext";
 import CarouselSlider from "../Components/CarouselSlider";
+import { useCart } from "../Components/CartContext";
 
 // Images
 import r1c1 from "../Assets/r1c1.png";
@@ -54,117 +52,117 @@ import r4c1 from "../Assets/r4c1.png";
 import r4c2 from "../Assets/r4c2.png";
 import r4c3 from "../Assets/r4c3.png";
 
-// Painting data
-const paintings = [
+// Artworks data
+const artworks = [
   {
-    title: "Abstract Harmony",
-    artist: "Maria Santos",
-    price: 540,
-    rating: 4.5,
+    title: "Dreamscape",
+    artist: "Aria Thompson",
+    price: 350,
+    rating: 4.6,
     image: r1c1,
     status: "Sale",
-    brand: "Gallery One",
+    type: "Painting",
     isNew: false,
   },
   {
-    title: "Urban Dreams",
-    artist: "John Doe",
-    price: 820,
-    rating: 4.0,
+    title: "Ethereal Form",
+    artist: "Julian Hayes",
+    price: 500,
+    rating: 4.4,
     image: r1c2,
-    brand: "Modern Arts",
+    type: "Sculpture",
     isNew: false,
   },
   {
-    title: "Coastal Breeze",
-    artist: "Elena Rodriguez",
-    price: 650,
+    title: "Whispering Lines",
+    artist: "Evelyn Park",
+    price: 200,
     rating: 5.0,
     image: r1c3,
     status: "Out of Stock",
-    brand: "Art House",
+    type: "Drawing",
     isNew: true,
   },
   {
-    title: "Morning Vista",
-    artist: "Thomas Miller",
-    price: 320,
-    rating: 4.0,
+    title: "Horizon Glow",
+    artist: "Aria Thompson",
+    price: 280,
+    rating: 4.2,
     image: r2c1,
-    brand: "Classic Studio",
+    type: "Painting",
     isNew: false,
   },
   {
-    title: "City Lights",
-    artist: "Sarah Johnson",
-    price: 480,
-    rating: 4.5,
+    title: "Sculpted Grace",
+    artist: "Julian Hayes",
+    price: 450,
+    rating: 4.8,
     image: r2c2,
-    brand: "Gallery One",
+    type: "Sculpture",
     isNew: true,
   },
   {
-    title: "Forest Path",
-    artist: "Michael Brown",
-    price: 380,
-    rating: 4.0,
+    title: "Soft Contours",
+    artist: "Evelyn Park",
+    price: 180,
+    rating: 4.3,
     image: r2c3,
-    brand: "Modern Arts",
+    type: "Drawing",
     isNew: false,
   },
   {
-    title: "Desert Sunset",
-    artist: "Lisa Wong",
-    price: 560,
-    rating: 5.0,
+    title: "Vivid Harmony",
+    artist: "Aria Thompson",
+    price: 400,
+    rating: 4.7,
     image: r3c1,
-    brand: "Art House",
+    type: "Painting",
     isNew: false,
   },
   {
-    title: "Ocean Waves",
-    artist: "Robert Davis",
-    price: 440,
+    title: "Bronze Echo",
+    artist: "Julian Hayes",
+    price: 520,
     rating: 4.5,
     image: r3c2,
-    brand: "Classic Studio",
+    type: "Sculpture",
     isNew: true,
   },
   {
-    title: "Autumn Colors",
-    artist: "Jennifer Lane",
-    price: 300,
-    rating: 4.0,
+    title: "Fading Shadows",
+    artist: "Evelyn Park",
+    price: 220,
+    rating: 4.1,
     image: r3c3,
     status: "Sale",
-    brand: "Gallery One",
+    type: "Drawing",
     isNew: false,
   },
   {
-    title: "Night Sky",
-    artist: "Emma Wilson",
-    price: 350,
-    rating: 4.5,
+    title: "Twilight Muse",
+    artist: "Aria Thompson",
+    price: 320,
+    rating: 4.9,
     image: r4c1,
-    brand: "Modern Arts",
+    type: "Painting",
     isNew: false,
   },
   {
-    title: "Spring Garden",
-    artist: "James Anderson",
-    price: 420,
-    rating: 4.0,
+    title: "Marble Whisper",
+    artist: "Julian Hayes",
+    price: 480,
+    rating: 4.6,
     image: r4c2,
-    brand: "Art House",
+    type: "Sculpture",
     isNew: true,
   },
   {
-    title: "Winter Landscape",
-    artist: "Amelia Carter",
-    price: 580,
+    title: "Bold Sketch",
+    artist: "Evelyn Park",
+    price: 250,
     rating: 5.0,
     image: r4c3,
-    brand: "Classic Studio",
+    type: "Drawing",
     isNew: false,
   },
 ];
@@ -181,13 +179,6 @@ const cardVariants = {
       ease: "easeOut",
     },
   }),
-  hover: {
-    scale: 1.05,
-    transition: {
-      duration: 0.3,
-      ease: "easeInOut",
-    },
-  },
 };
 
 // Animation variants for the header
@@ -210,8 +201,10 @@ const heartVariants = {
 const FilterSection = ({
   maxPrice,
   handlePriceChange,
-  brands,
-  handleBrandChange,
+  artists,
+  handleArtistChange,
+  types,
+  handleTypeChange,
   ratings,
   handleRatingChange,
   availability,
@@ -220,8 +213,8 @@ const FilterSection = ({
 }) => (
   <Box
     sx={{
-      width: "256px",
-      height: "796px",
+      width: 256,
+      height: 796,
       bgcolor: "#FBF6F4",
       borderRadius: 0,
       p: 3,
@@ -233,23 +226,31 @@ const FilterSection = ({
       top: { md: 10 },
     }}
   >
-    <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
+    <Box sx={{ mb: 2 }}>
       <Typography
-        fontWeight="bold"
-        sx={{ fontSize: "1.2rem", color: "#161412" }}
+        variant="body2"
+        sx={{
+          fontSize: "0.9rem",
+          color: "#333",
+          "& a": { color: "#1976d2", textDecoration: "none" },
+        }}
       >
+        <Link to="/">Home</Link> / Artists
+      </Typography>
+    </Box>
+    <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
+      <Typography fontWeight="bold" sx={{ fontSize: "1.2rem", color: "#333" }}>
         Filters
       </Typography>
       <Typography
         variant="body2"
-        color="#65635F"
+        color="primary"
         onClick={handleClearAll}
         sx={{ cursor: "pointer", fontWeight: 500, lineHeight: "0px" }}
       >
         Clear All
       </Typography>
     </Box>
-
     <Typography
       fontWeight={600}
       fontSize={14}
@@ -265,22 +266,9 @@ const FilterSection = ({
       sx={{
         mt: 1,
         color: "#000",
-        "& .MuiSlider-thumb": {
-          borderRadius: "50%",
-          width: 16,
-          height: 16,
-          lineHeight: "0px",
-        },
-        "& .MuiSlider-track": {
-          borderRadius: 10,
-          height: 4,
-          lineHeight: "0px",
-        },
-        "& .MuiSlider-rail": {
-          borderRadius: 10,
-          height: 4,
-          lineHeight: "0px",
-        },
+        "& .MuiSlider-thumb": { borderRadius: "50%", width: 16, height: 16 },
+        "& .MuiSlider-track": { borderRadius: 10, height: 4 },
+        "& .MuiSlider-rail": { borderRadius: 10, height: 4 },
       }}
     />
     <Box sx={{ display: "flex", justifyContent: "space-between", mt: 1 }}>
@@ -291,7 +279,6 @@ const FilterSection = ({
         ${maxPrice}
       </Typography>
     </Box>
-
     <Box sx={{ mt: 3 }}>
       <Typography
         fontWeight={600}
@@ -299,36 +286,59 @@ const FilterSection = ({
         gutterBottom
         sx={{ color: "#444", lineHeight: "20px" }}
       >
-        Brands
+        Artists
       </Typography>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
-        {["Gallery One", "Modern Arts", "Art House", "Classic Studio"].map(
-          (brand, i) => (
-            <FormControlLabel
-              key={i}
-              control={
-                <Checkbox
-                  size="small"
-                  checked={brands[brand]}
-                  onChange={() => handleBrandChange(brand)}
-                  sx={{ color: "#000", "&.Mui-checked": { color: "#1976d2" } }}
-                />
-              }
-              label={brand}
-              sx={{
-                "& .MuiTypography-root": {
-                  fontSize: "0.9rem",
-                  color: "#555",
-                  lineHeight: "0px",
-                },
-                mb: 0.5,
-              }}
-            />
-          )
-        )}
+        {["Aria Thompson", "Julian Hayes", "Evelyn Park"].map((artist, i) => (
+          <FormControlLabel
+            key={i}
+            control={
+              <Checkbox
+                size="small"
+                checked={artists[artist]}
+                onChange={() => handleArtistChange(artist)}
+                sx={{ color: "#000", "&.Mui-checked": { color: "#1976d2" } }}
+              />
+            }
+            label={artist}
+            sx={{
+              "& .MuiTypography-root": { fontSize: "0.9rem", color: "#555" },
+              mb: 0.5,
+            }}
+          />
+        ))}
       </Box>
     </Box>
-
+    <Box sx={{ mt: 3 }}>
+      <Typography
+        fontWeight={600}
+        fontSize={14}
+        gutterBottom
+        sx={{ color: "#444", lineHeight: "20px" }}
+      >
+        Artwork Type
+      </Typography>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        {["Painting", "Sculpture", "Drawing"].map((type, i) => (
+          <FormControlLabel
+            key={i}
+            control={
+              <Checkbox
+                size="small"
+                checked={types[type]}
+                onChange={() => handleTypeChange(type)}
+                sx={{ color: "#000", "&.Mui-checked": { color: "#1976d2" } }}
+              />
+            }
+            label={type}
+            sx={{
+              "& .MuiTypography-root": { fontSize: "0.9rem", color: "#555" },
+              mb: 0.5,
+            }}
+          />
+        ))}
+      </Box>
+    </Box>
     <Box sx={{ mt: 3 }}>
       <Typography
         fontWeight={600}
@@ -363,7 +373,6 @@ const FilterSection = ({
         ))}
       </Box>
     </Box>
-
     <Box sx={{ mt: 3 }}>
       <Typography
         fontWeight={600}
@@ -397,13 +406,17 @@ const FilterSection = ({
   </Box>
 );
 
-const PaintingPage = () => {
+const ArtistsPage = () => {
   const [maxPrice, setMaxPrice] = useState(1000);
-  const [brands, setBrands] = useState({
-    "Gallery One": false,
-    "Modern Arts": false,
-    "Art House": false,
-    "Classic Studio": false,
+  const [artists, setArtists] = useState({
+    "Aria Thompson": false,
+    "Julian Hayes": false,
+    "Evelyn Park": false,
+  });
+  const [types, setTypes] = useState({
+    Painting: false,
+    Sculpture: false,
+    Drawing: false,
   });
   const [ratings, setRatings] = useState({
     4.5: false,
@@ -420,21 +433,26 @@ const PaintingPage = () => {
   const [sortBy, setSortBy] = useState("Popularity");
   const [viewMode, setViewMode] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
-  const [favoritedPaintings, setFavoritedPaintings] = useState({});
+  const [favoritedArtworks, setFavoritedArtworks] = useState({});
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [favoriteSnackbarOpen, setFavoriteSnackbarOpen] = useState(false);
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
-  const filteredPaintings = paintings.filter((painting) => {
+  const filteredArtworks = artworks.filter((artwork) => {
     const discountedPrice =
-      painting.status === "Sale"
-        ? Math.round(painting.price * 0.75)
-        : painting.price;
+      artwork.status === "Sale"
+        ? Math.round(artwork.price * 0.75)
+        : artwork.price;
     if (discountedPrice > maxPrice) return false;
 
-    const selectedBrands = Object.keys(brands).filter((brand) => brands[brand]);
-    if (selectedBrands.length > 0 && !selectedBrands.includes(painting.brand))
+    const selectedArtists = Object.keys(artists).filter(
+      (artist) => artists[artist]
+    );
+    if (selectedArtists.length > 0 && !selectedArtists.includes(artwork.artist))
+      return false;
+
+    const selectedTypes = Object.keys(types).filter((type) => types[type]);
+    if (selectedTypes.length > 0 && !selectedTypes.includes(artwork.type))
       return false;
 
     const selectedRatings = Object.keys(ratings)
@@ -442,7 +460,7 @@ const PaintingPage = () => {
       .map((rating) => parseFloat(rating));
     if (
       selectedRatings.length > 0 &&
-      !selectedRatings.some((rating) => painting.rating >= rating)
+      !selectedRatings.some((rating) => artwork.rating >= rating)
     )
       return false;
 
@@ -450,9 +468,9 @@ const PaintingPage = () => {
     const onSale = availability["On Sale"];
     const newArrivals = availability["New Arrivals"];
     const availabilityFilters = [];
-    if (inStock) availabilityFilters.push(painting.status !== "Out of Stock");
-    if (onSale) availabilityFilters.push(painting.status === "Sale");
-    if (newArrivals) availabilityFilters.push(painting.isNew);
+    if (inStock) availabilityFilters.push(artwork.status !== "Out of Stock");
+    if (onSale) availabilityFilters.push(artwork.status === "Sale");
+    if (newArrivals) availabilityFilters.push(artwork.isNew);
     if (
       availabilityFilters.length > 0 &&
       !availabilityFilters.every((condition) => condition)
@@ -463,22 +481,28 @@ const PaintingPage = () => {
   });
 
   const itemsPerPage = 12;
-  const totalPages = Math.ceil(filteredPaintings.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredArtworks.length / itemsPerPage);
 
   const handlePriceChange = (event, newValue) => setMaxPrice(newValue);
-  const handleBrandChange = (brand) =>
-    setBrands((prev) => ({ ...prev, [brand]: !prev[brand] }));
+  const handleArtistChange = (artist) =>
+    setArtists((prev) => ({ ...prev, [artist]: !prev[artist] }));
+  const handleTypeChange = (type) =>
+    setTypes((prev) => ({ ...prev, [type]: !prev[type] }));
   const handleRatingChange = (rating) =>
     setRatings((prev) => ({ ...prev, [rating]: !prev[rating] }));
   const handleAvailabilityChange = (option) =>
     setAvailability((prev) => ({ ...prev, [option]: !prev[option] }));
   const handleClearAll = () => {
     setMaxPrice(1000);
-    setBrands({
-      "Gallery One": false,
-      "Modern Arts": false,
-      "Art House": false,
-      "Classic Studio": false,
+    setArtists({
+      "Aria Thompson": false,
+      "Julian Hayes": false,
+      "Evelyn Park": false,
+    });
+    setTypes({
+      Painting: false,
+      Sculpture: false,
+      Drawing: false,
     });
     setRatings({ 4.5: false, 4: false, 3: false, 2: false });
     setAvailability({
@@ -490,42 +514,35 @@ const PaintingPage = () => {
   const handleSortChange = (event) => setSortBy(event.target.value);
   const handleViewModeChange = (mode) => setViewMode(mode);
   const handlePageChange = (event, page) => setCurrentPage(page);
-  const handleViewClick = (painting) =>
-    navigate("/view", { state: { artwork: painting } });
-  const handleFavoriteClick = (paintingTitle) => {
-    setFavoritedPaintings((prev) => ({
+  const handleViewClick = (artwork) =>
+    navigate("/view", { state: { artwork } });
+  const handleFavoriteClick = (artworkTitle) => {
+    setFavoritedArtworks((prev) => ({
       ...prev,
-      [paintingTitle]: !prev[paintingTitle],
+      [artworkTitle]: !prev[artworkTitle],
     }));
-    if (!favoritedPaintings[paintingTitle]) {
-      setFavoriteSnackbarOpen(true);
-    }
   };
-
-  const handleAddToCart = (painting) => {
+  const handleAddToCart = (artwork) => {
     const discountedPrice =
-      painting.status === "Sale"
-        ? Math.round(painting.price * 0.75)
-        : painting.price;
+      artwork.status === "Sale"
+        ? Math.round(artwork.price * 0.75)
+        : artwork.price;
     const cartItem = {
-      title: painting.title,
-      artist: painting.artist,
+      title: artwork.title,
+      artist: artwork.artist,
       price: discountedPrice,
-      image: painting.image,
+      image: artwork.image,
+      quantity: 1,
     };
     addToCart(cartItem);
     setSnackbarOpen(true);
   };
-
   const handleSnackbarClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+    if (reason === "clickaway") return;
     setSnackbarOpen(false);
-    setFavoriteSnackbarOpen(false);
   };
 
-  const sortedPaintings = [...filteredPaintings].sort((a, b) => {
+  const sortedArtworks = [...filteredArtworks].sort((a, b) => {
     if (sortBy === "Price: Low to High") {
       const priceA = a.status === "Sale" ? Math.round(a.price * 0.75) : a.price;
       const priceB = b.status === "Sale" ? Math.round(b.price * 0.75) : b.price;
@@ -540,7 +557,7 @@ const PaintingPage = () => {
   });
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedPaintings = sortedPaintings.slice(
+  const paginatedArtworks = sortedArtworks.slice(
     startIndex,
     startIndex + itemsPerPage
   );
@@ -548,40 +565,15 @@ const PaintingPage = () => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", bgcolor: "#f5f5f5" }}>
       <CarouselSlider />
-      <Box sx={{ mb: 4 }}>
-        <Typography
-          variant="body2"
-          sx={{
-            fontSize: "0.9rem",
-            color: "black",
-            position: "absolute",
-            top: "445px",
-            left: "42px",
-            "& a": {
-              color: "#65635F",
-              textDecoration: "none",
-            },
-          }}
-        >
-          <Link to="/">Home</Link> <Link to="/"> / Categories </Link> /
-          Paintings
-        </Typography>
-      </Box>
-
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          p: 4,
-          gap: 4,
-        }}
-      >
+      <Box sx={{ display: "flex", flexDirection: "row", p: 4, gap: 4 }}>
         <Box sx={{ display: { xs: "none", md: "block" } }}>
           <FilterSection
             maxPrice={maxPrice}
             handlePriceChange={handlePriceChange}
-            brands={brands}
-            handleBrandChange={handleBrandChange}
+            artists={artists}
+            handleArtistChange={handleArtistChange}
+            types={types}
+            handleTypeChange={handleTypeChange}
             ratings={ratings}
             handleRatingChange={handleRatingChange}
             availability={availability}
@@ -589,7 +581,6 @@ const PaintingPage = () => {
             handleClearAll={handleClearAll}
           />
         </Box>
-
         <IconButton
           onClick={() => setOpenDrawer(true)}
           sx={{
@@ -614,8 +605,10 @@ const PaintingPage = () => {
           <FilterSection
             maxPrice={maxPrice}
             handlePriceChange={handlePriceChange}
-            brands={brands}
-            handleBrandChange={handleBrandChange}
+            artists={artists}
+            handleArtistChange={handleArtistChange}
+            types={types}
+            handleTypeChange={handleTypeChange}
             ratings={ratings}
             handleRatingChange={handleRatingChange}
             availability={availability}
@@ -623,7 +616,6 @@ const PaintingPage = () => {
             handleClearAll={handleClearAll}
           />
         </Drawer>
-
         <Box sx={{ flex: 1 }}>
           <motion.div
             variants={headerVariants}
@@ -635,43 +627,38 @@ const PaintingPage = () => {
                 display: "flex",
                 alignItems: "center",
                 mb: 3,
-                maxWidth: "912px",
+                maxWidth: 912,
               }}
             >
               <Box sx={{ display: "flex", alignItems: "baseline" }}>
                 <Typography
                   sx={{
-                    fontSize: "24px",
+                    fontSize: 24,
                     fontWeight: "bold",
                     display: "inline",
                     color: "#333",
                   }}
                 >
-                  Paintings
+                  Artists
                 </Typography>
                 <Typography
                   sx={{
-                    fontSize: "14px",
+                    fontSize: 14,
                     color: "text.secondary",
                     display: "inline",
                     ml: 1,
                   }}
                 >
-                  ({filteredPaintings.length} products)
+                  ({filteredArtworks.length} products)
                 </Typography>
               </Box>
               <Box sx={{ flex: 1 }} />
               <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 1,
-                  mr: "-100px",
-                }}
+                sx={{ display: "flex", alignItems: "center", gap: 1, mr: -100 }}
               >
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <Typography
-                    sx={{ fontSize: "14px", color: "text.secondary", mr: 1 }}
+                    sx={{ fontSize: 14, color: "text.secondary", mr: 1 }}
                   >
                     Sort by:
                   </Typography>
@@ -680,8 +667,8 @@ const PaintingPage = () => {
                       value={sortBy}
                       onChange={handleSortChange}
                       sx={{
-                        height: "32px",
-                        fontSize: "16px",
+                        height: 32,
+                        fontSize: 16,
                         bgcolor: "#fff",
                         borderRadius: 0,
                         boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.05)",
@@ -698,7 +685,7 @@ const PaintingPage = () => {
                     </Select>
                   </FormControl>
                 </Box>
-                <IconButtonMui
+                <IconButton
                   onClick={() => handleViewModeChange("grid")}
                   sx={{
                     bgcolor: viewMode === "grid" ? "#000" : "#fff",
@@ -708,8 +695,8 @@ const PaintingPage = () => {
                   }}
                 >
                   <GridViewIcon fontSize="small" />
-                </IconButtonMui>
-                <IconButtonMui
+                </IconButton>
+                <IconButton
                   onClick={() => handleViewModeChange("list")}
                   sx={{
                     bgcolor: viewMode === "list" ? "#000" : "#fff",
@@ -719,24 +706,22 @@ const PaintingPage = () => {
                   }}
                 >
                   <ListIcon fontSize="small" />
-                </IconButtonMui>
+                </IconButton>
               </Box>
             </Box>
           </motion.div>
-
-          {paginatedPaintings.length === 0 ? (
+          {paginatedArtworks.length === 0 ? (
             <Typography sx={{ textAlign: "center", color: "#666", mt: 4 }}>
-              No paintings match your filters.
+              No artworks match your filters.
             </Typography>
           ) : viewMode === "grid" ? (
             <Grid container spacing={3}>
-              {paginatedPaintings.map((painting, index) => (
+              {paginatedArtworks.map((artwork, index) => (
                 <Grid item key={index} xs={12} sm={6} md={4}>
                   <motion.div
                     variants={cardVariants}
                     initial="hidden"
                     animate="visible"
-                    whileHover="hover"
                     custom={index}
                   >
                     <Card
@@ -762,12 +747,12 @@ const PaintingPage = () => {
                             objectFit: "cover",
                             borderRadius: 0,
                           }}
-                          image={painting.image}
-                          alt={painting.title}
+                          image={artwork.image}
+                          alt={artwork.title}
                         />
-                        {painting.status && (
+                        {artwork.status && (
                           <Chip
-                            label={painting.status}
+                            label={artwork.status}
                             sx={{
                               position: "absolute",
                               top: "50%",
@@ -775,7 +760,7 @@ const PaintingPage = () => {
                               transform: "translate(-50%, -50%)",
                               bgcolor: "transparent",
                               color: "white",
-                              fontSize: "16px",
+                              fontSize: 16,
                               fontWeight: 500,
                               borderRadius: 0,
                             }}
@@ -794,60 +779,53 @@ const PaintingPage = () => {
                           {[
                             {
                               icon: "Favorite",
-                              label: "Favorites",
-                              action: () => handleFavoriteClick(painting.title),
+                              action: () => handleFavoriteClick(artwork.title),
                             },
                             {
-                              icon: "VisibilityIcon",
-                              label: "View in room",
-                              action: () => handleViewClick(painting),
+                              icon: "Visibility",
+                              action: () => handleViewClick(artwork),
                             },
-                            {
-                              icon: "BarChartIcon",
-                              label: "Insights",
-                              action: undefined,
-                            },
-                          ].map(({ icon, label, action }, i) => (
-                            <Tooltip title={label} key={i}>
-                              <IconButtonMui
-                                size="small"
-                                onClick={action}
-                                sx={{
-                                  bgcolor: "white",
-                                  boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
-                                  borderRadius: "50%",
-                                  width: 32,
-                                  height: 32,
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  transform: "translateY(6px)",
-                                }}
-                              >
-                                {icon === "Favorite" && (
-                                  <motion.div
-                                    variants={heartVariants}
-                                    animate={
-                                      favoritedPaintings[painting.title]
-                                        ? "favorited"
-                                        : "unfavorited"
-                                    }
-                                  >
-                                    {favoritedPaintings[painting.title] ? (
-                                      <FavoriteIcon fontSize="small" />
-                                    ) : (
-                                      <FavoriteBorderIcon fontSize="small" />
-                                    )}
-                                  </motion.div>
-                                )}
-                                {icon === "VisibilityIcon" && (
-                                  <VisibilityIcon fontSize="small" />
-                                )}
-                                {icon === "BarChartIcon" && (
-                                  <BarChartIcon fontSize="small" />
-                                )}
-                              </IconButtonMui>
-                            </Tooltip>
+                            { icon: "BarChart", action: () => {} },
+                          ].map(({ icon, action }, i) => (
+                            <IconButton
+                              key={i}
+                              size="small"
+                              onClick={action}
+                              sx={{
+                                bgcolor: "white",
+                                boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
+                                borderRadius: "50%",
+                                width: 32,
+                                height: 32,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                transform: "translateY(6px)",
+                              }}
+                            >
+                              {icon === "Favorite" && (
+                                <motion.div
+                                  variants={heartVariants}
+                                  animate={
+                                    favoritedArtworks[artwork.title]
+                                      ? "favorited"
+                                      : "unfavorited"
+                                  }
+                                >
+                                  {favoritedArtworks[artwork.title] ? (
+                                    <FavoriteIcon fontSize="small" />
+                                  ) : (
+                                    <FavoriteBorderIcon fontSize="small" />
+                                  )}
+                                </motion.div>
+                              )}
+                              {icon === "Visibility" && (
+                                <VisibilityIcon fontSize="small" />
+                              )}
+                              {icon === "BarChart" && (
+                                <BarChartIcon fontSize="small" />
+                              )}
+                            </IconButton>
                           ))}
                         </Box>
                       </Box>
@@ -861,14 +839,14 @@ const PaintingPage = () => {
                             fontWeight: 600,
                           }}
                         >
-                          {painting.title}
+                          {artwork.title}
                         </Typography>
                         <Typography
                           variant="body2"
                           color="text.secondary"
                           sx={{ mb: 0.5 }}
                         >
-                          {painting.artist}
+                          {artwork.artist}
                         </Typography>
                         <Box
                           sx={{
@@ -878,7 +856,7 @@ const PaintingPage = () => {
                           }}
                         >
                           <Rating
-                            value={painting.rating}
+                            value={artwork.rating}
                             readOnly
                             precision={0.5}
                             size="small"
@@ -887,7 +865,7 @@ const PaintingPage = () => {
                             variant="body2"
                             sx={{ ml: 0.5, color: "#555" }}
                           >
-                            {painting.rating}
+                            {artwork.rating}
                           </Typography>
                         </Box>
                       </CardContent>
@@ -902,19 +880,19 @@ const PaintingPage = () => {
                         <Box
                           sx={{ display: "flex", alignItems: "center", gap: 1 }}
                         >
-                          {painting.status === "Sale" && (
+                          {artwork.status === "Sale" && (
                             <Box
                               sx={{
                                 width: 43,
                                 height: 20,
-                                bgcolor: "#FFFFFF33",
+                                bgcolor: "#000",
                                 color: "#fff",
                                 borderRadius: "4px",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 position: "absolute",
-                                top: 16,
+                                top: 340,
                               }}
                             >
                               <Typography
@@ -930,11 +908,11 @@ const PaintingPage = () => {
                             sx={{ fontWeight: "bold", color: "#333" }}
                           >
                             $
-                            {painting.status === "Sale"
-                              ? Math.round(painting.price * 0.75)
-                              : painting.price}
+                            {artwork.status === "Sale"
+                              ? Math.round(artwork.price * 0.75)
+                              : artwork.price}
                           </Typography>
-                          {painting.status === "Sale" && (
+                          {artwork.status === "Sale" && (
                             <Typography
                               variant="body1"
                               sx={{
@@ -942,7 +920,7 @@ const PaintingPage = () => {
                                 textDecoration: "line-through",
                               }}
                             >
-                              ${painting.price}
+                              ${artwork.price}
                             </Typography>
                           )}
                         </Box>
@@ -956,8 +934,8 @@ const PaintingPage = () => {
                             "&:disabled": { bgcolor: "#ccc", color: "#666" },
                           }}
                           size="small"
-                          disabled={painting.status === "Out of Stock"}
-                          onClick={() => handleAddToCart(painting)}
+                          disabled={artwork.status === "Out of Stock"}
+                          onClick={() => handleAddToCart(artwork)}
                         >
                           Add to Cart
                         </Button>
@@ -969,18 +947,18 @@ const PaintingPage = () => {
             </Grid>
           ) : (
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              {paginatedPaintings.map((painting, index) => (
+              {paginatedArtworks.map((artwork, index) => (
                 <motion.div
+                  key={index}
                   variants={cardVariants}
                   initial="hidden"
                   animate="visible"
-                  whileHover="hover"
                   custom={index}
                 >
                   <Box
                     sx={{
                       display: "flex",
-                      width: "91.5%",
+                      width: "100%",
                       height: 200,
                       border: "1px solid #e0e0e0",
                       borderRadius: 0,
@@ -1005,12 +983,12 @@ const PaintingPage = () => {
                           objectFit: "cover",
                           borderRadius: 0,
                         }}
-                        image={painting.image}
-                        alt={painting.title}
+                        image={artwork.image}
+                        alt={artwork.title}
                       />
-                      {painting.status && (
+                      {artwork.status && (
                         <Chip
-                          label={painting.status}
+                          label={artwork.status}
                           sx={{
                             position: "absolute",
                             top: "50%",
@@ -1019,7 +997,7 @@ const PaintingPage = () => {
                             bgcolor: "transparent",
                             color: "white",
                             fontWeight: 500,
-                            fontSize: "16px",
+                            fontSize: 16,
                             borderRadius: 0,
                           }}
                         />
@@ -1043,20 +1021,20 @@ const PaintingPage = () => {
                           fontWeight: 600,
                         }}
                       >
-                        {painting.title}
+                        {artwork.title}
                       </Typography>
                       <Typography
                         variant="body2"
                         color="text.secondary"
                         sx={{ mb: 0.5 }}
                       >
-                        {painting.artist}
+                        {artwork.artist}
                       </Typography>
                       <Box
                         sx={{ display: "flex", alignItems: "center", mb: 0.5 }}
                       >
                         <Rating
-                          value={painting.rating}
+                          value={artwork.rating}
                           readOnly
                           precision={0.5}
                           size="small"
@@ -1065,7 +1043,7 @@ const PaintingPage = () => {
                           variant="body2"
                           sx={{ ml: 0.5, color: "#555" }}
                         >
-                          {painting.rating}
+                          {artwork.rating}
                         </Typography>
                       </Box>
                       <Box
@@ -1079,7 +1057,7 @@ const PaintingPage = () => {
                         <Box
                           sx={{ display: "flex", alignItems: "center", gap: 1 }}
                         >
-                          {painting.status === "Sale" && (
+                          {artwork.status === "Sale" && (
                             <Box
                               sx={{
                                 width: 43,
@@ -1107,11 +1085,11 @@ const PaintingPage = () => {
                             sx={{ fontWeight: "bold", color: "#333" }}
                           >
                             $
-                            {painting.status === "Sale"
-                              ? Math.round(painting.price * 0.75)
-                              : painting.price}
+                            {artwork.status === "Sale"
+                              ? Math.round(artwork.price * 0.75)
+                              : artwork.price}
                           </Typography>
-                          {painting.status === "Sale" && (
+                          {artwork.status === "Sale" && (
                             <Typography
                               variant="body1"
                               sx={{
@@ -1119,7 +1097,7 @@ const PaintingPage = () => {
                                 textDecoration: "line-through",
                               }}
                             >
-                              ${painting.price}
+                              ${artwork.price}
                             </Typography>
                           )}
                         </Box>
@@ -1135,62 +1113,55 @@ const PaintingPage = () => {
                             {[
                               {
                                 icon: "Favorite",
-                                label: "Favorites",
                                 action: () =>
-                                  handleFavoriteClick(painting.title),
+                                  handleFavoriteClick(artwork.title),
                               },
                               {
-                                icon: "VisibilityIcon",
-                                label: "View in room",
-                                action: () => handleViewClick(painting),
+                                icon: "Visibility",
+                                action: () => handleViewClick(artwork),
                               },
-                              {
-                                icon: "BarChartIcon",
-                                label: "Insights",
-                                action: undefined,
-                              },
-                            ].map(({ icon, label, action }, i) => (
-                              <Tooltip title={label} key={i}>
-                                <IconButtonMui
-                                  size="small"
-                                  onClick={action}
-                                  sx={{
-                                    position: "relative",
-                                    top: "-80px",
-                                    bgcolor: "white",
-                                    boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
-                                    borderRadius: "50%",
-                                    width: 32,
-                                    height: 32,
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                  }}
-                                >
-                                  {icon === "Favorite" && (
-                                    <motion.div
-                                      variants={heartVariants}
-                                      animate={
-                                        favoritedPaintings[painting.title]
-                                          ? "favorited"
-                                          : "unfavorited"
-                                      }
-                                    >
-                                      {favoritedPaintings[painting.title] ? (
-                                        <FavoriteIcon fontSize="small" />
-                                      ) : (
-                                        <FavoriteBorderIcon fontSize="small" />
-                                      )}
-                                    </motion.div>
-                                  )}
-                                  {icon === "VisibilityIcon" && (
-                                    <VisibilityIcon fontSize="small" />
-                                  )}
-                                  {icon === "BarChartIcon" && (
-                                    <BarChartIcon fontSize="small" />
-                                  )}
-                                </IconButtonMui>
-                              </Tooltip>
+                              { icon: "BarChart", action: () => {} },
+                            ].map(({ icon, action }, i) => (
+                              <IconButton
+                                key={i}
+                                size="small"
+                                onClick={action}
+                                sx={{
+                                  position: "relative",
+                                  top: "-80px",
+                                  bgcolor: "white",
+                                  boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
+                                  borderRadius: "50%",
+                                  width: 32,
+                                  height: 32,
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                {icon === "Favorite" && (
+                                  <motion.div
+                                    variants={heartVariants}
+                                    animate={
+                                      favoritedArtworks[artwork.title]
+                                        ? "favorited"
+                                        : "unfavorited"
+                                    }
+                                  >
+                                    {favoritedArtworks[artwork.title] ? (
+                                      <FavoriteIcon fontSize="small" />
+                                    ) : (
+                                      <FavoriteBorderIcon fontSize="small" />
+                                    )}
+                                  </motion.div>
+                                )}
+                                {icon === "Visibility" && (
+                                  <VisibilityIcon fontSize="small" />
+                                )}
+                                {icon === "BarChart" && (
+                                  <BarChartIcon fontSize="small" />
+                                )}
+                              </IconButton>
                             ))}
                           </Box>
                           <Button
@@ -1198,8 +1169,8 @@ const PaintingPage = () => {
                             sx={{
                               position: "relative",
                               top: "-10px",
-                              width: "106px",
-                              height: "36px",
+                              width: 106,
+                              height: 36,
                               bgcolor: "#000",
                               color: "#fff",
                               borderRadius: 0,
@@ -1208,10 +1179,10 @@ const PaintingPage = () => {
                               "&:disabled": { bgcolor: "#ccc", color: "#666" },
                             }}
                             size="small"
-                            disabled={painting.status === "Out of Stock"}
-                            onClick={() => handleAddToCart(painting)}
+                            disabled={artwork.status === "Out of Stock"}
+                            onClick={() => handleAddToCart(artwork)}
                           >
-                            Add to cart
+                            Add to Cart
                           </Button>
                         </Box>
                       </Box>
@@ -1221,8 +1192,7 @@ const PaintingPage = () => {
               ))}
             </Box>
           )}
-
-          {sortedPaintings.length > 0 && (
+          {sortedArtworks.length > 0 && (
             <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
               <Pagination
                 count={totalPages}
@@ -1270,22 +1240,8 @@ const PaintingPage = () => {
           Item added to cart successfully!
         </Alert>
       </Snackbar>
-      <Snackbar
-        open={favoriteSnackbarOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert
-          onClose={handleSnackbarClose}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Added to favorites!
-        </Alert>
-      </Snackbar>
     </Box>
   );
 };
 
-export default PaintingPage;
+export default ArtistsPage;

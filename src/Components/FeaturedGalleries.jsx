@@ -13,7 +13,7 @@ const FeaturedGalleries = () => {
         variant="h5"
         align="center"
         sx={{
-           fontFamily: '"Optima", serif',
+          fontFamily: '"Optima", serif',
           fontWeight: 400,
           fontSize: "30px",
           color: "#111",
@@ -27,6 +27,7 @@ const FeaturedGalleries = () => {
       <Typography
         align="center"
         sx={{
+          fontFamily: '"Optima", serif',
           color: "#666",
           fontSize: "16px",
           fontWeight: 400,
@@ -39,7 +40,7 @@ const FeaturedGalleries = () => {
         art institutions worldwide
       </Typography>
 
-      <Grid container spacing={26} justifyContent="center">
+      <Grid container spacing={25} justifyContent="center">
         {galleryImages.map((src, i) => (
           <Grid item xs={6} sm={3} key={i} sx={{ textAlign: "center" }}>
             <Box
@@ -49,18 +50,32 @@ const FeaturedGalleries = () => {
               sx={{
                 width: "120px",
                 height: "60px",
-                maxHeight: "120px", 
+                maxHeight: "120px",
                 objectFit: "cover",
-                borderRadius: 0, 
+                borderRadius: 0,
               }}
             />
             <Typography
               sx={{
-                fontSize: "0.85rem", // Smaller font to match the image
+                fontFamily: '"Optima", serif',
+                fontSize: "0.85rem",
                 mt: 1,
-                color: "#111", // Darker color
+                color: "#111",
                 cursor: "pointer",
-                "&:hover": { textDecoration: "underline" }, // Hover effect to match typical link behavior
+                position: "relative", // Needed for pseudo-element positioning
+                "&:hover::after": {
+                  width: "65%", // Expand underline on hover
+                },
+                "&::after": {
+                  content: '""',
+                  position: "absolute",
+                  bottom: "-2px", // Position the underline below the text
+                  left: "20px",
+                  width: "0%", // Start with no width
+                  height: "1px", // Thin underline
+                  backgroundColor: "#000", // Black underline as requested
+                  transition: "width 0.3s ease-in-out", // Smooth animation
+                },
               }}
             >
               Explore Now

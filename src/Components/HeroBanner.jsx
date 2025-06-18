@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react';
-import { Box, Typography, Button, IconButton } from '@mui/material';
-import { ArrowBackIosNew, ArrowForwardIos } from '@mui/icons-material';
-import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import banner from '../Assets/HeroBanner.png';
+import { useState, useEffect } from "react";
+import { Box, Typography, Button, IconButton } from "@mui/material";
+import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import banner from "../Assets/HeroBanner.png";
 import "@fontsource/raleway/400.css";
 import "@fontsource/raleway/700.css";
-
 
 // Array of banner images (extend this with more images as needed)
 const banners = [
@@ -46,7 +45,7 @@ const HeroBanner = () => {
 
   // Handle Shop Now button click
   const handleShopNow = () => {
-    navigate('/shop');
+    navigate("/shop");
   };
 
   return (
@@ -128,7 +127,7 @@ const HeroBanner = () => {
           variant="body1"
           sx={{
             mb: 3,
-            maxWidth: "420px",
+            maxWidth: "520px",
             mx: "auto",
             color: "#333",
             fontSize: "1rem",
@@ -168,6 +167,7 @@ const HeroBanner = () => {
                 top: 500,
                 width: 10,
                 height: 10,
+                mt: 20,
                 backgroundColor: currentSlide === index ? "#000" : "#ccc",
                 borderRadius: "50%",
                 cursor: "pointer",

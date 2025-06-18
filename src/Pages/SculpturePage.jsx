@@ -15,7 +15,6 @@ import {
   Drawer,
   IconButton,
   Chip,
-  IconButton as IconButtonMui,
   Select,
   MenuItem,
   FormControl,
@@ -23,7 +22,6 @@ import {
   PaginationItem,
   Snackbar,
   Alert,
-  Tooltip,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -37,134 +35,134 @@ import { motion } from "framer-motion";
 import LimitedEditionBanner from "../Components/LimitedEditionBanner";
 import Newsletter from "../Components/Newsletter";
 import Footer from "../Components/Footer";
-import { useCart } from "../Components/CartContext";
 import CarouselSlider from "../Components/CarouselSlider";
+import { useCart } from "../Components/CartContext";
 
 // Images
-import r1c1 from "../Assets/r1c1.png";
-import r1c2 from "../Assets/r1c2.png";
-import r1c3 from "../Assets/r1c3.png";
-import r2c1 from "../Assets/r2c1.png";
-import r2c2 from "../Assets/r2c2.png";
-import r2c3 from "../Assets/r2c3.png";
-import r3c1 from "../Assets/r3c1.png";
-import r3c2 from "../Assets/r3c2.png";
-import r3c3 from "../Assets/r3c3.png";
-import r4c1 from "../Assets/r4c1.png";
-import r4c2 from "../Assets/r4c2.png";
-import r4c3 from "../Assets/r4c3.png";
+import r1c1 from "../Assets/angel.jpg";
+import r1c2 from "../Assets/christus.jpg";
+import r1c3 from "../Assets/Egyptian.jpg";
+import r2c1 from "../Assets/golden.jpg";
+import r2c2 from "../Assets/indian.jpg";
+import r2c3 from "../Assets/italian.jpg";
+import r3c1 from "../Assets/knifeangel.jpg";
+import r3c2 from "../Assets/liberty.jpg";
+import r3c3 from "../Assets/roman.jpg";
+import r4c1 from "../Assets/wakefield.jpg";
+import r4c2 from "../Assets/western.jpg";
+import r4c3 from "../Assets/face.jpg";
 
-// Painting data
-const paintings = [
+// Sculptures data
+const sculptures = [
   {
-    title: "Abstract Harmony",
-    artist: "Maria Santos",
-    price: 540,
-    rating: 4.5,
+    title: "Angel Sculpture",
+    artist: "Clara Evans",
+    price: 450,
+    rating: 4.7,
     image: r1c1,
     status: "Sale",
-    brand: "Gallery One",
+    brand: "SculptArt",
     isNew: false,
   },
   {
-    title: "Urban Dreams",
-    artist: "John Doe",
-    price: 820,
-    rating: 4.0,
+    title: "Christus",
+    artist: "David Kim",
+    price: 600,
+    rating: 4.3,
     image: r1c2,
-    brand: "Modern Arts",
+    brand: "StoneWorks",
     isNew: false,
   },
   {
-    title: "Coastal Breeze",
-    artist: "Elena Rodriguez",
-    price: 650,
+    title: "Egyptian",
+    artist: "Sophie Turner",
+    price: 520,
     rating: 5.0,
     image: r1c3,
     status: "Out of Stock",
-    brand: "Art House",
+    brand: "ModernSculpt",
     isNew: true,
   },
   {
-    title: "Morning Vista",
-    artist: "Thomas Miller",
-    price: 320,
-    rating: 4.0,
+    title: "Golden",
+    artist: "Michael Reed",
+    price: 380,
+    rating: 4.1,
     image: r2c1,
-    brand: "Classic Studio",
+    brand: "SculptArt",
     isNew: false,
   },
   {
-    title: "City Lights",
-    artist: "Sarah Johnson",
-    price: 480,
-    rating: 4.5,
+    title: "Indian",
+    artist: "Laura Chen",
+    price: 470,
+    rating: 4.6,
     image: r2c2,
-    brand: "Gallery One",
+    brand: "StoneWorks",
     isNew: true,
   },
   {
-    title: "Forest Path",
-    artist: "Michael Brown",
-    price: 380,
+    title: "Italian",
+    artist: "Ethan Parker",
+    price: 410,
     rating: 4.0,
     image: r2c3,
-    brand: "Modern Arts",
+    brand: "ModernSculpt",
     isNew: false,
   },
   {
-    title: "Desert Sunset",
-    artist: "Lisa Wong",
-    price: 560,
-    rating: 5.0,
+    title: "knifeangel",
+    artist: "Isabelle Moore",
+    price: 490,
+    rating: 4.8,
     image: r3c1,
-    brand: "Art House",
+    brand: "SculptArt",
     isNew: false,
   },
   {
-    title: "Ocean Waves",
-    artist: "Robert Davis",
-    price: 440,
+    title: "Liberty",
+    artist: "Nathan Scott",
+    price: 550,
     rating: 4.5,
     image: r3c2,
-    brand: "Classic Studio",
+    brand: "StoneWorks",
     isNew: true,
   },
   {
-    title: "Autumn Colors",
-    artist: "Jennifer Lane",
-    price: 300,
-    rating: 4.0,
+    title: "Roman",
+    artist: "Olivia Hayes",
+    price: 430,
+    rating: 4.2,
     image: r3c3,
     status: "Sale",
-    brand: "Gallery One",
+    brand: "ModernSculpt",
     isNew: false,
   },
   {
-    title: "Night Sky",
-    artist: "Emma Wilson",
-    price: 350,
-    rating: 4.5,
+    title: "Wakefield",
+    artist: "Daniel Lee",
+    price: 510,
+    rating: 4.9,
     image: r4c1,
-    brand: "Modern Arts",
+    brand: "SculptArt",
     isNew: false,
   },
   {
-    title: "Spring Garden",
-    artist: "James Anderson",
-    price: 420,
-    rating: 4.0,
+    title: "Western",
+    artist: "Emma Brooks",
+    price: 460,
+    rating: 4.4,
     image: r4c2,
-    brand: "Art House",
+    brand: "StoneWorks",
     isNew: true,
   },
   {
-    title: "Winter Landscape",
-    artist: "Amelia Carter",
+    title: "Face Sculpture",
+    artist: "Lucas Wright",
     price: 580,
     rating: 5.0,
     image: r4c3,
-    brand: "Classic Studio",
+    brand: "ModernSculpt",
     isNew: false,
   },
 ];
@@ -181,13 +179,6 @@ const cardVariants = {
       ease: "easeOut",
     },
   }),
-  hover: {
-    scale: 1.05,
-    transition: {
-      duration: 0.3,
-      ease: "easeInOut",
-    },
-  },
 };
 
 // Animation variants for the header
@@ -220,8 +211,8 @@ const FilterSection = ({
 }) => (
   <Box
     sx={{
-      width: "256px",
-      height: "796px",
+      width: 256,
+      height: 796,
       bgcolor: "#FBF6F4",
       borderRadius: 0,
       p: 3,
@@ -233,27 +224,41 @@ const FilterSection = ({
       top: { md: 10 },
     }}
   >
-    <Box sx={{ display: "flex", justifyContent: "space-between", mb: 3 }}>
+    <Box sx={{ mb: 2 }}>
       <Typography
-        fontWeight="bold"
-        sx={{ fontSize: "1.2rem", color: "#161412" }}
+        variant="body2"
+        sx={{
+          fontSize: "0.9rem",
+          color: "#333",
+          "& a": { color: "#1976d2", textDecoration: "none" },
+        }}
+      >
+        <Link to="/">Home</Link> / Sculptures
+      </Typography>
+    </Box>
+    <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
+      <Typography
+        sx={{ fontSize: "1.2rem", fontWeight: "bold", color: "#333" }}
       >
         Filters
       </Typography>
       <Typography
         variant="body2"
-        color="#65635F"
+        color="primary"
         onClick={handleClearAll}
         sx={{ cursor: "pointer", fontWeight: 500, lineHeight: "0px" }}
       >
         Clear All
       </Typography>
     </Box>
-
     <Typography
-      fontWeight={600}
-      fontSize={14}
-      sx={{ mb: 1, color: "#444", lineHeight: "4px" }}
+      sx={{
+        mb: 1,
+        fontSize: 14,
+        fontWeight: 600,
+        color: "#444",
+        lineHeight: "4px",
+      }}
     >
       Price Range
     </Typography>
@@ -265,22 +270,9 @@ const FilterSection = ({
       sx={{
         mt: 1,
         color: "#000",
-        "& .MuiSlider-thumb": {
-          borderRadius: "50%",
-          width: 16,
-          height: 16,
-          lineHeight: "0px",
-        },
-        "& .MuiSlider-track": {
-          borderRadius: 10,
-          height: 4,
-          lineHeight: "0px",
-        },
-        "& .MuiSlider-rail": {
-          borderRadius: 10,
-          height: 4,
-          lineHeight: "0px",
-        },
+        "& .MuiSlider-thumb": { borderRadius: "50%", width: 16, height: 16 },
+        "& .MuiSlider-track": { borderRadius: 10, height: 4 },
+        "& .MuiSlider-rail": { borderRadius: 10, height: 4 },
       }}
     />
     <Box sx={{ display: "flex", justifyContent: "space-between", mt: 1 }}>
@@ -291,50 +283,48 @@ const FilterSection = ({
         ${maxPrice}
       </Typography>
     </Box>
-
     <Box sx={{ mt: 3 }}>
       <Typography
-        fontWeight={600}
-        fontSize={14}
+        sx={{
+          fontSize: 14,
+          fontWeight: 600,
+          color: "#444",
+          lineHeight: "20px",
+        }}
         gutterBottom
-        sx={{ color: "#444", lineHeight: "20px" }}
       >
         Brands
       </Typography>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
-        {["Gallery One", "Modern Arts", "Art House", "Classic Studio"].map(
-          (brand, i) => (
-            <FormControlLabel
-              key={i}
-              control={
-                <Checkbox
-                  size="small"
-                  checked={brands[brand]}
-                  onChange={() => handleBrandChange(brand)}
-                  sx={{ color: "#000", "&.Mui-checked": { color: "#1976d2" } }}
-                />
-              }
-              label={brand}
-              sx={{
-                "& .MuiTypography-root": {
-                  fontSize: "0.9rem",
-                  color: "#555",
-                  lineHeight: "0px",
-                },
-                mb: 0.5,
-              }}
-            />
-          )
-        )}
+        {["SculptArt", "StoneWorks", "ModernSculpt"].map((brand, i) => (
+          <FormControlLabel
+            key={i}
+            control={
+              <Checkbox
+                size="small"
+                checked={brands[brand]}
+                onChange={() => handleBrandChange(brand)}
+                sx={{ color: "#000", "&.Mui-checked": { color: "#1976d2" } }}
+              />
+            }
+            label={brand}
+            sx={{
+              "& .MuiTypography-root": { fontSize: "0.9rem", color: "#555" },
+              mb: 0.5,
+            }}
+          />
+        ))}
       </Box>
     </Box>
-
     <Box sx={{ mt: 3 }}>
       <Typography
-        fontWeight={600}
-        fontSize={14}
+        sx={{
+          fontSize: 14,
+          fontWeight: 600,
+          color: "#444",
+          lineHeight: "20px",
+        }}
         gutterBottom
-        sx={{ color: "#444", lineHeight: "20px" }}
       >
         Customer Rating
       </Typography>
@@ -363,13 +353,10 @@ const FilterSection = ({
         ))}
       </Box>
     </Box>
-
     <Box sx={{ mt: 3 }}>
       <Typography
-        fontWeight={600}
-        fontSize={14}
+        sx={{ fontSize: 14, fontWeight: 600, color: "#444" }}
         gutterBottom
-        sx={{ color: "#444" }}
       >
         Availability
       </Typography>
@@ -397,13 +384,12 @@ const FilterSection = ({
   </Box>
 );
 
-const PaintingPage = () => {
+const SculpturesPage = () => {
   const [maxPrice, setMaxPrice] = useState(1000);
   const [brands, setBrands] = useState({
-    "Gallery One": false,
-    "Modern Arts": false,
-    "Art House": false,
-    "Classic Studio": false,
+    SculptArt: false,
+    StoneWorks: false,
+    ModernSculpt: false,
   });
   const [ratings, setRatings] = useState({
     4.5: false,
@@ -420,21 +406,20 @@ const PaintingPage = () => {
   const [sortBy, setSortBy] = useState("Popularity");
   const [viewMode, setViewMode] = useState("grid");
   const [currentPage, setCurrentPage] = useState(1);
-  const [favoritedPaintings, setFavoritedPaintings] = useState({});
+  const [favoritedSculptures, setFavoritedSculptures] = useState({});
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [favoriteSnackbarOpen, setFavoriteSnackbarOpen] = useState(false);
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
-  const filteredPaintings = paintings.filter((painting) => {
+  const filteredSculptures = sculptures.filter((sculpture) => {
     const discountedPrice =
-      painting.status === "Sale"
-        ? Math.round(painting.price * 0.75)
-        : painting.price;
+      sculpture.status === "Sale"
+        ? Math.round(sculpture.price * 0.75)
+        : sculpture.price;
     if (discountedPrice > maxPrice) return false;
 
     const selectedBrands = Object.keys(brands).filter((brand) => brands[brand]);
-    if (selectedBrands.length > 0 && !selectedBrands.includes(painting.brand))
+    if (selectedBrands.length > 0 && !selectedBrands.includes(sculpture.brand))
       return false;
 
     const selectedRatings = Object.keys(ratings)
@@ -442,7 +427,7 @@ const PaintingPage = () => {
       .map((rating) => parseFloat(rating));
     if (
       selectedRatings.length > 0 &&
-      !selectedRatings.some((rating) => painting.rating >= rating)
+      !selectedRatings.some((rating) => sculpture.rating >= rating)
     )
       return false;
 
@@ -450,9 +435,9 @@ const PaintingPage = () => {
     const onSale = availability["On Sale"];
     const newArrivals = availability["New Arrivals"];
     const availabilityFilters = [];
-    if (inStock) availabilityFilters.push(painting.status !== "Out of Stock");
-    if (onSale) availabilityFilters.push(painting.status === "Sale");
-    if (newArrivals) availabilityFilters.push(painting.isNew);
+    if (inStock) availabilityFilters.push(sculpture.status !== "Out of Stock");
+    if (onSale) availabilityFilters.push(sculpture.status === "Sale");
+    if (newArrivals) availabilityFilters.push(sculpture.isNew);
     if (
       availabilityFilters.length > 0 &&
       !availabilityFilters.every((condition) => condition)
@@ -463,7 +448,7 @@ const PaintingPage = () => {
   });
 
   const itemsPerPage = 12;
-  const totalPages = Math.ceil(filteredPaintings.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredSculptures.length / itemsPerPage);
 
   const handlePriceChange = (event, newValue) => setMaxPrice(newValue);
   const handleBrandChange = (brand) =>
@@ -475,10 +460,9 @@ const PaintingPage = () => {
   const handleClearAll = () => {
     setMaxPrice(1000);
     setBrands({
-      "Gallery One": false,
-      "Modern Arts": false,
-      "Art House": false,
-      "Classic Studio": false,
+      SculptArt: false,
+      StoneWorks: false,
+      ModernSculpt: false,
     });
     setRatings({ 4.5: false, 4: false, 3: false, 2: false });
     setAvailability({
@@ -490,42 +474,35 @@ const PaintingPage = () => {
   const handleSortChange = (event) => setSortBy(event.target.value);
   const handleViewModeChange = (mode) => setViewMode(mode);
   const handlePageChange = (event, page) => setCurrentPage(page);
-  const handleViewClick = (painting) =>
-    navigate("/view", { state: { artwork: painting } });
-  const handleFavoriteClick = (paintingTitle) => {
-    setFavoritedPaintings((prev) => ({
+  const handleViewClick = (sculpture) =>
+    navigate("/view", { state: { artwork: sculpture } });
+  const handleFavoriteClick = (sculptureTitle) => {
+    setFavoritedSculptures((prev) => ({
       ...prev,
-      [paintingTitle]: !prev[paintingTitle],
+      [sculptureTitle]: !prev[sculptureTitle],
     }));
-    if (!favoritedPaintings[paintingTitle]) {
-      setFavoriteSnackbarOpen(true);
-    }
   };
-
-  const handleAddToCart = (painting) => {
+  const handleAddToCart = (sculpture) => {
     const discountedPrice =
-      painting.status === "Sale"
-        ? Math.round(painting.price * 0.75)
-        : painting.price;
+      sculpture.status === "Sale"
+        ? Math.round(sculpture.price * 0.75)
+        : sculpture.price;
     const cartItem = {
-      title: painting.title,
-      artist: painting.artist,
+      title: sculpture.title,
+      artist: sculpture.artist,
       price: discountedPrice,
-      image: painting.image,
+      image: sculpture.image,
+      quantity: 1,
     };
     addToCart(cartItem);
     setSnackbarOpen(true);
   };
-
   const handleSnackbarClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+    if (reason === "clickaway") return;
     setSnackbarOpen(false);
-    setFavoriteSnackbarOpen(false);
   };
 
-  const sortedPaintings = [...filteredPaintings].sort((a, b) => {
+  const sortedSculptures = [...filteredSculptures].sort((a, b) => {
     if (sortBy === "Price: Low to High") {
       const priceA = a.status === "Sale" ? Math.round(a.price * 0.75) : a.price;
       const priceB = b.status === "Sale" ? Math.round(b.price * 0.75) : b.price;
@@ -540,7 +517,7 @@ const PaintingPage = () => {
   });
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedPaintings = sortedPaintings.slice(
+  const paginatedSculptures = sortedSculptures.slice(
     startIndex,
     startIndex + itemsPerPage
   );
@@ -548,34 +525,7 @@ const PaintingPage = () => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", bgcolor: "#f5f5f5" }}>
       <CarouselSlider />
-      <Box sx={{ mb: 4 }}>
-        <Typography
-          variant="body2"
-          sx={{
-            fontSize: "0.9rem",
-            color: "black",
-            position: "absolute",
-            top: "445px",
-            left: "42px",
-            "& a": {
-              color: "#65635F",
-              textDecoration: "none",
-            },
-          }}
-        >
-          <Link to="/">Home</Link> <Link to="/"> / Categories </Link> /
-          Paintings
-        </Typography>
-      </Box>
-
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          p: 4,
-          gap: 4,
-        }}
-      >
+      <Box sx={{ display: "flex", flexDirection: "row", p: 4, gap: 4 }}>
         <Box sx={{ display: { xs: "none", md: "block" } }}>
           <FilterSection
             maxPrice={maxPrice}
@@ -589,7 +539,6 @@ const PaintingPage = () => {
             handleClearAll={handleClearAll}
           />
         </Box>
-
         <IconButton
           onClick={() => setOpenDrawer(true)}
           sx={{
@@ -623,7 +572,6 @@ const PaintingPage = () => {
             handleClearAll={handleClearAll}
           />
         </Drawer>
-
         <Box sx={{ flex: 1 }}>
           <motion.div
             variants={headerVariants}
@@ -635,43 +583,38 @@ const PaintingPage = () => {
                 display: "flex",
                 alignItems: "center",
                 mb: 3,
-                maxWidth: "912px",
+                maxWidth: 912,
               }}
             >
               <Box sx={{ display: "flex", alignItems: "baseline" }}>
                 <Typography
                   sx={{
-                    fontSize: "24px",
+                    fontSize: 24,
                     fontWeight: "bold",
                     display: "inline",
                     color: "#333",
                   }}
                 >
-                  Paintings
+                  Sculptures
                 </Typography>
                 <Typography
                   sx={{
-                    fontSize: "14px",
+                    fontSize: 14,
                     color: "text.secondary",
                     display: "inline",
                     ml: 1,
                   }}
                 >
-                  ({filteredPaintings.length} products)
+                  ({filteredSculptures.length} products)
                 </Typography>
               </Box>
               <Box sx={{ flex: 1 }} />
               <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 1,
-                  mr: "-100px",
-                }}
+                sx={{ display: "flex", alignItems: "center", gap: 1, mr: -100 }}
               >
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <Typography
-                    sx={{ fontSize: "14px", color: "text.secondary", mr: 1 }}
+                    sx={{ fontSize: 14, color: "text.secondary", mr: 1 }}
                   >
                     Sort by:
                   </Typography>
@@ -680,8 +623,8 @@ const PaintingPage = () => {
                       value={sortBy}
                       onChange={handleSortChange}
                       sx={{
-                        height: "32px",
-                        fontSize: "16px",
+                        height: 32,
+                        fontSize: 16,
                         bgcolor: "#fff",
                         borderRadius: 0,
                         boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.05)",
@@ -698,7 +641,7 @@ const PaintingPage = () => {
                     </Select>
                   </FormControl>
                 </Box>
-                <IconButtonMui
+                <IconButton
                   onClick={() => handleViewModeChange("grid")}
                   sx={{
                     bgcolor: viewMode === "grid" ? "#000" : "#fff",
@@ -708,8 +651,8 @@ const PaintingPage = () => {
                   }}
                 >
                   <GridViewIcon fontSize="small" />
-                </IconButtonMui>
-                <IconButtonMui
+                </IconButton>
+                <IconButton
                   onClick={() => handleViewModeChange("list")}
                   sx={{
                     bgcolor: viewMode === "list" ? "#000" : "#fff",
@@ -719,24 +662,22 @@ const PaintingPage = () => {
                   }}
                 >
                   <ListIcon fontSize="small" />
-                </IconButtonMui>
+                </IconButton>
               </Box>
             </Box>
           </motion.div>
-
-          {paginatedPaintings.length === 0 ? (
+          {paginatedSculptures.length === 0 ? (
             <Typography sx={{ textAlign: "center", color: "#666", mt: 4 }}>
-              No paintings match your filters.
+              No sculptures match your filters.
             </Typography>
           ) : viewMode === "grid" ? (
             <Grid container spacing={3}>
-              {paginatedPaintings.map((painting, index) => (
+              {paginatedSculptures.map((sculpture, index) => (
                 <Grid item key={index} xs={12} sm={6} md={4}>
                   <motion.div
                     variants={cardVariants}
                     initial="hidden"
                     animate="visible"
-                    whileHover="hover"
                     custom={index}
                   >
                     <Card
@@ -762,12 +703,12 @@ const PaintingPage = () => {
                             objectFit: "cover",
                             borderRadius: 0,
                           }}
-                          image={painting.image}
-                          alt={painting.title}
+                          image={sculpture.image}
+                          alt={sculpture.title}
                         />
-                        {painting.status && (
+                        {sculpture.status && (
                           <Chip
-                            label={painting.status}
+                            label={sculpture.status}
                             sx={{
                               position: "absolute",
                               top: "50%",
@@ -775,7 +716,7 @@ const PaintingPage = () => {
                               transform: "translate(-50%, -50%)",
                               bgcolor: "transparent",
                               color: "white",
-                              fontSize: "16px",
+                              fontSize: 16,
                               fontWeight: 500,
                               borderRadius: 0,
                             }}
@@ -794,60 +735,54 @@ const PaintingPage = () => {
                           {[
                             {
                               icon: "Favorite",
-                              label: "Favorites",
-                              action: () => handleFavoriteClick(painting.title),
+                              action: () =>
+                                handleFavoriteClick(sculpture.title),
                             },
                             {
-                              icon: "VisibilityIcon",
-                              label: "View in room",
-                              action: () => handleViewClick(painting),
+                              icon: "Visibility",
+                              action: () => handleViewClick(sculpture),
                             },
-                            {
-                              icon: "BarChartIcon",
-                              label: "Insights",
-                              action: undefined,
-                            },
-                          ].map(({ icon, label, action }, i) => (
-                            <Tooltip title={label} key={i}>
-                              <IconButtonMui
-                                size="small"
-                                onClick={action}
-                                sx={{
-                                  bgcolor: "white",
-                                  boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
-                                  borderRadius: "50%",
-                                  width: 32,
-                                  height: 32,
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  transform: "translateY(6px)",
-                                }}
-                              >
-                                {icon === "Favorite" && (
-                                  <motion.div
-                                    variants={heartVariants}
-                                    animate={
-                                      favoritedPaintings[painting.title]
-                                        ? "favorited"
-                                        : "unfavorited"
-                                    }
-                                  >
-                                    {favoritedPaintings[painting.title] ? (
-                                      <FavoriteIcon fontSize="small" />
-                                    ) : (
-                                      <FavoriteBorderIcon fontSize="small" />
-                                    )}
-                                  </motion.div>
-                                )}
-                                {icon === "VisibilityIcon" && (
-                                  <VisibilityIcon fontSize="small" />
-                                )}
-                                {icon === "BarChartIcon" && (
-                                  <BarChartIcon fontSize="small" />
-                                )}
-                              </IconButtonMui>
-                            </Tooltip>
+                            { icon: "BarChart", action: () => {} },
+                          ].map(({ icon, action }, i) => (
+                            <IconButton
+                              key={i}
+                              size="small"
+                              onClick={action}
+                              sx={{
+                                bgcolor: "white",
+                                boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
+                                borderRadius: "50%",
+                                width: 32,
+                                height: 32,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                transform: "translateY(6px)",
+                              }}
+                            >
+                              {icon === "Favorite" && (
+                                <motion.div
+                                  variants={heartVariants}
+                                  animate={
+                                    favoritedSculptures[sculpture.title]
+                                      ? "favorited"
+                                      : "unfavorited"
+                                  }
+                                >
+                                  {favoritedSculptures[sculpture.title] ? (
+                                    <FavoriteIcon fontSize="small" />
+                                  ) : (
+                                    <FavoriteBorderIcon fontSize="small" />
+                                  )}
+                                </motion.div>
+                              )}
+                              {icon === "Visibility" && (
+                                <VisibilityIcon fontSize="small" />
+                              )}
+                              {icon === "BarChart" && (
+                                <BarChartIcon fontSize="small" />
+                              )}
+                            </IconButton>
                           ))}
                         </Box>
                       </Box>
@@ -861,14 +796,14 @@ const PaintingPage = () => {
                             fontWeight: 600,
                           }}
                         >
-                          {painting.title}
+                          {sculpture.title}
                         </Typography>
                         <Typography
                           variant="body2"
                           color="text.secondary"
                           sx={{ mb: 0.5 }}
                         >
-                          {painting.artist}
+                          {sculpture.artist}
                         </Typography>
                         <Box
                           sx={{
@@ -878,7 +813,7 @@ const PaintingPage = () => {
                           }}
                         >
                           <Rating
-                            value={painting.rating}
+                            value={sculpture.rating}
                             readOnly
                             precision={0.5}
                             size="small"
@@ -887,7 +822,7 @@ const PaintingPage = () => {
                             variant="body2"
                             sx={{ ml: 0.5, color: "#555" }}
                           >
-                            {painting.rating}
+                            {sculpture.rating}
                           </Typography>
                         </Box>
                       </CardContent>
@@ -902,19 +837,19 @@ const PaintingPage = () => {
                         <Box
                           sx={{ display: "flex", alignItems: "center", gap: 1 }}
                         >
-                          {painting.status === "Sale" && (
+                          {sculpture.status === "Sale" && (
                             <Box
                               sx={{
                                 width: 43,
                                 height: 20,
-                                bgcolor: "#FFFFFF33",
+                                bgcolor: "#000",
                                 color: "#fff",
                                 borderRadius: "4px",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 position: "absolute",
-                                top: 16,
+                                top: 340,
                               }}
                             >
                               <Typography
@@ -930,11 +865,11 @@ const PaintingPage = () => {
                             sx={{ fontWeight: "bold", color: "#333" }}
                           >
                             $
-                            {painting.status === "Sale"
-                              ? Math.round(painting.price * 0.75)
-                              : painting.price}
+                            {sculpture.status === "Sale"
+                              ? Math.round(sculpture.price * 0.75)
+                              : sculpture.price}
                           </Typography>
-                          {painting.status === "Sale" && (
+                          {sculpture.status === "Sale" && (
                             <Typography
                               variant="body1"
                               sx={{
@@ -942,7 +877,7 @@ const PaintingPage = () => {
                                 textDecoration: "line-through",
                               }}
                             >
-                              ${painting.price}
+                              ${sculpture.price}
                             </Typography>
                           )}
                         </Box>
@@ -956,8 +891,8 @@ const PaintingPage = () => {
                             "&:disabled": { bgcolor: "#ccc", color: "#666" },
                           }}
                           size="small"
-                          disabled={painting.status === "Out of Stock"}
-                          onClick={() => handleAddToCart(painting)}
+                          disabled={sculpture.status === "Out of Stock"}
+                          onClick={() => handleAddToCart(sculpture)}
                         >
                           Add to Cart
                         </Button>
@@ -969,18 +904,17 @@ const PaintingPage = () => {
             </Grid>
           ) : (
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-              {paginatedPaintings.map((painting, index) => (
+              {paginatedSculptures.map((sculpture, index) => (
                 <motion.div
                   variants={cardVariants}
                   initial="hidden"
                   animate="visible"
-                  whileHover="hover"
                   custom={index}
                 >
                   <Box
                     sx={{
                       display: "flex",
-                      width: "91.5%",
+                      width: "100%",
                       height: 200,
                       border: "1px solid #e0e0e0",
                       borderRadius: 0,
@@ -1005,12 +939,12 @@ const PaintingPage = () => {
                           objectFit: "cover",
                           borderRadius: 0,
                         }}
-                        image={painting.image}
-                        alt={painting.title}
+                        image={sculpture.image}
+                        alt={sculpture.title}
                       />
-                      {painting.status && (
+                      {sculpture.status && (
                         <Chip
-                          label={painting.status}
+                          label={sculpture.status}
                           sx={{
                             position: "absolute",
                             top: "50%",
@@ -1019,7 +953,7 @@ const PaintingPage = () => {
                             bgcolor: "transparent",
                             color: "white",
                             fontWeight: 500,
-                            fontSize: "16px",
+                            fontSize: 16,
                             borderRadius: 0,
                           }}
                         />
@@ -1043,20 +977,20 @@ const PaintingPage = () => {
                           fontWeight: 600,
                         }}
                       >
-                        {painting.title}
+                        {sculpture.title}
                       </Typography>
                       <Typography
                         variant="body2"
                         color="text.secondary"
                         sx={{ mb: 0.5 }}
                       >
-                        {painting.artist}
+                        {sculpture.artist}
                       </Typography>
                       <Box
                         sx={{ display: "flex", alignItems: "center", mb: 0.5 }}
                       >
                         <Rating
-                          value={painting.rating}
+                          value={sculpture.rating}
                           readOnly
                           precision={0.5}
                           size="small"
@@ -1065,7 +999,7 @@ const PaintingPage = () => {
                           variant="body2"
                           sx={{ ml: 0.5, color: "#555" }}
                         >
-                          {painting.rating}
+                          {sculpture.rating}
                         </Typography>
                       </Box>
                       <Box
@@ -1079,7 +1013,7 @@ const PaintingPage = () => {
                         <Box
                           sx={{ display: "flex", alignItems: "center", gap: 1 }}
                         >
-                          {painting.status === "Sale" && (
+                          {sculpture.status === "Sale" && (
                             <Box
                               sx={{
                                 width: 43,
@@ -1107,11 +1041,11 @@ const PaintingPage = () => {
                             sx={{ fontWeight: "bold", color: "#333" }}
                           >
                             $
-                            {painting.status === "Sale"
-                              ? Math.round(painting.price * 0.75)
-                              : painting.price}
+                            {sculpture.status === "Sale"
+                              ? Math.round(sculpture.price * 0.75)
+                              : sculpture.price}
                           </Typography>
-                          {painting.status === "Sale" && (
+                          {sculpture.status === "Sale" && (
                             <Typography
                               variant="body1"
                               sx={{
@@ -1119,7 +1053,7 @@ const PaintingPage = () => {
                                 textDecoration: "line-through",
                               }}
                             >
-                              ${painting.price}
+                              ${sculpture.price}
                             </Typography>
                           )}
                         </Box>
@@ -1135,62 +1069,55 @@ const PaintingPage = () => {
                             {[
                               {
                                 icon: "Favorite",
-                                label: "Favorites",
                                 action: () =>
-                                  handleFavoriteClick(painting.title),
+                                  handleFavoriteClick(sculpture.title),
                               },
                               {
-                                icon: "VisibilityIcon",
-                                label: "View in room",
-                                action: () => handleViewClick(painting),
+                                icon: "Visibility",
+                                action: () => handleViewClick(sculpture),
                               },
-                              {
-                                icon: "BarChartIcon",
-                                label: "Insights",
-                                action: undefined,
-                              },
-                            ].map(({ icon, label, action }, i) => (
-                              <Tooltip title={label} key={i}>
-                                <IconButtonMui
-                                  size="small"
-                                  onClick={action}
-                                  sx={{
-                                    position: "relative",
-                                    top: "-80px",
-                                    bgcolor: "white",
-                                    boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
-                                    borderRadius: "50%",
-                                    width: 32,
-                                    height: 32,
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                  }}
-                                >
-                                  {icon === "Favorite" && (
-                                    <motion.div
-                                      variants={heartVariants}
-                                      animate={
-                                        favoritedPaintings[painting.title]
-                                          ? "favorited"
-                                          : "unfavorited"
-                                      }
-                                    >
-                                      {favoritedPaintings[painting.title] ? (
-                                        <FavoriteIcon fontSize="small" />
-                                      ) : (
-                                        <FavoriteBorderIcon fontSize="small" />
-                                      )}
-                                    </motion.div>
-                                  )}
-                                  {icon === "VisibilityIcon" && (
-                                    <VisibilityIcon fontSize="small" />
-                                  )}
-                                  {icon === "BarChartIcon" && (
-                                    <BarChartIcon fontSize="small" />
-                                  )}
-                                </IconButtonMui>
-                              </Tooltip>
+                              { icon: "BarChart", action: () => {} },
+                            ].map(({ icon, action }, i) => (
+                              <IconButton
+                                key={i}
+                                size="small"
+                                onClick={action}
+                                sx={{
+                                  position: "relative",
+                                  top: "-80px",
+                                  bgcolor: "white",
+                                  boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.1)",
+                                  borderRadius: "50%",
+                                  width: 32,
+                                  height: 32,
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                {icon === "Favorite" && (
+                                  <motion.div
+                                    variants={heartVariants}
+                                    animate={
+                                      favoritedSculptures[sculpture.title]
+                                        ? "favorited"
+                                        : "unfavorited"
+                                    }
+                                  >
+                                    {favoritedSculptures[sculpture.title] ? (
+                                      <FavoriteIcon fontSize="small" />
+                                    ) : (
+                                      <FavoriteBorderIcon fontSize="small" />
+                                    )}
+                                  </motion.div>
+                                )}
+                                {icon === "Visibility" && (
+                                  <VisibilityIcon fontSize="small" />
+                                )}
+                                {icon === "BarChart" && (
+                                  <BarChartIcon fontSize="small" />
+                                )}
+                              </IconButton>
                             ))}
                           </Box>
                           <Button
@@ -1198,8 +1125,8 @@ const PaintingPage = () => {
                             sx={{
                               position: "relative",
                               top: "-10px",
-                              width: "106px",
-                              height: "36px",
+                              width: 106,
+                              height: 36,
                               bgcolor: "#000",
                               color: "#fff",
                               borderRadius: 0,
@@ -1208,10 +1135,10 @@ const PaintingPage = () => {
                               "&:disabled": { bgcolor: "#ccc", color: "#666" },
                             }}
                             size="small"
-                            disabled={painting.status === "Out of Stock"}
-                            onClick={() => handleAddToCart(painting)}
+                            disabled={sculpture.status === "Out of Stock"}
+                            onClick={() => handleAddToCart(sculpture)}
                           >
-                            Add to cart
+                            Add to Cart
                           </Button>
                         </Box>
                       </Box>
@@ -1221,8 +1148,7 @@ const PaintingPage = () => {
               ))}
             </Box>
           )}
-
-          {sortedPaintings.length > 0 && (
+          {sortedSculptures.length > 0 && (
             <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
               <Pagination
                 count={totalPages}
@@ -1270,22 +1196,8 @@ const PaintingPage = () => {
           Item added to cart successfully!
         </Alert>
       </Snackbar>
-      <Snackbar
-        open={favoriteSnackbarOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert
-          onClose={handleSnackbarClose}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Added to favorites!
-        </Alert>
-      </Snackbar>
     </Box>
   );
 };
 
-export default PaintingPage;
+export default SculpturesPage;
